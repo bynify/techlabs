@@ -9,8 +9,8 @@
     {
       "name": "techlabs",
       "source": "./plugins/techlabs",
-      "description": "98 agents, 195 skills, full technology studio for Claude Code. Covers SaaS, API, Desktop, Mobile, AI/ML, Data, Event-Driven, and more.",
-      "version": "1.0.0",
+      "description": "98 agents, 199 skills, full technology studio for Claude Code. Covers SaaS, API, Desktop, Mobile, AI/ML, Data, Event-Driven, and more. Includes existing project adoption workflow.",
+      "version": "1.1.0",
       "author": {
         "name": "Bynify",
         "email": "hello@bynify.com"
