@@ -1,6 +1,6 @@
 # TechLabs by Bynify
 
-> 98 agents. 195 skills. One coordinated AI team for every tech domain.
+> 98 agents. 199 skills. One coordinated AI team for every tech domain.
 
 A Claude Code marketplace plugin that turns your session into a full technology studio.
 
@@ -9,9 +9,9 @@ A Claude Code marketplace plugin that turns your session into a full technology 
 | Category | Count | Description |
 |----------|-------|-------------|
 | **Agents** | 98 | Specialized subagents across 15 domains |
-| **Skills** | 195 | Slash commands for every workflow phase |
+| **Skills** | 199 | Slash commands for every workflow phase |
 | **Hooks** | 21 | Automated validation on commits, pushes, writes |
-| **Rules** | 16 | Path-scoped coding standards |
+| **Rules** | 17 | Path-scoped coding standards |
 
 ## Supported Domains
 
@@ -24,6 +24,26 @@ A Claude Code marketplace plugin that turns your session into a full technology 
 - AI/ML (Python, LLMs, RAG)
 - Data Platform (Python, dbt, Airflow)
 - Infrastructure (Docker, K8s, Terraform)
+
+## Existing Project Support
+
+Bring your existing project into TechLabs without restructuring:
+
+```bash
+# Scan existing project, generate adoption plan
+/adopt-existing
+
+# Override path conventions to match your structure
+/remap-paths
+
+# Generate phased restructure blueprint
+/restructure-plan
+
+# Audit code against conventions
+/integrity-audit
+```
+
+Works with Next.js app router, Go monoliths, Express + React, and any structure.
 
 ## Installation
 
