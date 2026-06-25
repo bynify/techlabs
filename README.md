@@ -32,16 +32,16 @@ A Claude Code marketplace plugin that turns your session into a full technology 
 claude plugin marketplace add bynify/techlabs
 
 # Install the plugin
-claude plugin install techlabs@techlabs --scope user
+claude plugin install techlabs@techlabs-marketplace --scope user
 
 # Or install for specific project only
-claude plugin install techlabs@techlabs --scope project
+claude plugin install techlabs@techlabs-marketplace --scope project
 ```
 
 ## Update
 
 ```bash
-claude plugin marketplace update techlabs
+claude plugin marketplace update techlabs-marketplace
 claude plugin update techlabs
 ```
 
