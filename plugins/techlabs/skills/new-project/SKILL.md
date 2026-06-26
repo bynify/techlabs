@@ -28,6 +28,11 @@ STEP 3: /project-planning
   → Plan team, infra, security, budget
   → SAVE CHECKPOINT: "Project plan created"
 
+STEP 3b: /create-project-lead (MANDATORY)
+  → Create project-specific lead agent
+  → Lead coordinates all work
+  → SAVE CHECKPOINT: "Project lead created"
+
 STEP 4: /choose-stack
   → Select backend, database, messaging
   → SAVE CHECKPOINT: "Stack selected"

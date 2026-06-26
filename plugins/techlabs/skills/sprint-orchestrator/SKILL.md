@@ -283,6 +283,43 @@ async function executeStory(story) {
   
   // CHECKPOINT 6: Code Review Gate
   const reviewPassed = await runSkill('review-gate', {
+  // CHECKPOINT 5: Scope Approval (if out-of-scope changes)
+  if (implementation.scopeChanges && implementation.scopeChanges.length > 0) {
+    console.log(`\\n⚠️ ${implementation.scopeChanges.length} out-of-scope changes detected`);
+    
+    // Load project lead
+    const projectLead = await loadProjectLead();
+    
+    if (!projectLead) {
+      console.log('⚠️ No project lead found, using lead-engineer');
+      // Fallback to lead-engineer
+      const approved = await runSkill('scope-approval', {
+        story,
+        changes: implementation.scopeChanges
+      });
+    } else {
+      console.log(`\\n📋 Coordinating with project lead: ${projectLead.name}`);
+      // Use project lead for coordination
+      const approved = await runSkill('scope-approval', {
+        story,
+        changes: implementation.scopeChanges,
+        coordinator: projectLead
+      });
+      
+      if (!approved) {
+        await updateStoryState(story.id, 'BLOCKED', { reason: 'Scope changes not approved' });
+        return;
+      }
+      
+      // Project lead updates docs after approval
+      await runSkill('lead-docs-update', {
+        story,
+        changes: implementation.scopeChanges,
+        lead: projectLead
+      });
+    }
+  }
+  const reviewPassed = await runSkill('review-gate', {
     story,
     code: implementation.files,
     type: 'code-review',

@@ -67,6 +67,31 @@ EXTRACT:
 - Current stage (idea, design, implementation)
 ```
 
+### Step 1b: Create Project Lead (MANDATORY)
+```
+⚠️ ENFORCEMENT: Project lead required for all projects
+
+RUN: /create-project-lead
+
+WITH:
+- project: {project-name}
+- domain: {domain}
+- stack: {tech-stack}
+
+RESULT:
+- agents/{project-name}-lead.md created
+- Lead can coordinate all work
+- Lead approves scope changes
+- Lead updates docs
+
+LEAD RESPONSIBILITIES:
+- Scope management
+- Documentation updates
+- Timeline monitoring
+- Agent coordination
+- Stakeholder communication
+```
+
 ### Step 2: Team Composition Planning
 ```
 QUESTIONS:
@@ -78,6 +103,9 @@ QUESTIONS:
    - Large (7+ people)
 
 2. Team roles needed? (suggest based on stack)
+
+   PROJECT LEAD (CREATED):
+   - [ ] {project-name}-lead
 
    BACKEND:
    - [ ] Go specialist (if Go)
