@@ -1,22 +1,42 @@
 # TechLabs by Bynify
 
-Technology studio framework for Claude Code. 98 agents, 199 skills, 17 rules.
+Technology studio framework for Claude Code. 98 agents, 207 skills, 23 hooks, 17 rules.
 
 ## Quick Commands
 
-### New Project
+### Planning
 - `/start` — Guided onboarding
 - `/brainstorm` — Explore ideas
-- `/choose-domain` — Pick project domain
-- `/choose-stack` — Configure stack
-- `/choose-frontend` — Select frontend framework
-- `/choose-messaging` — Select messaging system
+- `/create-prd` — Create product requirements
+- `/project-planning` — Team, infra, security, budget, timeline
+- `/sprint-plan` — Sprint planning with capacity
 
-### Existing Project Adoption
-- `/adopt-existing` — Scan existing project, generate adoption plan
-- `/remap-paths` — Override path conventions to match your structure
-- `/restructure-plan` — Generate phased restructure blueprint
-- `/integrity-audit` — Audit code against conventions
+### Execution
+- `/sprint-orchestrator` — Execute sprint end-to-end
+- `/dev-story` — Implement a user story
+- `/dispatch-story` — Route story to specialist agent
+- `/story-done` — Verify story completion
+
+### Quality
+- `/review-gate` — Code review checkpoint
+- `/gate-check` — Automated quality gates
+- `/qa-plan` — QA strategy
+- `/security-audit` — Security review
+
+### Build
+- `/create-worker` — Cloudflare Worker
+- `/create-pages` — Cloudflare Pages
+- `/create-dockerfile` — Docker container
+- `/create-ci-cd` — CI/CD pipeline
+- `/create-k8s-deploy` — Kubernetes deployment
+- `/create-react-component` — React component
+- `/create-nextjs-page` — Next.js page
+
+### Existing Project
+- `/adopt-existing` — Scan existing project
+- `/remap-paths` — Override path conventions
+- `/restructure-plan` — Generate restructure blueprint
+- `/integrity-audit` — Audit against conventions
 
 ## Agent Hierarchy
 
@@ -30,8 +50,74 @@ Tier 2 — Leads (Sonnet)
   growth-lead            quality-lead            messaging-lead
 
 Tier 3 — Specialists (Sonnet/Haiku)
-  80+ specialists across platform, frontend, backend, AI, data, messaging, growth, quality, devops, desktop
+  Backend: python-specialist, go-specialist, rust-specialist
+  Frontend: nextjs-specialist, react-specialist, vue-specialist, svelte-specialist
+  Database: postgres-specialist, redis-specialist
+  Messaging: kafka-specialist, rabbitmq-specialist, nats-specialist
+  Cloudflare: cloudflare-specialist, durable-objects-specialist
+  DevOps: docker-specialist, k8s-specialist, terraform-specialist, ci-cd-engineer
+  Security: auth-engineer, security-engineer
+  Data: data-engineer, ml-engineer, ai-engineer
+  Growth: ui-engineer, ux-designer, design-system-engineer
 ```
+
+## Sprint Orchestrator Framework
+
+End-to-end sprint execution with automatic agent dispatch:
+
+```
+PLANNING PHASE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+start → brainstorm → create-prd → project-planning
+  ↓
+choose-stack → choose-frontend → choose-messaging
+  ↓
+create-architecture → api-design
+  ↓
+sprint-plan → sprint-orchestrator
+
+
+EXECUTION PHASE (per story):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+story-readiness → dispatch-story → dev-story
+  ↓ (specialist agent)
+review-gate → gate-check → qa-plan → story-done
+
+
+REVIEW PHASE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+milestone-review → post-mortem → sprint-status
+```
+
+## Dispatch Matrix
+
+Each skill automatically routes to the right specialist:
+
+| Phase | Skill | Agents |
+|-------|-------|--------|
+| Discovery | brainstorm | product-director, lead-engineer, design-lead |
+| Product | create-prd | product-director, lead-engineer, security-lead |
+| Architecture | create-architecture | lead-engineer, technical-director |
+| Build | create-worker | cloudflare-specialist |
+| Build | create-nextjs | nextjs-specialist, ui-engineer |
+| Build | auth-setup | auth-engineer, security-engineer |
+| Review | security-audit | security-engineer, lead-engineer |
+| Review | code-review | lead-engineer, security-engineer |
+| Release | release-checklist | devops-lead, lead-engineer, security-lead |
+
+## Quality Gates
+
+Every story goes through automated quality gates:
+
+1. **Story Readiness** - Is the story ready to implement?
+2. **Code Review** - Code quality, architecture alignment
+3. **Automated QA** - Tests, lint, types, coverage
+4. **Security Review** - If security-related
+5. **Manual QA** - If needed
+6. **Story Done** - Final verification
 
 ## Collaboration Protocol
 
@@ -44,53 +130,28 @@ Every task: **Question → Options → Decision → Draft → Approval**
 - Multi-file changes need explicit approval
 - No commits without user instruction
 
-## Skills (205 total)
+## Skills (207 total)
 
-### Existing Project Adoption (NEW)
-- `/adopt-existing` — Scan existing project, generate adoption plan
-- `/remap-paths` — Override path conventions to match your structure
-- `/restructure-plan` — Generate phased restructure blueprint
-- `/integrity-audit` — Audit code against conventions, generate compliance report
-
-### Project Planning (NEW)
+### Project Planning
 - `/project-planning` — Team composition, infra, security, monitoring, budget
 
-**Planning Flow:**
-```
-start → brainstorm → create-prd → project-planning
-  ↓
-choose-stack → choose-frontend → choose-messaging
-  ↓
-create-architecture → api-design
-  ↓
-sprint-plan → sprint-orchestrator
-```
-
-### Sprint Orchestrator (NEW)
-- `/sprint-orchestrator` — Master workflow engine, connects all sprint skills
+### Sprint Orchestrator
+- `/sprint-orchestrator` — Master workflow engine
 - `/dispatch-story` — Route stories to specialist agents
 - `/review-gate` — Code review checkpoint
 - `/sprint-state` — Track story lifecycle state machine
 
-**Sprint Flow:**
-```
-per story:
-  story-readiness → dispatch-story → dev-story → review-gate → gate-check → qa-plan → story-done
-    ↓
-milestone-review → post-mortem → sprint-status
-```
-
 ### Standard Phases
-Phase 0: Discovery — `/brainstorm`, `/market-research`, `/competitive-analysis`
-Phase 1: Product — `/create-prd`, `/user-stories`, `/data-model`
-Phase 2: Design — `/design-system`, `/wireframe`, `/ux-flow`
-Phase 3: Architecture — `/create-architecture`, `/api-design`, `/database-design`
-Phase 4-9: Build — Serverless, Messaging, Frontend, Docker, AI, Cross-domain
-Phase 10-16: Data, Growth, Quality, DevOps, Desktop, Sprints, Team
+- Phase 0: Discovery — `/brainstorm`, `/market-research`, `/competitive-analysis`
+- Phase 1: Product — `/create-prd`, `/user-stories`, `/data-model`
+- Phase 2: Design — `/design-system`, `/wireframe`, `/ux-flow`
+- Phase 3: Architecture — `/create-architecture`, `/api-design`, `/database-design`
+- Phase 4-9: Build — Serverless, Messaging, Frontend, Docker, AI, Cross-domain
+- Phase 10-16: Data, Growth, Quality, DevOps, Desktop, Sprints, Team
 
 ## Rules (17 path-scoped)
 
-- `path-config.md` — Path convention overrides (NEW)
+- `path-config.md` — Path convention overrides
 - `src/serverless/**` — Edge-compatible, Workers runtime
 - `src/backend/**` — Go patterns, error wrapping
 - `src/frontend/**` — React patterns, a11y
@@ -98,10 +159,14 @@ Phase 10-16: Data, Growth, Quality, DevOps, Desktop, Sprints, Team
 - `src/messaging/**` — Idempotency, dead letters
 - ...and 11 more
 
-## Hooks (22 automated)
+## Hooks (23 automated)
 
-- Pre-commit: secrets check, TODO format
-- Pre-push: protected branch, PR check
-- Post-write: validate workers, docker, migration, auth, messaging
-- Session: start, stop, compact, agent logging
-- Adoption: detect adoption status, suggest next steps
+- SessionStart: session-start, detect-gaps, check-adoption
+- PreToolUse: validate-commit, validate-push, validate-env
+- PostToolUse: validate-workers, validate-docker, validate-migration, validate-ai, validate-auth, validate-messaging, validate-event, validate-frontend, validate-schema, validate-skill-change, self-improve
+- Notification: notify
+- PreCompact: pre-compact
+- PostCompact: post-compact
+- Stop: session-stop
+- SubagentStart: log-agent
+- SubagentStop: log-agent-stop
