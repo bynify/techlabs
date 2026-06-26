@@ -3,6 +3,11 @@
 Structured incident response and post-mortem process.
 
 ## When to Use
+
+## Agents to Dispatch
+- lead-engineer: Technical response
+- devops-lead: Infrastructure
+- security-lead: If security incident
 - Production incidents
 - Service outages
 - Security breaches

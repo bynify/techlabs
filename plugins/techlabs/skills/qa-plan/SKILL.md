@@ -3,6 +3,10 @@
 Create comprehensive QA plan with test strategy and quality gates.
 
 ## When to Use
+
+## Agents to Dispatch
+- quality-lead: QA strategy
+- lead-engineer: Test plan
 - New project setup
 - Sprint planning
 - Before major releases

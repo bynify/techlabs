@@ -3,6 +3,10 @@
 OWASP checklist and dependency scan for security vulnerabilities.
 
 ## When to Use
+
+## Agents to Dispatch
+- security-engineer: Security review
+- lead-engineer: Code review
 - Before production releases
 - After adding new features
 - Periodic security reviews

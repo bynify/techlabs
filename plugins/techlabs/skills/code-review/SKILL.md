@@ -3,6 +3,10 @@
 Systematic code review with checklist and feedback patterns.
 
 ## When to Use
+
+## Agents to Dispatch
+- lead-engineer: Code quality
+- security-engineer: If security-related
 - PR reviews
 - Architecture reviews
 - Security reviews

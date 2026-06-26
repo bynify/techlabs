@@ -3,6 +3,10 @@
 Create Angular standalone component with proper typing and template.
 
 ## When to Use
+
+## Agents to Dispatch
+- angular-specialist: Angular implementation
+- ui-engineer: Component design
 - Building Angular UI
 - Adding new features
 - Creating reusable components

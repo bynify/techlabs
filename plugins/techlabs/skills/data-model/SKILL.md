@@ -3,6 +3,10 @@
 Define data models with types, validation, and relationships.
 
 ## When to Use
+
+## Agents to Dispatch
+- data-engineer: Data modeling
+- postgres-specialist: Schema design
 - Starting new features
 - API contract design
 - Type safety enforcement

@@ -3,6 +3,10 @@
 Design RESTful APIs with proper resource modeling, versioning, and documentation.
 
 ## When to Use
+
+## Agents to Dispatch
+- api-engineer: API design patterns
+- lead-engineer: API standards
 - Designing new API endpoints
 - Defining API contracts
 - Planning API versioning strategy

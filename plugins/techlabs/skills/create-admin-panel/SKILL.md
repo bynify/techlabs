@@ -3,6 +3,10 @@
 Create an internal admin dashboard.
 
 ## When to Use
+
+## Agents to Dispatch
+- ui-engineer: Admin UI
+- lead-engineer: Admin logic
 - Internal tools
 - Content management
 - User management

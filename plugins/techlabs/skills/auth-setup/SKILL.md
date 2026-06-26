@@ -3,6 +3,10 @@
 Implement authentication and authorization with OAuth, JWT, and RBAC.
 
 ## When to Use
+
+## Agents to Dispatch
+- auth-engineer: Authentication
+- security-engineer: Security review
 - Adding login/signup
 - Implementing OAuth providers
 - Setting up role-based access

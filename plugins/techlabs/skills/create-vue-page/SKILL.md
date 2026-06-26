@@ -3,6 +3,10 @@
 Create Vue component/page with proper typing, state management, and accessibility.
 
 ## When to Use
+
+## Agents to Dispatch
+- vue-specialist: Vue implementation
+- ui-engineer: Page design
 - Building UI features
 - Adding new pages
 - Creating reusable components

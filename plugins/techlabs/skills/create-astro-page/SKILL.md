@@ -3,6 +3,10 @@
 Create Astro page with SSG, content collections, and layouts.
 
 ## When to Use
+
+## Agents to Dispatch
+- astro-specialist: Astro implementation
+- ui-engineer: Page design
 - Static pages
 - Blog posts
 - Documentation

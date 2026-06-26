@@ -3,6 +3,10 @@
 Design user onboarding for activation, engagement, and retention.
 
 ## When to Use
+
+## Agents to Dispatch
+- product-manager: User journey
+- ui-engineer: UI implementation
 - New user experience
 - Feature adoption
 - Reducing time-to-value

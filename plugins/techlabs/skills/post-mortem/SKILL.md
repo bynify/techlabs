@@ -3,6 +3,10 @@
 Blameless post-mortem analysis.
 
 ## When to Use
+
+## Agents to Dispatch
+- lead-engineer: Technical analysis
+- quality-lead: Process improvement
 - Post-mortem analysis
 - Incident review
 - Root cause analysis

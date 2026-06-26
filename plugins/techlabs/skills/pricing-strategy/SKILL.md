@@ -3,6 +3,10 @@
 Define pricing model, tiers, and packaging strategy.
 
 ## When to Use
+
+## Agents to Dispatch
+- growth-lead: Pricing strategy
+- product-director: Product value
 - Launching new product
 - Restructuring pricing
 - Entering new market

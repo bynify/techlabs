@@ -3,6 +3,10 @@
 Performance audit with Lighthouse, Core Web Vitals, and profiling.
 
 ## When to Use
+
+## Agents to Dispatch
+- lead-engineer: Performance review
+- devops-engineer: Infrastructure
 - Pre-release checks
 - Performance regression detection
 - Optimization planning

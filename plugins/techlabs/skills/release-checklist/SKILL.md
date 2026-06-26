@@ -3,6 +3,11 @@
 Pre-release verification checklist for safe deployments.
 
 ## When to Use
+
+## Agents to Dispatch
+- devops-lead: Deployment
+- lead-engineer: Code readiness
+- security-lead: Security check
 - Before production releases
 - After QA sign-off
 - Sprint completion

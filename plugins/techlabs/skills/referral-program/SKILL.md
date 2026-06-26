@@ -3,6 +3,10 @@
 Build referral program with tracking and rewards.
 
 ## When to Use
+
+## Agents to Dispatch
+- growth-lead: Referral logic
+- data-engineer: Tracking
 - Growth initiatives
 - Viral loops
 - Customer acquisition

@@ -3,6 +3,10 @@
 Create gRPC service with Protocol Buffers and proper error handling.
 
 ## When to Use
+
+## Agents to Dispatch
+- go-specialist: gRPC implementation
+- api-engineer: Service design
 - High-performance APIs
 - Microservice communication
 - Streaming endpoints

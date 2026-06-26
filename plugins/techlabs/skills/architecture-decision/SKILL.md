@@ -3,6 +3,10 @@
 Create Architecture Decision Records (ADRs) for documenting technical decisions.
 
 ## When to Use
+
+## Agents to Dispatch
+- technical-director: Complex decisions
+- lead-engineer: Technical review
 - Choosing between frameworks or approaches
 - Documenting why a decision was made
 - Recording trade-offs considered

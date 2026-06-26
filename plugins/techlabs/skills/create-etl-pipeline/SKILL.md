@@ -3,6 +3,10 @@
 Build ETL pipeline for data extraction, transformation, and loading.
 
 ## When to Use
+
+## Agents to Dispatch
+- data-engineer: ETL logic
+- lead-engineer: Pipeline design
 - Data warehouse loading
 - Analytics processing
 - Data migration

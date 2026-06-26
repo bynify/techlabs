@@ -3,6 +3,10 @@
 Pre-deployment quality gate checks.
 
 ## When to Use
+
+## Agents to Dispatch
+- quality-lead: Quality gates
+- lead-engineer: Code standards
 - Quality gates
 - Pre-deploy checks
 - Code quality

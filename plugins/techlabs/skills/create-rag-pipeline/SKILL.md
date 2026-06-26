@@ -3,6 +3,10 @@
 Build retrieval-augmented generation pipelines with embeddings, vector search, and LLM.
 
 ## When to Use
+
+## Agents to Dispatch
+- ml-engineer: RAG implementation
+- ai-engineer: AI integration
 - Q&A over documents
 - Knowledge base search
 - Context-aware chatbots

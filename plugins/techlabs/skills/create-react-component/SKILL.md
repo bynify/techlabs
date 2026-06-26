@@ -3,6 +3,10 @@
 Create React component/page with proper typing, state management, and accessibility.
 
 ## When to Use
+
+## Agents to Dispatch
+- react-specialist: React implementation
+- ui-engineer: Component design
 - Building UI features
 - Adding new pages
 - Creating reusable components

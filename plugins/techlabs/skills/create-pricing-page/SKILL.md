@@ -3,6 +3,10 @@
 Build conversion-optimized pricing page with clear tiers and CTAs.
 
 ## When to Use
+
+## Agents to Dispatch
+- ui-engineer: Pricing page
+- growth-lead: Pricing strategy
 - Launch pricing
 - Pricing page redesign
 - A/B testing pricing

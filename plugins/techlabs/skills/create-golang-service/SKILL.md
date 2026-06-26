@@ -3,6 +3,10 @@
 Create Go HTTP service with proper structure, middleware, and testing.
 
 ## When to Use
+
+## Agents to Dispatch
+- go-specialist: Go implementation
+- lead-engineer: Code standards
 - API services
 - Microservices
 - Backend services
