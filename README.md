@@ -1,17 +1,28 @@
 # TechLabs by Bynify
 
-> 98 agents. 207 skills. One coordinated AI team for every tech domain.
+> 98 agents. 235 skills. One coordinated AI team for every tech domain.
 
-A Claude Code marketplace plugin that turns your session into a full technology studio.
+A Claude Code marketplace plugin that turns your session into a full technology studio with end-to-end sprint orchestration.
 
 ## What's Included
 
 | Category | Count | Description |
 |----------|-------|-------------|
 | **Agents** | 98 | Specialized subagents across 15 domains |
-| **Skills** | 207 | Slash commands for every workflow phase |
-| **Hooks** | 23 | Automated validation on commits, pushes, writes |
-| **Rules** | 17 | Path-scoped coding standards |
+| **Skills** | 235 | Slash commands for every workflow phase |
+| **Hooks** | 46 | Automated validation on commits, pushes, writes |
+| **Rules** | 18 | Path-scoped coding standards |
+| **Stack Docs** | 3 | Backend, frontend, deployment references |
+
+## Key Features
+
+- **Sprint Orchestrator** - End-to-end sprint execution with automatic agent dispatch
+- **Document Validation** - Content quality checks before sprint starts
+- **Change Management** - Handle feature requests, scope changes, replanning
+- **Session Continuity** - Resume work exactly where you left off
+- **Agent Dispatch** - Automatic routing to specialist agents
+- **Quality Gates** - 6 checkpoints per story
+- **State Machine** - Track story lifecycle from backlog to done
 
 ## Supported Domains
 
@@ -38,12 +49,13 @@ start → brainstorm → create-prd → project-planning
   ↓
 choose-stack → choose-frontend → choose-messaging
   ↓
-create-architecture → api-design
+create-architecture → api-design → database-design
   ↓
 create-epics → user-stories → sprint-plan
   ↓
+doc-validator (validate quality) → sprint-prerequisites
+  ↓
 sprint-orchestrator
-
 
 EXECUTION PHASE (per story):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -52,6 +64,12 @@ story-readiness → dispatch-story → dev-story
   ↓ (specialist agent)
 review-gate → gate-check → qa-plan → story-done
 
+CHANGE MANAGEMENT:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+/change-request → sprint-replan → scope-change
+  ↓
+sprint-transition → next sprint
 
 REVIEW PHASE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -68,11 +86,13 @@ Each skill automatically routes to the right specialist:
 | Discovery | brainstorm | product-director, lead-engineer, design-lead |
 | Product | create-prd | product-director, lead-engineer, security-lead |
 | Architecture | create-architecture | lead-engineer, technical-director |
+| Database | database-design | postgres-specialist, data-engineer |
 | Build | create-worker | cloudflare-specialist |
 | Build | create-nextjs | nextjs-specialist, ui-engineer |
 | Security | auth-setup | auth-engineer, security-engineer |
 | Review | security-audit | security-engineer, lead-engineer |
 | Review | code-review | lead-engineer, security-engineer |
+| Testing | api-test | api-engineer, quality-lead |
 | Release | release-checklist | devops-lead, lead-engineer, security-lead |
 
 ### Quality Gates
@@ -86,60 +106,15 @@ Every story goes through automated quality gates:
 5. **Manual QA** - If needed
 6. **Story Done** - Final verification
 
-## Existing Project Support
+### Change Management
 
-Bring your existing project into TechLabs without restructuring:
+Handle changes during sprint:
 
-```bash
-# Scan existing project, generate adoption plan
-/adopt-existing
-
-# Override path conventions to match your structure
-/remap-paths
-
-# Generate phased restructure blueprint
-/restructure-plan
-
-# Audit code against conventions
-/integrity-audit
-```
-
-Works with Next.js app router, Go monoliths, Express + React, and any structure.
-
-## Quick Commands
-
-### Planning
-```bash
-/start                    # Guided onboarding
-/brainstorm               # Explore ideas
-/create-prd               # Create product requirements
-/project-planning         # Team, infra, security, budget
-/sprint-plan              # Sprint planning
-```
-
-### Execution
-```bash
-/sprint-orchestrator      # Execute sprint end-to-end
-/dev-story                # Implement a story
-/dispatch-story           # Route to specialist agent
-```
-
-### Quality
-```bash
-/review-gate              # Code review checkpoint
-/gate-check               # Quality gate checks
-/qa-plan                  # QA strategy
-/story-done               # Final verification
-```
-
-### Infrastructure
-```bash
-/create-worker            # Cloudflare Worker
-/create-pages             # Cloudflare Pages
-/create-dockerfile        # Docker container
-/create-ci-cd             # CI/CD pipeline
-/create-k8s-deploy        # Kubernetes deployment
-```
+- **Feature Request** - Add to sprint or backlog
+- **Bug Fix** - Fix and update scope
+- **Scope Change** - Update story, re-estimate
+- **Sprint Replan** - Reduce scope or extend sprint
+- **Sprint Transition** - Carry over to next sprint
 
 ## Installation
 
@@ -153,6 +128,27 @@ claude plugin install techlabs@techlabs-marketplace --scope user
 # Or install for specific project only
 claude plugin install techlabs@techlabs-marketplace --scope project
 ```
+
+## Quick Start
+
+```bash
+# New project
+/start → /brainstorm → /create-prd → /project-planning
+  → /choose-stack → /create-architecture
+  → /create-epics → /user-stories
+  → /sprint-plan → /sprint-orchestrator
+
+# Resume work
+/start-day
+
+# Existing project
+/adopt-existing
+```
+
+## Documentation
+
+- **[USAGE.md](USAGE.md)** - Complete usage guide with case scenarios, workflows, and best practices
+- **[plugins/techlabs/CLAUDE.md](plugins/techlabs/CLAUDE.md)** - Framework configuration and rules
 
 ## Update
 
