@@ -9,7 +9,7 @@ A Claude Code marketplace plugin that turns your session into a full technology 
 | Category | Count | Description |
 |----------|-------|-------------|
 | **Agents** | 98 | Specialized subagents across 15 domains |
-| **Skills** | 235 | Slash commands for every workflow phase |
+| **Skills** | 246 | Slash commands for every workflow phase |
 | **Hooks** | 46 | Automated validation on commits, pushes, writes |
 | **Rules** | 18 | Path-scoped coding standards |
 | **Stack Docs** | 3 | Backend, frontend, deployment references |
@@ -116,6 +116,19 @@ Handle changes during sprint:
 - **Sprint Replan** - Reduce scope or extend sprint
 - **Sprint Transition** - Carry over to next sprint
 
+## Shortcuts
+
+| Shortcut | Description | Steps |
+|----------|-------------|-------|
+| `/new-project` | Complete project setup | 11 |
+| `/quick-sprint` | Plan and execute sprint | 2 |
+| `/full-cycle` | Complete sprint cycle | 5 |
+| `/emergency-fix` | Fast-track bug fix | 4 |
+| `/production-deploy` | Full production deployment | 5 |
+| `/audit-all` | Comprehensive audit | 4 |
+| `/monitoring-setup` | Complete monitoring stack | 4 |
+| `/business-review` | Business analysis | 5 |
+
 ## Installation
 
 ```bash
@@ -132,11 +145,11 @@ claude plugin install techlabs@techlabs-marketplace --scope project
 ## Quick Start
 
 ```bash
-# New project
-/start → /brainstorm → /create-prd → /project-planning
-  → /choose-stack → /create-architecture
-  → /create-epics → /user-stories
-  → /sprint-plan → /sprint-orchestrator
+# New project (one command)
+/new-project
+
+# Quick sprint (one command)
+/quick-sprint
 
 # Resume work
 /start-day
@@ -144,6 +157,19 @@ claude plugin install techlabs@techlabs-marketplace --scope project
 # Existing project
 /adopt-existing
 ```
+
+## Shortcuts
+
+| Shortcut | Description | Steps |
+|----------|-------------|-------|
+| `/new-project` | Complete project setup | 11 |
+| `/quick-sprint` | Plan and execute sprint | 2 |
+| `/full-cycle` | Complete sprint cycle | 5 |
+| `/emergency-fix` | Fast-track bug fix | 4 |
+| `/production-deploy` | Full production deployment | 5 |
+| `/audit-all` | Comprehensive audit | 4 |
+| `/monitoring-setup` | Complete monitoring stack | 4 |
+| `/business-review` | Business analysis | 5 |
 
 ## Documentation
 

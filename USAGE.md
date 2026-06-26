@@ -5,6 +5,7 @@ Complete guide for using TechLabs framework with case scenarios, workflows, and 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
+- [Shortcuts](#shortcuts)
 - [Complete Workflow](#complete-workflow)
 - [Case Scenarios](#case-scenarios)
 - [Do's and Don'ts](#dos-and-donts)
@@ -15,43 +16,35 @@ Complete guide for using TechLabs framework with case scenarios, workflows, and 
 
 ## Quick Start
 
-### New Project (From Scratch)
+### New Project (One Command)
 
 ```bash
-# Step 1: Start onboarding
-/start
+# Complete project setup in one command
+/new-project
 
-# Step 2: Brainstorm ideas
-/brainstorm
+# This chains 11 skills:
+# brainstorm → create-prd → project-planning
+# → choose-stack → choose-frontend
+# → create-architecture → api-design → database-design
+# → create-epics → user-stories → sprint-plan
+# → doc-validator
+```
 
-# Step 3: Create requirements
-/create-prd
+### Quick Sprint (One Command)
 
-# Step 4: Plan team and infrastructure
-/project-planning
+```bash
+# Plan and execute sprint in one command
+/quick-sprint
 
-# Step 5: Choose tech stack
-/choose-stack
-/choose-frontend
-/choose-messaging
+# This chains 2 skills:
+# sprint-plan → sprint-orchestrator
+```
 
-# Step 6: Design architecture
-/create-architecture
-/api-design
-/database-design
+### Resume Work
 
-# Step 7: Create epics and stories
-/create-epics
-/user-stories
-
-# Step 8: Plan sprint
-/sprint-plan
-
-# Step 9: Validate documents
-/sprint-prerequisites
-
-# Step 10: Execute sprint
-/sprint-orchestrator
+```bash
+# Continue from yesterday
+/start-day
 ```
 
 ### Existing Project (Adopt TechLabs)
@@ -79,6 +72,28 @@ Complete guide for using TechLabs framework with case scenarios, workflows, and 
 # Step 2: Continue from where you left off
 # (Framework will show current status and next steps)
 ```
+
+---
+
+## Shortcuts
+
+| Shortcut | Description | Steps |
+|----------|-------------|-------|
+| `/new-project` | Complete project setup | 11 |
+| `/quick-sprint` | Plan and execute sprint | 2 |
+| `/full-cycle` | Complete sprint cycle | 5 |
+| `/emergency-fix` | Fast-track bug fix | 4 |
+| `/production-deploy` | Full production deployment | 5 |
+| `/audit-all` | Comprehensive audit | 4 |
+| `/monitoring-setup` | Complete monitoring stack | 4 |
+| `/business-review` | Business analysis | 5 |
+
+### How Shortcuts Work
+
+1. **Auto-chain**: Skills run in sequence automatically
+2. **Checkpoints**: Critical steps ask for approval
+3. **Progress save**: Can stop and resume later
+4. **Fast-track**: Emergency shortcuts skip non-essential steps
 
 ---
 
