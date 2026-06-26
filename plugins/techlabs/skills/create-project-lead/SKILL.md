@@ -51,6 +51,7 @@ LOAD ALL PROJECT DOCS:
 - docs/architecture.md
 - docs/api-design.md
 - docs/database-design.md
+- production/knowledge-base/ (IF EXISTS)
 
 EXTRACT AND BUILD KNOWLEDGE:
 1. Project overview (name, goal, domain, users)
@@ -59,11 +60,13 @@ EXTRACT AND BUILD KNOWLEDGE:
 4. API design (endpoints, auth, schemas)
 5. Database (tables, relations, indexes)
 6. Constraints (security, performance, compliance)
+7. Knowledge base (documentation for stack)
 
 THIS KNOWLEDGE IS BUILT INTO THE LEAD AGENT
 - No need to read docs later
 - Lead already knows everything
 - Saves tokens on every decision
+- Knowledge base available for reference
 ```
 
 ### Step 2: Create Project Lead Template

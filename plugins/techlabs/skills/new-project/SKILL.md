@@ -101,22 +101,23 @@ STEP 2i: /database-design
   → Schema, indexes, constraints
   → SAVE CHECKPOINT: "Database design created"
 
-PHASE 3: RESEARCH & VALIDATION
+PHASE 3: RESEARCH & VALIDATION (KNOWLEDGE BASE)
 
-STEP 3a: /stack-research
-  → Search latest docs for stack
-  → Best practices
-  → SAVE CHECKPOINT: "Stack research complete"
+STEP 3a: /knowledge-base (MANDATORY)
+  → Search ALL documentation for project stack
+  → Process documentation (not raw)
+  → Organize by stack component
+  → Store in knowledge base
+  → All agents can access
+  → SAVE CHECKPOINT: "Knowledge base built"
 
-STEP 3b: /security-research
-  → Security best practices
-  → Compliance requirements
-  → SAVE CHECKPOINT: "Security research complete"
-
-STEP 3c: /performance-research
-  → Performance guidelines
-  → Scalability patterns
-  → SAVE CHECKPOINT: "Performance research complete"
+KNOWLEDGE BASE INCLUDES:
+- Backend docs (language, framework, patterns)
+- Frontend docs (framework, components, state)
+- Database docs (schema, indexing, optimization)
+- Infrastructure docs (deployment, monitoring)
+- Security docs (auth, compliance, best practices)
+- Performance docs (caching, optimization)
 
 PHASE 4: SPRINT PLANNING
 
