@@ -1,6 +1,6 @@
 # TechLabs by Bynify
 
-> 98 agents. 266 skills. One coordinated AI team for every tech domain.
+> 98 agents. 267 skills. One coordinated AI team for every tech domain.
 
 A Claude Code marketplace plugin that turns your session into a full technology studio with end-to-end sprint orchestration.
 
@@ -9,7 +9,7 @@ A Claude Code marketplace plugin that turns your session into a full technology 
 | Category | Count | Description |
 |----------|-------|-------------|
 | **Agents** | 98 | Specialized subagents across 15 domains |
-| **Skills** | 266 | Slash commands for every workflow phase |
+| **Skills** | 267 | Slash commands for every workflow phase |
 | **Hooks** | 46 | Automated validation on commits, pushes, writes |
 | **Rules** | 19 | Path-scoped coding standards |
 | **Stack Docs** | 3 | Backend, frontend, deployment references |
