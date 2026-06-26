@@ -12,6 +12,7 @@ Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18
 4. **DISPATCH AGENTS** - If skill has "Agents to Dispatch", LOAD agent definition first
 5. **UPDATE STATE** - After EVERY action, update session state
 6. **ERROR HANDLING** - If something fails, STOP, report, ask for guidance
+7. **CHUNK WRITES** - Write/edit in small chunks (max 20 lines for edit, 50 for write)
 
 **NEVER:**
 - Skip reading the skill file

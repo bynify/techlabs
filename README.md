@@ -11,7 +11,7 @@ A Claude Code marketplace plugin that turns your session into a full technology 
 | **Agents** | 98 | Specialized subagents across 15 domains |
 | **Skills** | 246 | Slash commands for every workflow phase |
 | **Hooks** | 46 | Automated validation on commits, pushes, writes |
-| **Rules** | 18 | Path-scoped coding standards |
+| **Rules** | 19 | Path-scoped coding standards |
 | **Stack Docs** | 3 | Backend, frontend, deployment references |
 
 ## Key Features
