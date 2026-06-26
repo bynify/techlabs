@@ -2,6 +2,12 @@
 
 Implement rate limiting for APIs.
 
+## When to Use
+- Rate limiting
+- API protection
+- Abuse prevention
+- Throttling strategy
+
 ## Execution
 
 ### Step 1: Strategy

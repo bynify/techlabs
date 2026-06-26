@@ -2,6 +2,12 @@
 
 Implement webhook sending and receiving.
 
+## When to Use
+- Webhook setup
+- Event notifications
+- Third-party integration
+- Real-time updates
+
 ## Execution
 
 ### Step 1: Sender

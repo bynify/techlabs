@@ -2,6 +2,12 @@
 
 Update analytics with latest execution data.
 
+## When to Use
+- Analytics updates
+- Dashboard updates
+- Metric changes
+- Report refresh
+
 ## Execution
 
 ### Step 1: Collect Data

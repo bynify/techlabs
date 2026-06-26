@@ -2,6 +2,12 @@
 
 Identify and prioritize technical debt.
 
+## When to Use
+- Technical debt
+- Code refactoring
+- Legacy cleanup
+- Architecture improvement
+
 ## Execution
 
 ### Step 1: Identify

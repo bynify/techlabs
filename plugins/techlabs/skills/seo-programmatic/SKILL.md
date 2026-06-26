@@ -2,6 +2,12 @@
 
 Generate SEO pages at scale from data.
 
+## When to Use
+- Programmatic SEO
+- Template pages
+- Dynamic content
+- Scale content
+
 ## Execution
 
 ### Step 1: Template Design

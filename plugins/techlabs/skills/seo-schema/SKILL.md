@@ -2,6 +2,12 @@
 
 Add structured data (JSON-LD) for rich search results.
 
+## When to Use
+- Schema markup
+- Structured data
+- Rich snippets
+- JSON-LD
+
 ## Execution
 
 ### Step 1: Identify Schema Type

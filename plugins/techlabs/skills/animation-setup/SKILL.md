@@ -2,6 +2,12 @@
 
 Setup animation system with Framer Motion.
 
+## When to Use
+- Animation setup
+- UI transitions
+- Micro-interactions
+- Page transitions
+
 ## Execution
 
 ### Step 1: Install Dependencies

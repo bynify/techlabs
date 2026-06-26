@@ -2,6 +2,12 @@
 
 Analyze project dependencies.
 
+## When to Use
+- Dependency analysis
+- Security vulnerabilities
+- Outdated packages
+- License compliance
+
 ## Execution
 
 ### Step 1: Scan Dependencies

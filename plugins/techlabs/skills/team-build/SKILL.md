@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Team building
+- Hiring plan
+- Team structure
+- Skill gaps
+
 ## Execution
 
 ### Step 1: Assess Needs

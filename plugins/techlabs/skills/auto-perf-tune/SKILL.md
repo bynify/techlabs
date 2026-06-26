@@ -2,6 +2,12 @@
 
 Automatic performance tuning.
 
+## When to Use
+- Performance tuning
+- Bottleneck resolution
+- Query optimization
+- Caching strategy
+
 ## Execution
 
 ### Step 1: Profile Application

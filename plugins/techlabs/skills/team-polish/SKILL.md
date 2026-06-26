@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Polish phase
+- UI refinement
+- Bug fixes
+- Performance tuning
+
 ## Execution
 
 ### Step 1: Assess Needs

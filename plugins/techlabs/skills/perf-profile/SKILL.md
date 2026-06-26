@@ -2,6 +2,12 @@
 
 Profile application performance.
 
+## When to Use
+- Performance profiling
+- CPU profiling
+- Memory analysis
+- Bottleneck detection
+
 ## Execution
 
 ### Step 1: Setup Profiling

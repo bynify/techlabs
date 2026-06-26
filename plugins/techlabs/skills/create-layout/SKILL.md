@@ -2,6 +2,12 @@
 
 Create page layout patterns.
 
+## When to Use
+- Layout creation
+- Page structure
+- Grid systems
+- Responsive layouts
+
 ## Execution
 
 ### Step 1: App Layout (SaaS Dashboard)

@@ -2,6 +2,12 @@
 
 Implement a user story end-to-end.
 
+## When to Use
+- Development stories
+- Sprint planning
+- Task breakdown
+- Estimation
+
 ## Execution
 
 ### Step 1: Load Story

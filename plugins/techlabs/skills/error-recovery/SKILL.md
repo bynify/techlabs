@@ -2,6 +2,12 @@
 
 Automatic error recovery system.
 
+## When to Use
+- Error recovery
+- Graceful degradation
+- Fallback logic
+- Circuit breakers
+
 ## Execution
 
 ### Step 1: Detect Error

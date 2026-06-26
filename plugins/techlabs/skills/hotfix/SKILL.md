@@ -2,6 +2,12 @@
 
 Emergency production fix workflow.
 
+## When to Use
+- Hotfix process
+- Critical bugs
+- Production issues
+- Emergency patches
+
 ## Execution
 
 ### Step 1: Create Hotfix Branch

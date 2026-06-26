@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Launch team
+- Go-to-market
+- Release coordination
+- Launch readiness
+
 ## Execution
 
 ### Step 1: Assess Needs

@@ -2,6 +2,12 @@
 
 Detect current project stage and recommend next steps.
 
+## When to Use
+- Project stage detection
+- Greenfield vs legacy
+- Tech stack assessment
+- Migration planning
+
 ## Execution
 
 ### Step 1: Scan Project

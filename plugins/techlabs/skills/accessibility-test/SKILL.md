@@ -2,6 +2,12 @@
 
 Automated accessibility testing with axe-core and Playwright.
 
+## When to Use
+- Accessibility testing
+- WCAG compliance
+- Screen reader testing
+- Keyboard navigation
+
 ## Execution
 
 ### Step 1: Setup

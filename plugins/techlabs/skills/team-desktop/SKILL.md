@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Desktop team
+- Electron developers
+- Native apps
+- Cross-platform
+
 ## Execution
 
 ### Step 1: Assess Needs

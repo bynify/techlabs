@@ -2,6 +2,12 @@
 
 Create comprehensive design system.
 
+## When to Use
+- Design system creation
+- Component library
+- Brand consistency
+- Design tokens
+
 ## Execution
 
 ### Step 1: Define Design Tokens

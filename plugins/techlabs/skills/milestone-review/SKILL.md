@@ -2,6 +2,12 @@
 
 Review project milestones and progress.
 
+## When to Use
+- Milestone review
+- Sprint retrospective
+- Progress tracking
+- Stakeholder updates
+
 ## Execution
 
 ### Step 1: Status Check

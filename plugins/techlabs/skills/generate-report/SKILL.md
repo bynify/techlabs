@@ -2,6 +2,12 @@
 
 Generate weekly/monthly analytics report.
 
+## When to Use
+- Report generation
+- Analytics reports
+- Status reports
+- Audit reports
+
 ## Execution
 
 ### Step 1: Load Analytics Data

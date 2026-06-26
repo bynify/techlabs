@@ -2,6 +2,12 @@
 
 Pre-deployment quality gate checks.
 
+## When to Use
+- Quality gates
+- Pre-deploy checks
+- Code quality
+- Release readiness
+
 ## Execution
 
 ### Step 1: Run Checks

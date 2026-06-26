@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Migration team
+- Data migration
+- System migration
+- Legacy modernization
+
 ## Execution
 
 ### Step 1: Assess Needs

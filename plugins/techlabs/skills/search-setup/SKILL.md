@@ -2,6 +2,12 @@
 
 Implement full-text search with Elasticsearch or Algolia.
 
+## When to Use
+- Search setup
+- Full-text search
+- Elasticsearch
+- Algolia integration
+
 ## Execution
 
 ### Step 1: Index Setup

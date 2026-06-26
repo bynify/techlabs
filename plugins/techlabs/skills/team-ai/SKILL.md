@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- AI team assembly
+- ML engineers
+- Data scientists
+- AI specialists
+
 ## Execution
 
 ### Step 1: Assess Needs

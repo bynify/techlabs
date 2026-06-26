@@ -2,6 +2,12 @@
 
 Assess technical feasibility of features.
 
+## When to Use
+- Technical feasibility
+- Proof of concept
+- Spike research
+- Risk assessment
+
 ## Execution
 
 ### Step 1: Requirements

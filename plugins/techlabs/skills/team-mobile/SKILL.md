@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Mobile team
+- iOS/Android developers
+- React Native
+- Flutter
+
 ## Execution
 
 ### Step 1: Assess Needs

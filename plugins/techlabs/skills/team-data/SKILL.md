@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Data team
+- Data engineers
+- Analysts
+- Data governance
+
 ## Execution
 
 ### Step 1: Assess Needs

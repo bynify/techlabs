@@ -2,6 +2,12 @@
 
 Performance and load testing with k6 or Artillery.
 
+## When to Use
+- Load testing
+- Performance testing
+- Capacity planning
+- Stress testing
+
 ## Execution
 
 ### Step 1: Define Scenarios

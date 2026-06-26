@@ -2,6 +2,12 @@
 
 SEO audit with technical, on-page, and content analysis.
 
+## When to Use
+- SEO audit
+- Technical SEO
+- Content optimization
+- Search rankings
+
 ## Execution
 
 ### Step 1: Technical SEO

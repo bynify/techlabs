@@ -2,6 +2,12 @@
 
 Optimize application performance.
 
+## When to Use
+- Performance optimization
+- Speed improvement
+- Resource optimization
+- Query tuning
+
 ## Execution
 
 ### Step 1: Identify Target

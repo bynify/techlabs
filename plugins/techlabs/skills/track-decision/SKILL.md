@@ -2,6 +2,12 @@
 
 Track a decision made during development.
 
+## When to Use
+- Decision tracking
+- Architecture decisions
+- ADR management
+- Decision log
+
 ## Execution
 
 ### Step 1: Gather Decision Details

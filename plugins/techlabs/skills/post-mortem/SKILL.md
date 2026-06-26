@@ -2,6 +2,12 @@
 
 Blameless post-mortem analysis.
 
+## When to Use
+- Post-mortem analysis
+- Incident review
+- Root cause analysis
+- Process improvement
+
 ## Execution
 
 ### Step 1: Document

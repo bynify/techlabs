@@ -2,6 +2,12 @@
 
 Create theme system with dark mode support.
 
+## When to Use
+- Theme creation
+- Brand colors
+- Dark mode
+- Custom styling
+
 ## Execution
 
 ### Step 1: Define Color Palette

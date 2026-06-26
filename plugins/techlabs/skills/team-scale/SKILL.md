@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Scaling team
+- Architecture scaling
+- Infrastructure scaling
+- Team scaling
+
 ## Execution
 
 ### Step 1: Assess Needs

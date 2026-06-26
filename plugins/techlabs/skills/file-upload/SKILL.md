@@ -2,6 +2,12 @@
 
 Implement file upload with validation, storage, and progress.
 
+## When to Use
+- File upload
+- Image uploads
+- Document handling
+- S3/R2 integration
+
 ## Execution
 
 ### Step 1: Frontend Upload

@@ -2,6 +2,12 @@
 
 Auto-generate documentation from code.
 
+## When to Use
+- Documentation generation
+- API docs
+- README updates
+- Code comments
+
 ## Execution
 
 ### Step 1: Analyze Code

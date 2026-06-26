@@ -2,6 +2,12 @@
 
 Kubernetes deployment with services, ingress, and scaling.
 
+## When to Use
+- Container orchestration
+- Production deployment
+- Auto-scaling setup
+- Service mesh configuration
+
 ## Execution
 
 ### Step 1: Deployment

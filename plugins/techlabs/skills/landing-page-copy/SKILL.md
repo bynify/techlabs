@@ -2,6 +2,12 @@
 
 Write high-converting landing page copy.
 
+## When to Use
+- Landing page copy
+- Marketing pages
+- Product launches
+- Conversion optimization
+
 ## Execution
 
 ### Step 1: Structure

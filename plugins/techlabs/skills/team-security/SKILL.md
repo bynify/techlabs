@@ -2,6 +2,12 @@
 
 Coordinate team for specific domain work.
 
+## When to Use
+- Security team
+- Security engineers
+- Penetration testing
+- Compliance
+
 ## Execution
 
 ### Step 1: Assess Needs

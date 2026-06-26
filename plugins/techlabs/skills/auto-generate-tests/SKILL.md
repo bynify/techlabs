@@ -2,6 +2,12 @@
 
 Auto-generate tests from code.
 
+## When to Use
+- Test generation
+- Unit tests
+- Integration tests
+- Test coverage
+
 ## Execution
 
 ### Step 1: Analyze Code

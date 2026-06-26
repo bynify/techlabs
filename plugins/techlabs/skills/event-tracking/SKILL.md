@@ -2,6 +2,12 @@
 
 Implement analytics event tracking for user behavior.
 
+## When to Use
+- Event tracking
+- Analytics setup
+- User behavior
+- Conversion tracking
+
 ## Execution
 
 ### Step 1: Define Events

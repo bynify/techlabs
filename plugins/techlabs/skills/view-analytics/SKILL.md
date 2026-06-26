@@ -2,6 +2,12 @@
 
 View analytics dashboard for skill usage and agent performance.
 
+## When to Use
+- Analytics viewing
+- Dashboard review
+- Metric analysis
+- Trend monitoring
+
 ## Execution
 
 ### Step 1: Load Analytics Data

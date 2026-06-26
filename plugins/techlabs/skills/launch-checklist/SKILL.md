@@ -2,6 +2,12 @@
 
 Pre-launch verification checklist.
 
+## When to Use
+- Launch checklist
+- Product launch
+- Feature release
+- Go-live preparation
+
 ## Execution
 
 ### Step 1: Technical

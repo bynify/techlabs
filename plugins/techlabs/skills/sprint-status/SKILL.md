@@ -2,6 +2,12 @@
 
 Sprint progress tracking and burndown.
 
+## When to Use
+- Sprint status
+- Progress tracking
+- Burndown charts
+- Team velocity
+
 ## Execution
 
 ### Step 1: Status Report
