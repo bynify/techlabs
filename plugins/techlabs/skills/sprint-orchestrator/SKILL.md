@@ -74,7 +74,25 @@ GATE 4: REVIEW GATE ✅
 - Wait for review approval
 ```
 
-### Step 1: Load Sprint Context
+### Step 1: Validate Prerequisites (CRITICAL)
+```
+BEFORE STARTING SPRINT:
+
+CHECK:
+1. PRD exists? (docs/PRD.md)
+2. Architecture exists? (docs/architecture.md)
+3. Stack defined? (docs/stack.md)
+4. Epics created? (production/epics/)
+5. Stories created? (production/stories/)
+6. Sprint plan exists? (production/sprint/current.json)
+
+IF ANY MISSING:
+  → Run /sprint-prerequisites
+  → Run /doc-recovery for missing docs
+  → Block sprint until complete
+```
+
+### Step 2: Load Sprint Context
 ```
 READ:
 - production/sprint/current.json (sprint config)

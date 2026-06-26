@@ -74,6 +74,8 @@ Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18
 ### Change Management
 - `/change-request` — Handle feature requests during sprint
 - `/sprint-replan` — Replan when blockers or scope changes
+- `/sprint-prerequisites` — Validate docs before sprint
+- `/doc-recovery` — Generate missing documents
 - `/scope-change` — Handle scope changes within a story
 
 ### Build
