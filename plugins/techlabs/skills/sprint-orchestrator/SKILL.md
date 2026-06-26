@@ -16,10 +16,10 @@ Master workflow engine that connects all sprint skills end-to-end.
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  PHASE 1: PLANNING                                              │
-│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐          │
-│  │brainstorm│→│create-prd│→│user-     │→│sprint-   │          │
-│  │          │ │          │ │stories   │ │plan      │          │
-│  └──────────┘ └──────────┘ └──────────┘ └──────────┘          │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐
+│  │brainstorm│→│create-prd│→│create-   │→│user-     │→│sprint-   │
+│  │          │ │          │ │epics     │ │stories   │ │plan      │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘
 │                                                                 │
 │  PHASE 2: EXECUTION (per story)                                 │
 │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐          │
@@ -78,20 +78,24 @@ async function runPlanningPhase() {
   // 2. Create/update PRD
   await runSkill('create-prd', { scope: 'sprint features' });
   
-  // 3. Generate user stories
-  const stories = await runSkill('user-stories', { prd: 'docs/PRD.md' });
+  // 3. Create epics from PRD
+  const epics = await runSkill('create-epics', { prd: 'docs/PRD.md' });
   
-  // 4. Prioritize features
+  // 4. Generate user stories from epics
+  const stories = await runSkill('user-stories', { epics });
+  
+  // 5. Prioritize features
   await runSkill('feature-prioritize', { stories });
   
-  // 5. Create sprint plan
+  // 6. Create sprint plan
   const sprintPlan = await runSkill('sprint-plan', {
+    epics,
     stories,
     capacity: teamCapacity,
     velocity: teamVelocity,
   });
   
-  // 6. Save sprint state
+  // 7. Save sprint state
   await updateSprintState('PLANNING_COMPLETE', { sprintPlan });
   
   return sprintPlan;

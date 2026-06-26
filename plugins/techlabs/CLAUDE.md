@@ -75,7 +75,9 @@ choose-stack → choose-frontend → choose-messaging
   ↓
 create-architecture → api-design
   ↓
-sprint-plan → sprint-orchestrator
+create-epics → user-stories → sprint-plan
+  ↓
+sprint-orchestrator
 
 
 EXECUTION PHASE (per story):
