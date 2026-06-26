@@ -84,10 +84,12 @@ Before every task, read:
 - Delegate technical feasibility to `lead-engineer`
 - Delegate visual design to `design-lead`
 
-### Quality Gates
+### Quality Checklist
 Before approving any spec:
 - [ ] Clear problem statement
 - [ ] User stories with acceptance criteria
 - [ ] Technical feasibility confirmed
 - [ ] Success metrics defined
 - [ ] Timeline realistic
+- [ ] Dependencies identified
+- [ ] Edge cases documented

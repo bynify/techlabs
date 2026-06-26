@@ -1,53 +1,42 @@
 # context-optimize
 
-Optimize context window for long sessions.
+Optimize context loading for relevance and token efficiency.
+
+## When to Use
+- Large codebases
+- Token-constrained tasks
+- Focused work sessions
 
 ## Execution
 
-### Step 1: Analyze Current Context
+### Step 1: Identify Relevant Files
 ```
-READ:
-- Session state
-- Active files
-- Decision history
-- User preferences
-
-CALCULATE:
-- Current token usage
-- Priority ranking
-- Compression potential
+BASED ON task:
+- Read only related files
+- Skip tests unless fixing tests
+- Skip docs unless updating docs
+- Use grep to find references
 ```
 
-### Step 2: Optimize
+### Step 2: Load Strategically
 ```
-OPTIMIZE:
-1. Remove low-priority files
-2. Summarize verbose sections
-3. Compress old decisions
-4. Preserve critical context
-
-STRATEGY:
-- High priority: Keep full
-- Medium priority: Summarize
-- Low priority: Remove
+PRIORITY:
+1. Files being modified
+2. Direct dependencies
+3. Type definitions
+4. Related tests
+5. Documentation (if needed)
 ```
 
-### Step 3: Update
+### Step 3: Cache Context
 ```
-UPDATE:
-- Context config
-- Session state
-- Priority rankings
-```
-
-### Step 4: Report
-```
-SHOW:
-- Context usage before/after
-- Files optimized
-- Recommendations
+SAVE to session state:
+- Key file contents
+- Type definitions
+- API schemas
 ```
 
 ## Output
-- Optimized context
-- Usage report
+- Optimized file loading
+- Token usage reduced
+- Relevant context preserved

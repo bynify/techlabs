@@ -1,51 +1,35 @@
 # sprint-status
 
-Progress tracking and burndown.
+Sprint progress tracking and burndown.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Status Report
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+SPRINT 5 - Day 7/10
+
+COMPLETED: 22/34 points (65%)
+IN PROGRESS: 8 points
+TODO: 4 points
+
+BURNDOWN:
+Day 1: 34 pts
+Day 3: 28 pts
+Day 5: 24 pts
+Day 7: 12 pts ← On track
 ```
 
-### Step 2: Load Context
+### Step 2: Blockers
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+BLOCKED:
+- Waiting for API credentials
+- Design review pending
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+AT RISK:
+- Export feature (complexity underestimated)
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Sprint status
+- Burndown chart
+- Blocker list

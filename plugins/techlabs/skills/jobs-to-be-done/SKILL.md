@@ -1,51 +1,42 @@
 # jobs-to-be-done
 
-JTBD interviews, persona building, user research.
+Analyze user JTBD for product and feature discovery.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Interview Framework
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+PROMPTS:
+1. When did you last [job]?
+2. What were you trying to achieve?
+3. What did you do step by step?
+4. What was frustrating?
+5. What alternatives did you consider?
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Define Jobs
+```markdown
+## Job: [Verb] + [Context]
+
+**Situation:** When [context]
+**Motivation:** I want to [motivation]
+**Expected outcome:** So I can [outcome]
+
+**Push:** [What drives them]
+**Pull:** [What attracts them]
+**Anxiety:** [What holds them back]
 ```
 
-### Step 4: Verify
+### Step 3: Map to Features
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+JOB: Track project progress
+FEATURES:
+- Dashboard with metrics
+- Export progress reports
+- Team notifications
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Job definitions
+- Feature mapping
+- Priority insights

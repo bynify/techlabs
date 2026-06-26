@@ -1,51 +1,56 @@
 # webhook-setup
 
-Incoming/outgoing webhooks.
+Implement webhook sending and receiving.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Sender
+```typescript
+async function sendWebhook(url: string, event: string, payload: any) {
+  const signature = crypto
+    .createHmac('sha256', WEBHOOK_SECRET)
+    .update(JSON.stringify(payload))
+    .digest('hex');
+
+  await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Webhook-Signature': signature,
+    },
+    body: JSON.stringify({ event, payload, timestamp: Date.now() }),
+  });
+}
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Receiver
+```typescript
+app.post('/webhooks/stripe', (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  const event = stripe.webhooks.constructEvent(req.body, sig, WEBHOOK_SECRET);
+
+  switch (event.type) {
+    case 'payment_intent.succeeded':
+      handlePaymentSuccess(event.data.object);
+      break;
+  }
+
+  res.json({ received: true });
+});
 ```
 
-### Step 3: Implement
+### Step 3: Retry Logic
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+RETRY:
+- Attempt 1: immediate
+- Attempt 2: 5 minutes
+- Attempt 3: 30 minutes
+- Attempt 4: 2 hours
+- Attempt 5: DLQ
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Webhook sender
+- Webhook receiver
+- Signature verification
+- Retry logic

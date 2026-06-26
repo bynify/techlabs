@@ -1,51 +1,36 @@
 # event-driven-design
 
-Event sourcing, CQRS patterns.
+Design event-driven architecture with proper boundaries.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Identify Events
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+FOR EACH domain action:
+- What happened? (event)
+- Who produced it? (source)
+- Who consumes it? (handlers)
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 2: Define Schema
+```typescript
+interface DomainEvent {
+  id: string;
+  type: string;
+  aggregateId: string;
+  payload: unknown;
+  timestamp: string;
+}
 ```
 
-### Step 5: Report
+### Step 3: Draw Boundaries
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+ORDER SERVICE → order.created → INVENTORY SERVICE
+                                PAYMENT SERVICE
+                                NOTIFICATION SERVICE
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Event catalog
+- Service boundaries
+- Schema definitions

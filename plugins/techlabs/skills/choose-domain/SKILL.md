@@ -1,51 +1,78 @@
 # choose-domain
 
-Domain selection (SaaS, API, CLI, etc.).
+Help select project domain and define the core problem space.
+
+## When to Use
+- Starting a new project
+- Pivoting product direction
+- Validating market fit
+- Defining scope
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Explore Domains
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. What industry? (SaaS, e-commerce, fintech, health, education)
+2. Who are the users? (B2B, B2C, developers)
+3. What problem exists?
+4. Existing solutions and gaps?
 ```
 
-### Step 2: Load Context
+### Step 2: Analyze Options
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+FOR EACH domain option:
+- Market size (TAM, SAM, SOM)
+- Competition level
+- Technical complexity
+- Revenue potential
+- Personal interest/expertise
+
+CREATE comparison matrix:
+| Domain | Market | Competition | Complexity | Revenue | Score |
+|--------|--------|-------------|------------|---------|-------|
+| SaaS   | Large  | High        | Medium     | High    | 4.2   |
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 3: Define Domain Boundaries
+```markdown
+## Domain: [Selected Domain]
+
+### Core Problem
+[Clear problem statement]
+
+### Target Users
+- Primary: [User persona]
+- Secondary: [User persona]
+
+### Key Workflows
+1. [Primary workflow]
+2. [Secondary workflow]
+
+### Out of Scope
+- [Not building this]
+- [Not building that]
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+### Step 4: Create Domain Model
+```markdown
+## Entities
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### User
+- Properties: id, name, email, role
+- Relations: has many Orders
+
+### Order
+- Properties: id, status, total, createdAt
+- Relations: belongs to User, has many Items
+
+### Item
+- Properties: id, name, price, quantity
+- Relations: belongs to Order
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Domain selection rationale
+- Target user personas
+- Core workflows defined
+- Domain model sketch

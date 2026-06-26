@@ -1,51 +1,62 @@
 # search-setup
 
-Full-text search with Elasticsearch/Meilisearch.
+Implement full-text search with Elasticsearch or Algolia.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 1: Index Setup
+```typescript
+const indexSchema = {
+  properties: {
+    title: { type: 'text', analyzer: 'standard' },
+    content: { type: 'text', analyzer: 'standard' },
+    tags: { type: 'keyword' },
+    created_at: { type: 'date' },
+  },
+};
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Search Query
+```typescript
+async function search(query: string, filters?: Record<string, any>) {
+  const body: any = {
+    query: {
+      bool: {
+        must: [{ multi_match: { query, fields: ['title^3', 'content'] } }],
+      },
+    },
+    highlight: { fields: { content: {} } },
+  };
+
+  if (filters) {
+    body.query.bool.filter = Object.entries(filters).map(([key, value]) => ({
+      term: { [key]: value },
+    }));
+  }
+
+  return client.search({ index: 'documents', body });
+}
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Autocomplete
+```typescript
+async function autocomplete(prefix: string) {
+  return client.search({
+    index: 'documents',
+    body: {
+      suggest: {
+        autocomplete: {
+          prefix,
+          completion: { field: 'suggest', size: 5 },
+        },
+      },
+    },
+  });
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Search index
+- Query functions
+- Autocomplete
+- UI integration

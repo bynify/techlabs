@@ -1,51 +1,68 @@
 # create-angular-service
 
-Angular service with DI.
+Create Angular service with dependency injection and HTTP client.
+
+## When to Use
+- API communication
+- Shared state management
+- Business logic encapsulation
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Create Service
+```typescript
+// src/app/services/user.service.ts
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { API_URL } from '../tokens';
+
+@Injectable({ providedIn: 'root' })
+export class UserService {
+  private http = inject(HttpClient);
+  private api = inject(API_URL);
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.api}/users`);
+  }
+
+  getUserById(id: string): Observable<User> {
+    return this.http.get<User>(`${this.api}/users/${id}`);
+  }
+
+  createUser(data: CreateUserRequest): Observable<User> {
+    return this.http.post<User>(`${this.api}/users`, data);
+  }
+
+  updateUser(id: string, data: Partial<User>): Observable<User> {
+    return this.http.patch<User>(`${this.api}/users/${id}`, data);
+  }
+
+  deleteUser(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.api}/users/${id}`);
+  }
+}
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+### Step 2: Add Interceptors
+```typescript
+// src/app/interceptors/error.interceptor.ts
+import { HttpInterceptorFn } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+export const errorInterceptor: HttpInterceptorFn = (req, next) => {
+  return next(req).pipe(
+    catchError((error) => {
+      if (error.status === 401) {
+        // Handle unauthorized
+      }
+      return throwError(() => error);
+    })
+  );
+};
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Service file
+- Interceptors
+- Type definitions

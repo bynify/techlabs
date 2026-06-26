@@ -1,51 +1,39 @@
 # ux-flow
 
-Multi-step flows, edge cases, interaction design.
+Design user experience flows for key workflows.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Flow
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+FLOW: Checkout
+
+STEPS:
+1. Cart → Review items
+2. Address → Enter shipping
+3. Payment → Select method
+4. Confirm → Place order
+5. Success → Order confirmation
 ```
 
-### Step 2: Load Context
+### Step 2: Edge Cases
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+ERRORS:
+- Payment declined → Show error, retry
+- Out of stock → Notify, suggest alternatives
+- Address invalid → Inline validation
 ```
 
-### Step 4: Verify
+### Step 3: Wireframes
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+SKETCH each step with:
+- Layout
+- Key elements
+- Navigation
+- CTAs
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Flow diagram
+- Edge cases
+- Wireframes

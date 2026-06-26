@@ -1,51 +1,70 @@
 # choose-frontend
 
-Frontend framework selection (React, Vue, Svelte, etc.).
+Select the right frontend framework based on project requirements.
+
+## When to Use
+- Starting new projects
+- Evaluating framework migrations
+- Technology selection
 
 ## Execution
 
 ### Step 1: Gather Requirements
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Rendering needs? (SSR, SSG, CSR, hybrid)
+2. Team experience? (React, Vue, Svelte, Angular)
+3. SEO critical?
+4. Real-time features?
+5. Mobile app needed? (React Native, Expo)
 ```
 
-### Step 2: Load Context
+### Step 2: Compare Frameworks
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+| Feature         | Next.js | Nuxt | SvelteKit | Remix | Astro |
+|-----------------|---------|------|-----------|-------|-------|
+| SSR/SSG         | ✅      | ✅   | ✅        | ✅    | ✅    |
+| React ecosystem | ✅      | ❌   | ❌        | ✅    | ✅    |
+| Vue ecosystem   | ❌      | ✅   | ❌        | ❌    | ✅    |
+| Learning curve  | Medium  | Med  | Low       | Med   | Low   |
+| Edge runtime    | ✅      | ✅   | ✅        | ✅    | ✅    |
 ```
 
-### Step 4: Verify
+### Step 3: Make Recommendation
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+IF team_knows == "react" AND needs_ssr:
+  RECOMMEND: Next.js
+
+IF team_knows == "vue":
+  RECOMMEND: Nuxt
+
+IF focus == "content" AND minimal_js:
+  RECOMMEND: Astro
+
+IF focus == "form_heavy" AND progressive_enhancement:
+  RECOMMEND: Remix
+
+IF focus == "simplicity" AND small_bundle:
+  RECOMMEND: SvelteKit
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Create Setup Guide
+```bash
+# Next.js
+npx create-next-app@latest app --typescript --tailwind --app
+
+# Nuxt
+npx nuxi@latest init app
+
+# SvelteKit
+npm create svelte@latest app
+
+# Astro
+npm create astro@latest app
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Framework recommendation with rationale
+- Comparison matrix
+- Setup instructions
+- Migration path (if existing project)

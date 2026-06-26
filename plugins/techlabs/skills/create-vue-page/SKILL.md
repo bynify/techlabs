@@ -1,51 +1,96 @@
 # create-vue-page
 
-Vue/Nuxt page setup with Composition API.
+Create Vue component/page with proper typing, state management, and accessibility.
+
+## When to Use
+- Building UI features
+- Adding new pages
+- Creating reusable components
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Requirements
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Component/page purpose?
+2. Data requirements?
+3. Interactions needed?
+4. Auth required?
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Create Implementation
+```vue
+<script setup lang="ts">
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
+interface Props {
+  users: User[];
+  loading?: boolean;
+}
+
+const props = withDefaults(defineProps<Props>(), { loading: false });
+const emit = defineEmits<{
+  edit: [id: string];
+  delete: [id: string];
+}>();
+
+const search = ref("");
+const filtered = computed(() =>
+  props.users.filter(u => u.name.toLowerCase().includes(search.value.toLowerCase()))
+);
+</script>
+
+<template>
+  <div>
+    <input v-model="search" placeholder="Search..." class="border p-2 rounded w-full" />
+    
+    <div v-if="loading">Loading...</div>
+    <div v-else class="space-y-2 mt-4">
+      <div v-for="user in filtered" :key="user.id" class="border p-4 rounded flex justify-between">
+        <div>
+          <h3 class="font-semibold">{{ user.name }}</h3>
+          <p class="text-gray-600">{{ user.email }}</p>
+        </div>
+        <div class="flex gap-2">
+          <button @click="emit(edit, user.id)">Edit</button>
+          <button @click="emit(delete, user.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Add Types
+```typescript
+// src/types/create-vue-page.ts
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user" | "viewer";
+  createdAt: string;
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Add Tests
+```typescript
+import { render, screen } from "@testing-library/react";
+import { UserCard } from "./UserCard";
+
+test("renders user name", () => {
+  render(<UserCard user={mockUser} onEdit={vi.fn()} onDelete={vi.fn()} />);
+  expect(screen.getByText("Test User")).toBeInTheDocument();
+});
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Component/page file
+- Type definitions
+- Unit tests
+- Documentation

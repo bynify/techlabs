@@ -1,51 +1,44 @@
 # rate-limiting
 
-Rate limit implementation.
+Implement rate limiting for APIs.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Strategy
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+OPTIONS:
+- Token bucket
+- Sliding window
+- Fixed window
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Implementation
+```typescript
+import rateLimit from 'express-rate-limit';
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: (req, res) => {
+    res.status(429).json({ error: 'Too many requests' });
+  },
+});
+
+app.use('/api/', limiter);
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Redis-based
+```typescript
+async function checkRateLimit(key: string, limit: number, window: number) {
+  const current = await redis.incr(key);
+  if (current === 1) await redis.expire(key, window);
+  return current <= limit;
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Rate limiter middleware
+- Configuration
+- Response headers

@@ -1,51 +1,67 @@
 # database-design
 
-Schema, relations, indexing strategy.
+Design database schema with proper normalization, indexes, and constraints.
+
+## When to Use
+- New feature schema
+- Schema optimization
+- Data modeling
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Identify Entities
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. What entities exist?
+2. Relationships between them?
+3. Access patterns?
+4. Data volume estimates?
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Design Schema
+```sql
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email VARCHAR(255) UNIQUE NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE orders (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE RESTRICT,
+  status VARCHAR(50) NOT NULL DEFAULT 'pending',
+  total DECIMAL(10,2) NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_orders_user ON orders(user_id);
+CREATE INDEX idx_orders_status ON orders(status) WHERE status = 'pending';
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 3: Add Constraints
+```sql
+ALTER TABLE orders ADD CONSTRAINT positive_total CHECK (total >= 0);
+ALTER TABLE orders ADD CONSTRAINT valid_status 
+  CHECK (status IN ('pending', 'processing', 'completed', 'cancelled'));
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+### Step 4: Document
+```markdown
+# Schema Documentation
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+## Users
+- Primary store for user accounts
+- Email must be unique
+
+## Orders
+- Tracks user purchases
+- Status lifecycle: pending → processing → completed
+- Soft deletes not implemented (use status='cancelled')
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- DDL scripts
+- ER diagram
+- Index strategy
+- Documentation

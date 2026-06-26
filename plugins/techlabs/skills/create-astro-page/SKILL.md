@@ -1,51 +1,42 @@
 # create-astro-page
 
-Astro page with islands architecture.
+Create Astro page with SSG, content collections, and layouts.
+
+## When to Use
+- Static pages
+- Blog posts
+- Documentation
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
+### Step 1: Page with Layout
+```astro
+---
+// src/pages/blog/index.astro
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+const posts = await getCollection("blog", ({ data }) => !data.draft);
+---
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+<Layout title="Blog">
+  <main class="container py-8">
+    <h1 class="text-3xl font-bold mb-6">Blog</h1>
+    <div class="grid gap-6">
+      {posts.map((post) => (
+        <article class="border rounded-lg p-6">
+          <h2><a href={`/blog/${post.slug}`}>{post.data.title}</a></h2>
+          <time class="text-gray-500">{post.data.date.toLocaleDateString()}</time>
+          <p class="mt-2">{post.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </main>
+</Layout>
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Page component
+- Layout integration
+- Content collection
+- Routing

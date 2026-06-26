@@ -1,51 +1,53 @@
 # compliance-check
 
-SOC2, GDPR, data privacy validation.
+Verify compliance with GDPR, SOC2, HIPAA, and other regulations.
+
+## When to Use
+- New feature launches
+- Audit preparation
+- Data handling changes
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: GDPR Checklist
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+- [ ] Consent collected before data processing
+- [ ] Privacy policy accessible
+- [ ] Data subject rights implemented (access, delete, portability)
+- [ ] Data retention policy defined
+- [ ] DPO appointed (if required)
+- [ ] Data processing records maintained
 ```
 
-### Step 3: Implement
+### Step 2: Data Flow Audit
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+MAP data flows:
+- Collection points
+- Storage locations
+- Processing activities
+- Third-party sharing
+- Retention periods
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Technical Controls
+```typescript
+// Data retention
+async function enforceRetention() {
+  const expired = await db.query(
+    'DELETE FROM analytics WHERE created_at < NOW() - INTERVAL \'2 years\' RETURNING id'
+  );
+}
+
+// Right to deletion
+async function handleDeletionRequest(userId: string) {
+  await db.query('DELETE FROM users WHERE id = $1', [userId]);
+  await db.query('DELETE FROM orders WHERE user_id = $1', [userId]);
+  await auditLog('user_deleted', { userId });
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Compliance checklist
+- Data flow map
+- Technical controls
+- Gap analysis

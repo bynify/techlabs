@@ -55,10 +55,12 @@ When making architecture decisions:
 3. Get approval from relevant stakeholders
 4. Update architecture doc after decision
 
-### Quality Gates
+### Quality Checklist
 Before approving any technical change:
 - [ ] Architecture review completed
 - [ ] Security implications assessed
 - [ ] Performance impact measured
 - [ ] Scalability considered
 - [ ] Documentation updated
+- [ ] Technical debt impact evaluated
+- [ ] Team capacity confirmed

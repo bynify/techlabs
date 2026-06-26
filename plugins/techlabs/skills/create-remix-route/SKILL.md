@@ -1,51 +1,96 @@
 # create-remix-route
 
-Remix route with loader/action.
+Create Remix component/page with proper typing, state management, and accessibility.
+
+## When to Use
+- Building UI features
+- Adding new pages
+- Creating reusable components
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Requirements
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Component/page purpose?
+2. Data requirements?
+3. Interactions needed?
+4. Auth required?
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Create Implementation
+```tsx
+// app/routes/users.tsx
+import type { LoaderFunctionArgs, ActionFunctionArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { useLoaderData, Form, useNavigation } from "@remix-run/react";
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const userId = await requireUser(request);
+  const users = await db.users.findByOrg(userId);
+  return json({ users });
+}
+
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const intent = formData.get("intent");
+
+  if (intent === "delete") {
+    await db.users.delete(formData.get("id") as string);
+  }
+
+  return redirect("/users");
+}
+
+export default function UsersPage() {
+  const { users } = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
+
+  return (
+    <div>
+      <h1>Users</h1>
+      {users.map((user) => (
+        <div key={user.id} className="flex justify-between items-center p-4 border">
+          <span>{user.name}</span>
+          <Form method="post">
+            <input type="hidden" name="intent" value="delete" />
+            <input type="hidden" name="id" value={user.id} />
+            <button type="submit" disabled={navigation.state === "submitting"}>
+              Delete
+            </button>
+          </Form>
+        </div>
+      ))}
+    </div>
+  );
+}
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Add Types
+```typescript
+// src/types/create-remix-route.ts
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user" | "viewer";
+  createdAt: string;
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Add Tests
+```typescript
+import { render, screen } from "@testing-library/react";
+import { UserCard } from "./UserCard";
+
+test("renders user name", () => {
+  render(<UserCard user={mockUser} onEdit={vi.fn()} onDelete={vi.fn()} />);
+  expect(screen.getByText("Test User")).toBeInTheDocument();
+});
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Component/page file
+- Type definitions
+- Unit tests
+- Documentation

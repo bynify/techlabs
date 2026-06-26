@@ -1,51 +1,49 @@
 # wireframe
 
-Low-fi layouts, user flows.
+Create wireframes for UI layouts and user flows.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Page Structure
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+LAYOUT:
+┌─────────────────────────┐
+│ Header (Logo, Nav, CTA) │
+├─────────────────────────┤
+│ Hero Section            │
+│ - Headline              │
+│ - Subheadline           │
+│ - CTA Button            │
+├─────────────────────────┤
+│ Features Grid           │
+├─────────────────────────┤
+│ Testimonials            │
+├─────────────────────────┤
+│ Footer                  │
+└─────────────────────────┘
 ```
 
-### Step 4: Verify
+### Step 2: Component Specs
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+BUTTON:
+- Size: 44px height
+- Padding: 12px 24px
+- Border radius: 8px
+
+CARD:
+- Padding: 24px
+- Border: 1px solid #e5e7eb
+- Shadow: sm
 ```
 
-### Step 5: Report
+### Step 3: Responsive
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+MOBILE: Single column, stacked
+TABLET: 2-column grid
+DESKTOP: 3-column grid, sidebar
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Wireframe layout
+- Component specs
+- Responsive behavior

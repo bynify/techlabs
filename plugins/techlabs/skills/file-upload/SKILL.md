@@ -1,51 +1,52 @@
 # file-upload
 
-File upload handling with validation.
+Implement file upload with validation, storage, and progress.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Frontend Upload
+```typescript
+async function uploadFile(file: File, onProgress: (pct: number) => void) {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const xhr = new XMLHttpRequest();
+  xhr.upload.onprogress = (e) => onProgress((e.loaded / e.total) * 100);
+  
+  return new Promise((resolve, reject) => {
+    xhr.onload = () => resolve(JSON.parse(xhr.responseText));
+    xhr.onerror = reject;
+    xhr.open('POST', '/api/upload');
+    xhr.send(formData);
+  });
+}
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 2: Backend Handler
+```typescript
+app.post('/api/upload', async (req, res) => {
+  const file = req.files.file;
+  
+  // Validate
+  if (file.size > 10 * 1024 * 1024) {
+    return res.status(400).json({ error: 'File too large' });
+  }
+  
+  const allowed = ['image/jpeg', 'image/png', 'application/pdf'];
+  if (!allowed.includes(file.mimetype)) {
+    return res.status(400).json({ error: 'Invalid file type' });
+  }
+  
+  // Store
+  const key = `uploads/${Date.now()}-${file.name}`;
+  await storage.put(key, file.data);
+  
+  res.json({ url: `/files/${key}` });
+});
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Upload handler
+- Progress tracking
+- Validation
+- Storage integration

@@ -1,51 +1,62 @@
 # data-model
 
-Domain model, entities, relationships.
+Define data models with types, validation, and relationships.
+
+## When to Use
+- Starting new features
+- API contract design
+- Type safety enforcement
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Define Models
+```typescript
+// src/models/user.ts
+import { z } from 'zod';
+
+export const UserSchema = z.object({
+  id: z.string().uuid(),
+  email: z.string().email(),
+  name: z.string().min(1).max(100),
+  role: z.enum(['admin', 'user', 'viewer']),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+});
+
+export type User = z.infer<typeof UserSchema>;
+
+export const CreateUserSchema = UserSchema.omit({ id: true, createdAt: true, updatedAt: true });
+export type CreateUser = z.infer<typeof CreateUserSchema>;
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Add Relationships
+```typescript
+export const OrderSchema = z.object({
+  id: z.string().uuid(),
+  userId: z.string().uuid(),
+  status: z.enum(['pending', 'processing', 'completed', 'cancelled']),
+  total: z.number().positive(),
+  items: z.array(z.object({
+    productId: z.string().uuid(),
+    quantity: z.number().int().positive(),
+    price: z.number().positive(),
+  })),
+});
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+### Step 3: Create Validations
+```typescript
+export function validateUser(data: unknown): User {
+  return UserSchema.parse(data);
+}
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+export function validateCreateUser(data: unknown): CreateUser {
+  return CreateUserSchema.parse(data);
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Type definitions
+- Zod schemas
+- Validation functions
+- Relationship mapping

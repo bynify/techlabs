@@ -1,51 +1,53 @@
 # create-tauri-app
 
-Tauri app scaffolding with Rust backend.
+Create Tauri desktop app with Rust backend and web frontend.
+
+## When to Use
+- Lightweight desktop apps
+- System-level access needed
+- Secure desktop applications
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Initialize
+```bash
+npm create tauri-app@latest my-app -- --template react-ts
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Rust Commands
+```rust
+// src-tauri/src/commands.rs
+#[tauri::command]
+async fn read_file(path: String) -> Result<String, String> {
+    std::fs::read_to_string(&path).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+async fn save_file(path: String, content: String) -> Result<(), String> {
+    std::fs::write(&path, content).map_err(|e| e.to_string())
+}
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 3: Frontend
+```typescript
+import { invoke } from '@tauri-apps/api/core';
+
+const content = await invoke<string>('read_file', { path: '/path/to/file' });
+await invoke('save_file', { path: '/path/to/file', content: 'new' });
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Permissions
+```json
+{
+  "permissions": {
+    "fs": { "scope": ["$APPDATA/**"] },
+    "shell": { "open": true }
+  }
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Tauri app scaffold
+- Rust commands
+- Frontend integration
+- Permissions configured

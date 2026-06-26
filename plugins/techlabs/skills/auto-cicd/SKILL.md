@@ -1,45 +1,54 @@
 # auto-cicd
 
-Auto-generate CI/CD pipeline.
+Automate CI/CD pipeline creation based on detected stack.
+
+## When to Use
+- New project setup
+- Missing CI/CD
+- Standardizing pipelines
 
 ## Execution
 
-### Step 1: Detect Project Type
-```
-SCAN:
-- go.mod → Go
-- package.json → Node.js
-- requirements.txt → Python
-- Dockerfile → Docker
+### Step 1: Detect Stack and Create Pipeline
+```yaml
+# .github/workflows/ci.yml
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'
+      - run: go test ./... -race -coverprofile=coverage.out
 ```
 
-### Step 2: Generate Pipeline
-```
-CREATE .github/workflows/ci.yml:
-- Linting
-- Testing
-- Building
-- Security scanning
-- Deployment
-```
+### Step 2: Add CD Pipeline
+```yaml
+# .github/workflows/deploy.yml
+name: CD
+on:
+  push:
+    branches: [main]
 
-### Step 3: Configure
-```
-SETUP:
-- Environment variables
-- Secrets
-- Deployment targets
-- Notifications
-```
-
-### Step 4: Validate
-```
-CHECK:
-- Pipeline syntax
-- Required secrets
-- Deployment targets
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci && npm run build
+      - run: npx wrangler deploy
 ```
 
 ## Output
-- CI/CD configuration
-- Documentation
+- CI pipeline
+- CD pipeline
+- Secret documentation

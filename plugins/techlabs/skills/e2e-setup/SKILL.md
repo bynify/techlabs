@@ -1,51 +1,56 @@
 # e2e-setup
 
-Playwright setup with page objects.
+End-to-end testing with Playwright or Cypress.
+
+## When to Use
+- Critical path testing
+- Regression prevention
+- CI integration
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Setup Playwright
+```bash
+npm init playwright@latest
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Write Tests
+```typescript
+// tests/e2e/auth.spec.ts
+import { test, expect } from '@playwright/test';
+
+test('user can login', async ({ page }) => {
+  await page.goto('/login');
+  await page.fill('[name=email]', 'user@example.com');
+  await page.fill('[name=password]', 'password123');
+  await page.click('button[type=submit]');
+  await expect(page).toHaveURL('/dashboard');
+});
+
+test('user sees error on invalid credentials', async ({ page }) => {
+  await page.goto('/login');
+  await page.fill('[name=email]', 'wrong@example.com');
+  await page.fill('[name=password]', 'wrong');
+  await page.click('button[type=submit]');
+  await expect(page.locator('.error')).toBeVisible();
+});
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: CI Config
+```yaml
+# .github/workflows/e2e.yml
+- name: Run E2E tests
+  run: npx playwright test
+- name: Upload results
+  if: always()
+  uses: actions/upload-artifact@v4
+  with:
+    name: playwright-report
+    path: playwright-report/
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Playwright setup
+- Test suite
+- CI configuration
+- Report artifacts

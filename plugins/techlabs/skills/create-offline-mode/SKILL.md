@@ -1,51 +1,56 @@
 # create-offline-mode
 
-Offline-first patterns with sync.
+Implement offline-first with service workers and local storage.
+
+## When to Use
+- Mobile web apps
+- Unreliable connectivity
+- Field workers
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Service Worker Cache
+```typescript
+// sw.js
+const CACHE = 'app-v1';
+const ASSETS = ['/', '/index.html', '/assets/app.js'];
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+});
+
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then(cached => cached || fetch(event.request))
+  );
+});
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+### Step 2: IndexedDB Storage
+```typescript
+import { openDB } from 'idb';
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
+const db = await openDB('app', 1, {
+  upgrade(db) {
+    db.createObjectStore('pending', { keyPath: 'id', autoIncrement: true });
+  },
+});
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+async function saveOffline(action: any) {
+  await db.add('pending', { ...action, timestamp: Date.now() });
+}
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+async function syncPending() {
+  const pending = await db.getAll('pending');
+  for (const action of pending) {
+    await api.send(action);
+    await db.delete('pending', action.id);
+  }
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Service worker
+- IndexedDB integration
+- Sync logic
+- UI indicators

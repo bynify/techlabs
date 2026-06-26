@@ -77,10 +77,12 @@ Already using Redis? → Redis Streams
 Simple, Go ecosystem? → NSQ
 ```
 
-### Quality Gates
+### Quality Checklist
 Before approving any messaging change:
 - [ ] Event schema documented
 - [ ] Dead letter queue configured
 - [ ] Consumer groups defined
 - [ ] Monitoring in place
 - [ ] Rollback plan documented
+- [ ] Idempotency verified
+- [ ] Backward compatibility ensured

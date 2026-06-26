@@ -1,51 +1,36 @@
 # feature-prioritize
 
-RICE/ICE scoring, roadmap planning.
+Prioritize features using RICE, MoSCoW, or Value/Effort matrix.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: List Features
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+FEATURES:
+1. User auth
+2. Dashboard
+3. Notifications
+4. Export data
+5. API v2
 ```
 
-### Step 3: Implement
+### Step 2: Score with RICE
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+FEATURE | REACH | IMPACT | CONFIDENCE | EFFORT | RICE SCORE
+Auth    | 100   | 3      | 100%       | 5      | 60
+Dash    | 80    | 3      | 80%        | 8      | 24
+Export  | 30    | 2      | 90%        | 3      | 18
+API v2  | 50    | 2      | 70%        | 13     | 5.4
 ```
 
-### Step 5: Report
+### Step 3: Create Roadmap
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+NOW: Auth, Dashboard
+NEXT: Export
+LATER: API v2
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Feature scores
+- Prioritized roadmap
+- Rationale

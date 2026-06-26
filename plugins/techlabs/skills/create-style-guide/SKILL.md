@@ -1,51 +1,59 @@
 # create-style-guide
 
-Design documentation, style guide.
+Create coding style guide for consistent codebase.
+
+## When to Use
+- Team onboarding
+- Code quality standards
+- Refactoring standards
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Define Standards
+```markdown
+# Style Guide
+
+## Naming
+- Variables: camelCase
+- Components: PascalCase
+- Files: kebab-case
+- Constants: UPPER_SNAKE_CASE
+
+## Files
+- One component per file
+- Tests next to source
+- Types in separate files
+
+## Comments
+- JSDoc for public APIs
+- No comments for obvious code
+- TODO format: TODO(username): description
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: ESLint Config
+```json
+{
+  "rules": {
+    "no-console": "warn",
+    "no-unused-vars": "error",
+    "prefer-const": "error",
+    "react-hooks/rules-of-hooks": "error"
+  }
+}
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Prettier Config
+```json
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "printWidth": 100
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Style guide document
+- Linting config
+- Formatting config
+- Example snippets

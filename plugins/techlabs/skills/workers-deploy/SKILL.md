@@ -1,51 +1,47 @@
 # workers-deploy
 
-Wrangler deploy with preview URLs.
+Deploy Cloudflare Workers with wrangler.
+
+## When to Use
+- Deploying Workers
+- Environment management
+- Secret management
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Configure wrangler.toml
+```toml
+name = "api-worker"
+main = "src/worker.ts"
+compatibility_date = "2024-01-01"
+
+[env.production]
+name = "api-production"
+routes = [{ pattern = "api.example.com/*", zone_name = "example.com" }]
+
+[env.staging]
+name = "api-staging"
+routes = [{ pattern = "staging.example.com/*", zone_name = "example.com" }]
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Deploy
+```bash
+# Deploy to staging
+npx wrangler deploy --env staging
+
+# Deploy to production
+npx wrangler deploy --env production
+
+# Deploy with secrets
+npx wrangler secret put API_KEY --env production
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Verify
+```bash
+curl -f https://api.example.com/health
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- wrangler.toml configuration
+- Deploy script
+- Secret management

@@ -1,51 +1,68 @@
 # brainstorm
 
-Ideation, feature exploration, concept development.
+Structured ideation, feature exploration, and concept development.
+
+## When to Use
+- Starting a new project
+- Exploring feature ideas
+- Solving complex problems
+- Validating assumptions
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Problem Space
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. What problem are we solving?
+2. Who has this problem?
+3. Current solutions? Why insufficient?
+4. Constraints? (time, budget, tech)
+5. Success looks like?
 ```
 
-### Step 2: Load Context
+### Step 2: Generate Ideas
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+BRAINSTORM TECHNIQUE: Mind Mapping
+
+Core Problem: [Problem statement]
+├── Category 1
+│   ├── Idea A
+│   ├── Idea B
+│   └── Idea C
+├── Category 2
+│   ├── Idea D
+│   └── Idea E
+└── Category 3
+    └── Idea F
 ```
 
-### Step 3: Implement
+### Step 3: Evaluate Ideas
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+FOR EACH idea, score:
+- Impact (1-5): How much does this move the needle?
+- Effort (1-5): How hard to implement?
+- Risk (1-5): What could go wrong?
+
+Priority = Impact / (Effort × Risk)
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+### Step 4: Create Action Plan
+```markdown
+## Selected Ideas
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Idea 1: [Name]
+**Impact:** High | **Effort:** Medium | **Risk:** Low
+- MVP scope: ...
+- Timeline: 2 weeks
+- Dependencies: ...
+
+### Idea 2: [Name]
+**Impact:** Medium | **Effort:** Low | **Risk:** Low
+- Quick win, implement immediately
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Problem statement
+- Idea map with scores
+- Prioritized action plan
+- Next steps defined

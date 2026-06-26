@@ -1,51 +1,80 @@
 # pricing-strategy
 
-Tier design, value metrics, packaging.
+Define pricing model, tiers, and packaging strategy.
+
+## When to Use
+- Launching new product
+- Restructuring pricing
+- Entering new market
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Value Metric Selection
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+OPTIONS:
+- Per seat (SaaS tools)
+- Per usage (API calls, storage)
+- Per feature (tiered access)
+- Flat rate (simple pricing)
+- Hybrid (base + usage)
+
+CONSIDER:
+- Value perceived by customer
+- Revenue predictability
+- Scaling with customer growth
 ```
 
-### Step 2: Load Context
+### Step 2: Competitor Analysis
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+| Feature | Us | Competitor A | Competitor B |
+|---------|----|--------------|--------------|
+| Free tier | Yes | No | Yes |
+| Unlimited users | $29/seat | $49/seat | $39/seat |
+| API access | Yes | $99/mo | Yes |
+| Support | Email | Chat 24/7 | Email |
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Define Tiers
+```markdown
+## Pricing Tiers
+
+### Free
+- Price: $0/mo
+- Limits: 3 users, 100 API calls/day
+- Features: Core features
+- Goal: Acquisition
+
+### Pro
+- Price: $29/seat/mo (or $290/yr)
+- Limits: Unlimited users, 10,000 API calls/day
+- Features: All features + priority support
+- Goal: Revenue
+
+### Enterprise
+- Price: Custom
+- Limits: Custom
+- Features: SSO, SLA, dedicated support, custom integrations
+- Goal: Expansion
 ```
 
-### Step 5: Report
+### Step 4: Launch Strategy
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+PHASE 1 (Beta):
+- Early bird discount (30% off)
+- Founding member pricing
+
+PHASE 2 (Launch):
+- Standard pricing
+- 14-day free trial
+- Annual discount (2 months free)
+
+PHASE 3 (Growth):
+- Volume discounts
+- Enterprise outreach
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Value metric defined
+- Competitor comparison
+- Tier structure
+- Launch pricing

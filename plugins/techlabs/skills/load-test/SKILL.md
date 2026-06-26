@@ -1,51 +1,53 @@
 # load-test
 
-k6/Artillery load test setup.
+Performance and load testing with k6 or Artillery.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Define Scenarios
+```javascript
+// load-test.js
+import http from 'k6/http';
+import { check } from 'k6';
+
+export const options = {
+  stages: [
+    { duration: '1m', target: 50 },   // Ramp up
+    { duration: '5m', target: 50 },   // Hold
+    { duration: '1m', target: 100 },  // Spike
+    { duration: '3m', target: 100 },  // Hold
+    { duration: '1m', target: 0 },    // Ramp down
+  ],
+  thresholds: {
+    http_req_duration: ['p(95)<500'],
+    http_req_failed: ['rate<0.01'],
+  },
+};
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Test Scenarios
+```javascript
+export default function () {
+  const res = http.get('http://api.example.com/users');
+  check(res, {
+    'status 200': (r) => r.status === 200,
+    'response < 500ms': (r) => r.timings.duration < 500,
+  });
+}
 ```
 
-### Step 4: Verify
+### Step 3: Report
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+RESULTS:
+- Total requests: 15,000
+- Failed: 0.02%
+- P50 latency: 120ms
+- P95 latency: 380ms
+- P99 latency: 890ms
+- Throughput: 50 req/s
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Load test scripts
+- Results report
+- Bottleneck analysis

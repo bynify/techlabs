@@ -1,51 +1,44 @@
 # create-pricing-page
 
-Pricing tiers and comparison.
+Build conversion-optimized pricing page with clear tiers and CTAs.
+
+## When to Use
+- Launch pricing
+- Pricing page redesign
+- A/B testing pricing
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Pricing Structure
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Pricing tiers?
+2. Differentiators per tier?
+3. Discount strategy?
+4. CTA for each tier?
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 2: Create Pricing Component
+```tsx
+function PricingCard({ tier, features, price, isPopular }: Props) {
+  return (
+    <div className={cn("rounded-lg border p-6", isPopular && "border-blue-500 ring-2")}>
+      {isPopular && <span className="text-blue-600 text-sm font-medium">Most Popular</span>}
+      <h3 className="text-xl font-bold mt-2">{tier}</h3>
+      <div className="mt-4">
+        <span className="text-4xl font-bold">${price}</span>
+        <span className="text-gray-500">/month</span>
+      </div>
+      <ul className="mt-6 space-y-3">
+        {features.map(f => <li key={f}>✓ {f}</li>)}
+      </ul>
+    </div>
+  );
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Pricing component
+- Tier configuration
+- Schema markup
+- FAQ section

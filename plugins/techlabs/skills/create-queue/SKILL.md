@@ -1,51 +1,42 @@
 # create-queue
 
-Queue producers/consumers setup.
+Create Message Queue with proper configuration and error handling.
+
+## When to Use
+- Async processing needs
+- Event-driven workflows
+- Reliable message delivery
 
 ## Execution
 
 ### Step 1: Gather Requirements
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Message/event type?
+2. Throughput requirements?
+3. Ordering needs?
+4. Retry strategy?
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Configure
+```typescript
+// Implementation specific to queue type
+// Follows patterns from create-kafka-topic for Kafka
+// Follows patterns from create-sqs-queue for SQS
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+### Step 3: Add Error Handling
+- Dead letter queue for failed messages
+- Exponential backoff for retries
+- Idempotency keys for deduplication
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
-```
+### Step 4: Monitor
+- Queue depth alerts
+- Processing rate metrics
+- Error rate tracking
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Queue/topic configuration
+- Producer code
+- Consumer code with DLQ
+- Monitoring setup

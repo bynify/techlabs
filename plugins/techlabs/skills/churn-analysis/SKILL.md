@@ -1,51 +1,60 @@
 # churn-analysis
 
-Retention metrics and intervention.
+Analyze user churn patterns and build retention strategies.
+
+## When to Use
+- High churn rate
+- Retention optimization
+- User lifecycle analysis
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Churn
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+METRICS:
+- Churn rate = lost users / total users (monthly)
+- Cohort retention = % users active after N days
+- Revenue churn = lost MRR / total MRR
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 2: Cohort Analysis
+```sql
+SELECT
+  DATE_TRUNC('month', first_seen) AS cohort,
+  COUNT(DISTINCT CASE WHEN active_month = 0 THEN user_id END) AS month_0,
+  COUNT(DISTINCT CASE WHEN active_month = 1 THEN user_id END) AS month_1,
+  COUNT(DISTINCT CASE WHEN active_month = 2 THEN user_id END) AS month_2
+FROM user_activity
+GROUP BY 1
+ORDER BY 1;
 ```
 
-### Step 5: Report
+### Step 3: Churn Reasons
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+ANALYZE:
+- Last action before churn
+- Support tickets
+- Feature usage patterns
+- NPS responses
+```
+
+### Step 4: Retention Strategies
+```
+IF churn_stage == "first_week":
+  → Onboarding emails
+  → Guided tour
+  
+IF churn_stage == "month_1":
+  → Feature discovery
+  → Check-in call
+  
+IF churn_stage == "power_user":
+  → Save offer
+  → Exit survey
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Churn metrics
+- Cohort analysis
+- Churn reasons
+- Retention strategies

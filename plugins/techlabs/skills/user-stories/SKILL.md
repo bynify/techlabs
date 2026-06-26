@@ -1,51 +1,39 @@
 # user-stories
 
-Story mapping, acceptance criteria, user journeys.
+Create user stories with acceptance criteria.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Format
+```markdown
+## Story: [Title]
+
+**As a** [user type]
+**I want to** [action]
+**So that** [benefit]
+
+### Acceptance Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+- [ ] Criterion 3
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+### Step 2: Example
+```markdown
+## Story: User Login
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
+**As a** registered user
+**I want to** log in with my email
+**So that** I can access my account
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Acceptance Criteria
+- [ ] Valid credentials grant access
+- [ ] Invalid credentials show error
+- [ ] Account locks after 5 failed attempts
+- [ ] Password reset link works
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- User stories
+- Acceptance criteria
+- Dependencies mapped

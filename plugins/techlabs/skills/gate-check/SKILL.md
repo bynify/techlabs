@@ -1,51 +1,42 @@
 # gate-check
 
-Quality gate validation.
+Pre-deployment quality gate checks.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Run Checks
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+CHECKLIST:
+- [ ] All tests passing
+- [ ] No lint errors
+- [ ] No type errors
+- [ ] Coverage > 80%
+- [ ] No critical vulnerabilities
+- [ ] Build succeeds
+- [ ] Documentation updated
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 2: Run Commands
+```bash
+npm test
+npm run lint
+npm run typecheck
+npm run build
 ```
 
-### Step 5: Report
+### Step 3: Report
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+GATE STATUS: ✅ PASS / ❌ FAIL
+
+Tests:     ✅ 145/145 passing
+Lint:      ✅ 0 errors
+Types:     ✅ 0 errors
+Coverage:  ✅ 87%
+Security:  ✅ 0 critical
+Build:     ✅ Success
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Gate check results
+- Pass/fail status
+- Issues list

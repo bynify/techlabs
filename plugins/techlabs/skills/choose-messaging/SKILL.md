@@ -1,51 +1,71 @@
 # choose-messaging
 
-Messaging system selection (Kafka, RabbitMQ, NATS, etc.).
+Select the right message broker based on project requirements.
+
+## When to Use
+- Designing event-driven systems
+- Choosing between Kafka, RabbitMQ, NATS, etc.
+- Scaling communication between services
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Analyze Requirements
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Message volume? (low/medium/high/very high)
+2. Ordering important?
+3. Exactly-once needed?
+4. Streaming or task queue?
+5. Multi-consumer patterns?
 ```
 
-### Step 2: Load Context
+### Step 2: Compare Options
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+| Feature          | Kafka  | RabbitMQ | NATS  | Redis Pub/Sub | SQS/SNS |
+|------------------|--------|----------|-------|---------------|---------|
+| Throughput       | High   | Medium   | High  | Medium        | Medium  |
+| Ordering         | Per-partition | Per-queue | No | No          | FIFO    |
+| Exactly-once     | ✅     | ❌       | ❌    | ❌            | ✅ FIFO |
+| Message replay   | ✅     | ❌       | ❌    | ❌            | ❌      |
+| Streaming        | ✅     | ❌       | ✅    | ❌            | ❌      |
+| Managed option   | ✅     | ✅       | ✅    | ✅            | ✅      |
 ```
 
-### Step 4: Verify
+### Step 3: Decision Matrix
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+IF volume > 100k/sec OR event_sourcing:
+  → Kafka
+
+IF task_queue AND reliability_critical:
+  → RabbitMQ
+
+IF simple_pub_sub AND low_latency:
+  → NATS
+
+IF already_using_redis AND simple_needs:
+  → Redis Pub/Sub
+
+IF aws_native AND managed_service:
+  → SQS/SNS
 ```
 
-### Step 5: Report
+### Step 4: Create Implementation Plan
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+RECOMMENDED: [Selected]
+
+Setup:
+1. [Infrastructure step]
+2. [Client setup]
+3. [First topic/queue]
+
+Considerations:
+- [Scaling strategy]
+- [Monitoring approach]
+- [Cost estimate]
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Messaging system recommendation
+- Comparison matrix
+- Implementation plan
+- Cost estimates

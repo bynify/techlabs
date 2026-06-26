@@ -1,51 +1,45 @@
 # multi-tenancy
 
-Tenant isolation strategy.
+Implement multi-tenant architecture with data isolation.
+
+## When to Use
+- SaaS applications
+- B2B platforms
+- Shared infrastructure
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Tenant Schema
+```sql
+CREATE TABLE tenants (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name VARCHAR(255) NOT NULL,
+  slug VARCHAR(100) UNIQUE NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Add tenant_id to all tables
+ALTER TABLE users ADD COLUMN tenant_id UUID REFERENCES tenants(id);
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Tenant Context
+```typescript
+async function tenantMiddleware(req: Request) {
+  const tenantId = req.headers.get('X-Tenant-ID');
+  if (!tenantId) throw new Error('Tenant required');
+  req.tenantId = tenantId;
+}
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Row Level Security
+```sql
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+CREATE POLICY tenant_isolation ON users 
+  USING (tenant_id = current_setting('app.tenant_id')::uuid);
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Tenant schema
+- Context middleware
+- RLS policies
+- Tenant-aware queries

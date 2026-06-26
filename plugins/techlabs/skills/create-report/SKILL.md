@@ -1,51 +1,58 @@
 # create-report
 
-Automated reporting with schedules.
+Generate reports from data (analytics, performance, status).
+
+## When to Use
+- Weekly reports
+- Performance reviews
+- Status updates
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Report Type
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+TYPES:
+- Performance: API metrics, error rates
+- Analytics: Users, traffic, conversions
+- Status: Sprint progress, blockers
+- Financial: Revenue, costs
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 2: Gather Data
+```typescript
+async function generateReport(type: string, period: DateRange) {
+  const data = await fetchMetrics(type, period);
+  return {
+    period,
+    summary: calculateSummary(data),
+    trends: calculateTrends(data),
+    highlights: identifyHighlights(data),
+  };
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Format Report
+```markdown
+# {Type} Report: {Period}
+
+## Summary
+- Key metric 1: value (change%)
+- Key metric 2: value (change%)
+
+## Trends
+- Upward/downward trend description
+
+## Highlights
+- Notable achievement
+- Area needing attention
+
+## Next Steps
+- Recommended action 1
+- Recommended action 2
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Report generation
+- Data aggregation
+- Formatting
+- Distribution

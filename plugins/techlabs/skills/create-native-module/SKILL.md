@@ -1,51 +1,60 @@
 # create-native-module
 
-Native module integration for RN.
+Create React Native native module for platform-specific functionality.
+
+## When to Use
+- Platform-specific features
+- Performance-critical code
+- Third-party SDK integration
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 1: Define Interface
+```typescript
+// src/types/native.ts
+interface NativeBridge {
+  getDeviceInfo(): Promise<{ platform: string; version: string }>;
+  share(content: { title: string; url: string }): Promise<void>;
+  hapticFeedback(type: "light" | "medium" | "heavy"): Promise<void>;
+}
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: iOS Implementation
+```swift
+// ios/Modules/DeviceInfoModule.swift
+@objc(DeviceInfoModule)
+class DeviceInfoModule: NSObject {
+  @objc static func requiresMainQueueSetup() -> Bool { return false }
+  
+  @objc func getDeviceInfo(_ resolve: @escaping RCTPromiseResolveBlock,
+                           rejecter reject: @escaping RCTPromiseRejectBlock) {
+    let device = UIDevice.current
+    resolve([
+      "platform": "ios",
+      "version": device.systemVersion
+    ])
+  }
+}
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Android Implementation
+```kotlin
+// android/src/main/java/com/app/DeviceInfoModule.kt
+class DeviceInfoModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+  override fun getName() = "DeviceInfo"
+  
+  @ReactMethod
+  fun getDeviceInfo(promise: Promise) {
+    val result = Arguments.createMap()
+    result.putString("platform", "android")
+    result.putString("version", Build.VERSION.RELEASE)
+    promise.resolve(result)
+  }
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- TypeScript interface
+- iOS implementation
+- Android implementation
+- Bridge registration

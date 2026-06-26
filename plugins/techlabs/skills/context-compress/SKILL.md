@@ -1,35 +1,56 @@
 # context-compress
 
-Manually compress context window.
+Compress conversation context to save tokens and maintain relevance.
+
+## When to Use
+- Long conversations
+- Token limits approaching
+- Context optimization
 
 ## Execution
 
-### Step 1: Identify Targets
+### Step 1: Identify Key Points
 ```
-ANALYZE:
-- Verbose sections
-- Old decisions
-- Redundant information
-- Low-priority content
-```
-
-### Step 2: Compress
-```
-COMPRESS:
-1. Summarize long sections
-2. Remove old decisions
-3. Archive completed tasks
-4. Preserve active context
+EXTRACT:
+- User's original goal
+- Key decisions made
+- Files modified
+- Current blockers
+- Pending actions
 ```
 
-### Step 3: Verify
+### Step 2: Create Summary
+```markdown
+## Context Summary
+
+**Goal:** [What we're building]
+**Progress:** [What's done]
+**Current:** [What we're working on]
+**Next:** [What's pending]
+**Files:** [Key files modified]
 ```
-CHECK:
-- Critical context preserved
-- Token usage reduced
-- No data loss
+
+### Step 3: Update Active State
+```markdown
+# production/session-state/active.md
+
+## Current Task
+[Description]
+
+## Decisions
+- [Decision 1]
+- [Decision 2]
+
+## Files Modified
+- src/api/users.ts
+- src/components/UserCard.tsx
+
+## Next Steps
+- [ ] Step 1
+- [ ] Step 2
 ```
 
 ## Output
 - Compressed context
-- Usage report
+- Updated session state
+- Token savings

@@ -1,51 +1,38 @@
 # ui-review
 
-Design QA, consistency check.
+UI consistency and quality review.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
+### Step 1: Visual Consistency
 ```
 CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+- [ ] Consistent colors
+- [ ] Consistent typography
+- [ ] Consistent spacing
+- [ ] Consistent components
 ```
 
-### Step 5: Report
+### Step 2: UX Patterns
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+CHECK:
+- [ ] Clear hierarchy
+- [ ] Obvious CTAs
+- [ ] Error states
+- [ ] Loading states
+- [ ] Empty states
+```
+
+### Step 3: Responsive
+```
+CHECK:
+- [ ] Mobile (320px)
+- [ ] Tablet (768px)
+- [ ] Desktop (1024px)
+- [ ] Large (1440px)
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Review report
+- Issues list
+- Recommendations

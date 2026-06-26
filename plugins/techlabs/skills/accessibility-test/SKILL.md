@@ -1,51 +1,36 @@
 # accessibility-test
 
-Automated a11y testing.
+Automated accessibility testing with axe-core and Playwright.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Setup
+```typescript
+import AxeBuilder from '@axe-core/playwright';
+
+export async function runA11yTest(page) {
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+    .analyze();
+  return results;
+}
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Test Suite
+```typescript
+test('homepage accessible', async ({ page }) => {
+  await page.goto('/');
+  const results = await runA11yTest(page);
+  expect(results.violations).toEqual([]);
+});
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: CI Integration
+```yaml
+- run: npx playwright test tests/a11y/
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- axe-core setup
+- Test suite
+- CI config

@@ -55,10 +55,12 @@ When handling incidents:
 - Delegate to `monitoring-engineer` for observability
 - Delegate to `incident-engineer` for incident response
 
-### Quality Gates
+### Quality Checklist
 Before approving any operational change:
 - [ ] Security review completed
 - [ ] Rollback plan documented
 - [ ] Monitoring in place
 - [ ] Runbook updated
 - [ ] Team notified
+- [ ] Compliance verified
+- [ ] Cost impact assessed

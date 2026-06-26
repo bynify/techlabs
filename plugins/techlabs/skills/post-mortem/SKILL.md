@@ -1,51 +1,38 @@
 # post-mortem
 
-Post-incident analysis template.
+Blameless post-mortem analysis.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
+### Step 1: Document
+```markdown
+# Post-Mortem: [Incident Name]
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+## Summary
+- Date: YYYY-MM-DD
+- Duration: X hours
+- Impact: Y users affected
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
+## Timeline
+- HH:MM - Event started
+- HH:MM - Detected
+- HH:MM - Mitigated
+- HH:MM - Resolved
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+## Root Cause
+[What caused it]
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+## Contributing Factors
+- [Factor 1]
+- [Factor 2]
+
+## Action Items
+- [ ] Prevention: [Action]
+- [ ] Detection: [Action]
+- [ ] Response: [Action]
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Post-mortem document
+- Action items assigned
+- Follow-up scheduled

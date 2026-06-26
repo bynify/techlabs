@@ -1,51 +1,41 @@
 # tech-feasibility
 
-Technical feasibility assessment, risk analysis.
+Assess technical feasibility of features.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Requirements
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+FEATURE: [Description]
+CONSTRAINTS:
+- Performance: [targets]
+- Budget: [amount]
+- Timeline: [dates]
 ```
 
-### Step 3: Implement
+### Step 2: Analysis
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+APPROACHES:
+1. Approach A - Simple, limited
+2. Approach B - Complex, full-featured
+3. Approach C - Hybrid
+
+COMPARISON:
+| Approach | Effort | Risk | Tradeoffs |
+|----------|--------|------|-----------|
+| A        | Low    | Low  | Limited features |
+| B        | High   | Med  | Full featured |
+| C        | Medium | Low  | Balanced |
 ```
 
-### Step 4: Verify
+### Step 3: Recommendation
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+RECOMMEND: Approach C
+REASON: Balances features with effort
+TIMELINE: 2-3 weeks
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Feasibility assessment
+- Approach comparison
+- Recommendation

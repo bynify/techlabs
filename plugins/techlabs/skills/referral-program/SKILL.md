@@ -1,51 +1,49 @@
 # referral-program
 
-Referral system design.
+Build referral program with tracking and rewards.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 1: Referral Schema
+```sql
+CREATE TABLE referrals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  referrer_id UUID REFERENCES users(id),
+  referred_id UUID REFERENCES users(id),
+  status VARCHAR(50) DEFAULT 'pending',
+  reward_amount DECIMAL(10,2),
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Tracking
+```typescript
+app.post('/api/referrals', async (req, res) => {
+  const { referralCode } = req.body;
+  const referrer = await db.users.findByReferralCode(referralCode);
+  
+  if (!referrer) return res.status(404).json({ error: 'Invalid code' });
+  
+  await db.referrals.create({
+    referrer_id: referrer.id,
+    referred_id: req.user.id,
+  });
+  
+  res.json({ success: true });
+});
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Rewards
+```typescript
+async function processReferralReward(referralId: string) {
+  const referral = await db.referrals.findById(referralId);
+  await db.users.addCredit(referral.referrer_id, 25);
+  await db.users.addCredit(referral.referred_id, 25);
+  await db.referrals.updateStatus(referralId, 'completed');
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Referral schema
+- Tracking logic
+- Reward system

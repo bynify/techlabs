@@ -1,51 +1,52 @@
 # seo-audit
 
-Technical SEO check and recommendations.
+SEO audit with technical, on-page, and content analysis.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
+### Step 1: Technical SEO
 ```
 CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+- robots.txt exists
+- sitemap.xml exists
+- canonical URLs set
+- SSL certificate valid
+- Mobile responsive
+- Page speed < 3s
 ```
 
-### Step 5: Report
+### Step 2: On-Page SEO
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+FOR EACH page:
+- Title tag (50-60 chars)
+- Meta description (150-160 chars)
+- H1 tag (one per page)
+- Image alt text
+- Internal links
+- Structured data
+```
+
+### Step 3: Content Quality
+```
+ANALYZE:
+- Duplicate content
+- Thin content (<300 words)
+- Keyword usage
+- Content freshness
+```
+
+### Step 4: Report
+```
+SCORE: 78/100
+
+ISSUES:
+- [ ] Missing sitemap.xml
+- [ ] 5 pages without meta descriptions
+- [ ] 3 images without alt text
+- [ ] Mobile viewport not set
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- SEO score
+- Issue list
+- Fix recommendations

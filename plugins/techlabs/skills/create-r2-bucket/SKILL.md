@@ -1,51 +1,57 @@
 # create-r2-bucket
 
-R2 object storage setup.
+Cloudflare R2 storage bucket with presigned URLs and lifecycle rules.
+
+## When to Use
+- File uploads/downloads
+- Static asset storage
+- Backup storage
+- Media hosting
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 1: Configure R2
+```toml
+# wrangler.toml
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "app-storage"
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Upload Handler
+```typescript
+export async function handleUpload(request: Request, env: Env) {
+  const formData = await request.formData();
+  const file = formData.get('file') as File;
+  
+  await env.R2.put(`uploads/${file.name}`, file, {
+    httpMetadata: { contentType: file.type },
+  });
+
+  return Response.json({ key: `uploads/${file.name}` });
+}
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Presigned URL
+```typescript
+export async function getPresignedUrl(key: string, env: Env) {
+  const url = await env.R2.presign(key, {
+    method: 'GET',
+    expiresIn: 3600, // 1 hour
+  });
+  return Response.json({ url });
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Lifecycle Rules
+```toml
+[[r2_buckets.lifecycle_rules]]
+enabled = true
+expiration = { days = 90 }
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- R2 bucket config
+- Upload/download handlers
+- Presigned URLs
+- Lifecycle rules

@@ -1,51 +1,83 @@
 # perf-audit
 
-Lighthouse and bundle analysis.
+Performance audit with Lighthouse, Core Web Vitals, and profiling.
+
+## When to Use
+- Pre-release checks
+- Performance regression detection
+- Optimization planning
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Lighthouse Audit
+```bash
+# Run Lighthouse
+npx lighthouse https://example.com --view
+
+# CI integration
+npx lighthouse https://example.com --output json --output-path ./report.json
 ```
 
-### Step 2: Load Context
+### Step 2: Core Web Vitals Check
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+TARGETS:
+- LCP (Largest Contentful Paint): < 2.5s
+- FID (First Input Delay): < 100ms
+- CLS (Cumulative Layout Shift): < 0.1
+- INP (Interaction to Next Paint): < 200ms
+
+MEASURE WITH:
+- PageSpeed Insights
+- Chrome DevTools Performance tab
+- CrUX data (field data)
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 3: Audit Checklist
+```markdown
+## Performance Audit
+
+### Metrics
+- [ ] LCP: 1.8s ✅
+- [ ] FID: 45ms ✅
+- [ ] CLS: 0.05 ✅
+- [ ] INP: 120ms ✅
+
+### Load Performance
+- [ ] Initial bundle < 250KB ✅
+- [ ] Images optimized ✅
+- [ ] Fonts loaded efficiently ⚠️
+- [ ] No render-blocking resources ✅
+
+### Runtime Performance
+- [ ] No memory leaks ✅
+- [ ] Smooth animations ✅
+- [ ] Efficient re-renders ⚠️
+
+### Backend Performance
+- [ ] API P95 < 200ms ✅
+- [ ] Database queries optimized ✅
+- [ ] Caching configured ✅
 ```
 
-### Step 4: Verify
+### Step 4: Recommendations
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+HIGH IMPACT:
+1. Optimize images (use WebP/AVIF)
+2. Implement code splitting
+3. Add resource hints (preload/prefetch)
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+MEDIUM IMPACT:
+1. Optimize font loading
+2. Reduce JavaScript execution time
+3. Use browser caching
+
+LOW IMPACT:
+1. Minify CSS
+2. Enable compression
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Lighthouse score
+- Core Web Vitals metrics
+- Audit checklist
+- Optimization recommendations

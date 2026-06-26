@@ -1,51 +1,35 @@
 # market-research
 
-Market analysis, TAM/SAM/SOM, competitive landscape.
+Research market size, competition, and opportunities.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Market Size
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+ANALYZE:
+- TAM (Total Addressable Market)
+- SAM (Serviceable Addressable Market)
+- SOM (Serviceable Obtainable Market)
 ```
 
-### Step 3: Implement
+### Step 2: Competition
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+MAP:
+- Direct competitors
+- Indirect competitors
+- Market gaps
 ```
 
-### Step 5: Report
+### Step 3: Opportunities
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+IDENTIFY:
+- Underserved segments
+- Pricing gaps
+- Feature gaps
+- Geographic gaps
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Market sizing
+- Competitive analysis
+- Opportunity map

@@ -1,51 +1,47 @@
 # sprint-plan
 
-Sprint planning with capacity.
+Sprint planning with story estimation and backlog prioritization.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Capacity
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+TEAM:
+- Developers: 4
+- Sprint length: 2 weeks
+- Velocity: 40 points/sprint
+- Capacity: 80% (holidays, meetings)
 ```
 
-### Step 3: Implement
+### Step 2: Select Stories
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+BACKLOG (prioritized):
+1. User auth (8 pts)
+2. Dashboard (5 pts)
+3. API v1 (13 pts)
+4. Notifications (5 pts)
+5. Export (3 pts)
+
+SELECTED (34 points):
+- User auth: 8
+- Dashboard: 5
+- API v1: 13
+- Notifications: 5
+- Export: 3
 ```
 
-### Step 4: Verify
+### Step 3: Tasks
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+STORY: User auth (8 pts)
+TASKS:
+- [ ] Database schema (2h)
+- [ ] Auth endpoints (4h)
+- [ ] JWT middleware (2h)
+- [ ] Login page (3h)
+- [ ] Tests (2h)
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Sprint backlog
+- Story points
+- Task breakdown

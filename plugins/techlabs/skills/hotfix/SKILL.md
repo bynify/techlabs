@@ -1,51 +1,38 @@
 # hotfix
 
-Emergency patch flow.
+Emergency production fix workflow.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Create Hotfix Branch
+```bash
+git checkout -b hotfix/critical-bug main
 ```
 
-### Step 2: Load Context
+### Step 2: Fix & Test
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+1. Identify root cause
+2. Create minimal fix
+3. Write regression test
+4. Verify fix
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Deploy
+```bash
+git commit -m "fix: critical bug description"
+git push origin hotfix/critical-bug
+# Deploy immediately
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Merge & Tag
+```bash
+git checkout main
+git merge hotfix/critical-bug
+git tag v1.2.1
+git push origin main --tags
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Fix deployed
+- Tests added
+- Release tagged

@@ -1,45 +1,58 @@
 # auto-refactor
 
-Automatic code refactoring.
+Detect code smells and apply refactoring patterns.
+
+## When to Use
+- Technical debt reduction
+- Code quality improvement
+- Pre-feature cleanup
 
 ## Execution
 
-### Step 1: Detect Code Smells
+### Step 1: Detect Patterns
 ```
-SCAN:
-- Long functions (> 50 lines)
-- Deep nesting (> 3 levels)
+SCAN FOR:
+- Long functions (>50 lines)
+- Deep nesting (>3 levels)
 - Code duplication
-- Complex conditionals
-- God classes/objects
+- God objects
+- Magic numbers
+- Unused imports/variables
 ```
 
-### Step 2: Suggest Refactoring
+### Step 2: Apply Refactoring
 ```
-FOR EACH code smell:
+FOR EACH issue:
 1. Identify pattern
-2. Suggest refactoring technique
-3. Estimate impact
-4. Show before/after
+2. Show proposed change
+3. Get approval
+4. Apply change
+5. Run tests
 ```
 
-### Step 3: Apply (with approval)
-```
-APPLY:
-1. Backup current code
-2. Apply refactoring
-3. Run tests
-4. Verify no regression
-```
+### Step 3: Refactoring Patterns
+```typescript
+// Extract Function
+function processOrder(order: Order) {
+  validateOrder(order);
+  calculateTotal(order);
+  applyDiscounts(order);
+  saveOrder(order);
+}
 
-### Step 4: Document
-```
-DOCUMENT:
-- Refactoring applied
-- Impact on code quality
-- Test results
+// Replace Magic Number
+const MAX_RETRY_COUNT = 3;
+const TIMEOUT_MS = 5000;
+
+// Remove Duplication
+function handleError(error: Error) {
+  logger.error(error);
+  metrics.increment('error');
+  notifyOps(error);
+}
 ```
 
 ## Output
-- Refactored code
-- Quality improvement report
+- Refactoring suggestions
+- Applied changes
+- Test verification

@@ -1,51 +1,81 @@
 # create-ai-binding
 
-Workers AI integration.
+Integrate Cloudflare Workers AI with LLM inference, embeddings, and image generation.
+
+## When to Use
+- Adding AI features to Workers
+- Using LLMs at the edge
+- Generating embeddings
+- Image generation
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 1: Configure Binding
+```toml
+# wrangler.toml
+[ai]
+binding = "AI"
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Chat Completion
+```typescript
+// src/ai/chat.ts
+export interface Env {
+  AI: Ai;
+}
+
+async function chat(env: Env, messages: { role: string; content: string }[]) {
+  const response = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
+    messages,
+    max_tokens: 1024,
+    temperature: 0.7,
+  });
+
+  return response.response;
+}
+
+// Usage in worker
+if (url.pathname === '/api/chat') {
+  const { messages } = await request.json();
+  const reply = await chat(env, messages);
+  return Response.json({ reply });
+}
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Embeddings
+```typescript
+async function getEmbedding(env: Env, text: string): Promise<number[]> {
+  const response = await env.AI.run('@cf/baai/bge-base-en-v1.5', {
+    text: [text],
+  });
+  return response.data[0];
+}
+
+// Store in Vectorize
+async function indexDocument(env: Env, doc: { id: string; text: string }) {
+  const embedding = await getEmbedding(env, doc.text);
+  await env.VECTORIZE.upsert([{
+    id: doc.id,
+    values: embedding,
+    metadata: { text: doc.text },
+  }]);
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Image Generation
+```typescript
+async function generateImage(env: Env, prompt: string): Promise<Response> {
+  const response = await env.AI.run('@cf/stabilityai/stable-diffusion-xl-base-1.0', {
+    prompt,
+  });
+  return new Response(response, {
+    headers: { 'Content-Type': 'image/png' },
+  });
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- wrangler.toml with AI binding
+- Chat completion handler
+- Embedding pipeline
+- Image generation endpoint

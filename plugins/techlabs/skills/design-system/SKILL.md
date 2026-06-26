@@ -1,51 +1,68 @@
 # design-system
 
-Tokens, colors, typography, components.
+Create design system with tokens, components, and documentation.
+
+## When to Use
+- New project branding
+- Component library
+- Design consistency
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 1: Define Tokens
+```css
+:root {
+  --color-primary-50: #eff6ff;
+  --color-primary-500: #3b82f6;
+  --color-primary-900: #1e3a8a;
+  
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
 ```
 
-### Step 5: Report
+### Step 2: Component Specs
+```typescript
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'ghost' | 'danger';
+  size: 'sm' | 'md' | 'lg';
+  loading?: boolean;
+  disabled?: boolean;
+}
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+
+### Step 3: Documentation
+```markdown
+# Design System
+
+## Colors
+Use primary-500 for CTAs, primary-900 for headings.
+
+## Typography
+- Headings: Inter Bold
+- Body: Inter Regular
+- Code: JetBrains Mono
+
+## Spacing
+Use multiples of 4px base unit.
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Design tokens
+- Component specs
+- Usage documentation
+- Storybook setup

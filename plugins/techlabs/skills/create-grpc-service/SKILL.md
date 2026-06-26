@@ -1,51 +1,62 @@
 # create-grpc-service
 
-gRPC service with proto definition.
+Create gRPC service with Protocol Buffers and proper error handling.
+
+## When to Use
+- High-performance APIs
+- Microservice communication
+- Streaming endpoints
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Define Proto
+```protobuf
+// api/proto/user/v1/user.proto
+syntax = "proto3";
+package user.v1;
+
+service UserService {
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc CreateUser(CreateUserRequest) returns (User);
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+}
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Implement Server
+```go
+// internal/grpc/user.go
+type UserServer struct {
+    pb.UnimplementedUserServiceServer
+    svc *service.UserService
+}
+
+func (s *UserServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.User, error) {
+    user, err := s.svc.Get(ctx, req.Id)
+    if err != nil {
+        return nil, status.Errorf(codes.NotFound, "user %s not found", req.Id)
+    }
+    return toProto(user), nil
+}
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Add Interceptors
+```go
+func loggingInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+    start := time.Now()
+    resp, err := handler(ctx, req)
+    log.Printf("gRPC %s %v %v", info.FullMethod, time.Since(start), err)
+    return resp, err
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Proto definitions
+- Server implementation
+- Interceptors
+- Client stubs

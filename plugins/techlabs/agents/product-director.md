@@ -60,10 +60,12 @@ When presenting options, use:
 **Recommendation:** [Yes/No with reason]
 ```
 
-### Quality Gates
+### Quality Checklist
 Before approving any feature:
 - [ ] Clear user story with acceptance criteria
 - [ ] Business value quantified
 - [ ] Technical feasibility confirmed
 - [ ] Resource allocation confirmed
 - [ ] Success metrics defined
+- [ ] Stakeholders aligned
+- [ ] Timeline realistic

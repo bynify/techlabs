@@ -1,51 +1,43 @@
 # create-stories
 
-Story creation from epics.
+Create user stories with acceptance criteria.
+
+## When to Use
+- Sprint planning
+- Feature specification
+- Backlog management
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Story Format
+```markdown
+## Story: [Title]
+
+**As a** [user type]
+**I want to** [action]
+**So that** [benefit]
+
+### Acceptance Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+- [ ] Criterion 3
+
+### Technical Notes
+- Dependencies: [list]
+- Complexity: [low/medium/high]
+- Estimation: [story points]
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
-```
+### Step 2: INVEST Check
+- **I**ndependent: No dependencies?
+- **N**egotiable: Details can be discussed?
+- **V**aluable: Delivers user value?
+- **E**stimable: Team can estimate?
+- **S**mall: Fits in one sprint?
+- **T**estable: Can verify completion?
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- User stories
+- Acceptance criteria
+- Dependency map
+- Sprint backlog

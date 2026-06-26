@@ -1,51 +1,58 @@
 # create-electron-app
 
-Electron app scaffolding with IPC.
+Create Electron desktop app with secure IPC, preload scripts, and auto-update.
+
+## When to Use
+- Desktop applications
+- System tray apps
+- Native integrations needed
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Scaffold
+```bash
+npm init electron-app@latest my-app -- --template=webpack-typescript
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Main Process
+```typescript
+// src/main/index.ts
+import { app, BrowserWindow, ipcMain } from 'electron';
+
+let mainWindow: BrowserWindow;
+
+app.whenReady().then(() => {
+  mainWindow = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false,
+    },
+  });
+
+  mainWindow.loadFile('dist/index.html');
+});
+
+ipcMain.handle('file:read', async (_, path: string) => {
+  return fs.promises.readFile(path, 'utf-8');
+});
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
+### Step 3: Preload Script
+```typescript
+// src/preload/index.ts
+import { contextBridge, ipcRenderer } from 'electron';
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+contextBridge.exposeInMainWorld('api', {
+  readFile: (path: string) => ipcRenderer.invoke('file:read', path),
+  saveFile: (path: string, content: string) => ipcRenderer.invoke('file:save', path, content),
+});
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Electron app scaffold
+- Main process with IPC
+- Preload script
+- Auto-update configuration

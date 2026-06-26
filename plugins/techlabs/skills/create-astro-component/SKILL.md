@@ -1,51 +1,49 @@
 # create-astro-component
 
-Astro component with content collections.
+Create Astro component with props, slots, and islands.
+
+## When to Use
+- Content-focused components
+- Partial hydration
+- Static + interactive
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Create Component
+```astro
+---
+// src/components/UserCard.astro
+interface Props {
+  name: string;
+  email: string;
+  avatar?: string;
+}
+
+const { name, email, avatar } = Astro.props;
+---
+
+<div class="border rounded-lg p-4">
+  {avatar && <img src={avatar} alt={name} class="w-12 h-12 rounded-full" />}
+  <h3 class="font-semibold mt-2">{name}</h3>
+  <p class="text-gray-600">{email}</p>
+  <slot />
+</div>
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+### Step 2: Use with Client Island
+```astro
+---
+import UserCard from "../components/UserCard.astro";
+import UserActions from "../components/UserActions"; // React component
+---
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+<UserCard name="John" email="john@example.com">
+  <UserActions client:visible userId="123" />
+</UserCard>
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Component file
+- Props interface
+- Slot support
+- Client directive usage

@@ -1,51 +1,39 @@
 # team-scale
 
-Multi-agent: scaling infrastructure.
+Coordinate team for specific domain work.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Assess Needs
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+DOMAIN: scale
+TASKS:
+- Current state analysis
+- Required expertise
+- Resource needs
 ```
 
-### Step 3: Implement
+### Step 2: Plan
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+TEAM:
+- Lead: [name]
+- Members: [list]
+- Timeline: [dates]
+
+DELIVERABLES:
+- [ ] Deliverable 1
+- [ ] Deliverable 2
 ```
 
-### Step 4: Verify
+### Step 3: Execute
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+COORDINATION:
+- Daily standups
+- Weekly reviews
+- Blockers escalated
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Team assembled
+- Plan created
+- Execution started

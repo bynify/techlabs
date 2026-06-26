@@ -1,51 +1,34 @@
 # story-done
 
-Definition of done validation.
+Verify story meets Definition of Done.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Checklist
+```markdown
+## Story: [Title]
+
+### Definition of Done
+- [ ] Code complete
+- [ ] Tests passing
+- [ ] Code reviewed
+- [ ] Documentation updated
+- [ ] Acceptance criteria met
+- [ ] Deployed to staging
 ```
 
-### Step 2: Load Context
+### Step 2: Verify
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+STATUS: ✅ Done / ❌ Not Done
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+CHECKED:
+- [x] Code complete
+- [x] Tests passing
+- [x] Code reviewed
+- [ ] Documentation ← Missing
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Done status
+- Missing items
+- Action items

@@ -1,51 +1,40 @@
 # rollback
 
-Rollback procedure and automation.
+Deployment rollback procedure.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Identify Issue
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+DETECT:
+- Error rate spike
+- Latency increase
+- User reports
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Rollback
+```bash
+# Git rollback
+git revert HEAD
+git push
+
+# Container rollback
+kubectl rollout undo deployment/api
+
+# Feature flag
+await featureFlags.disable('new_feature')
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+### Step 3: Verify
+```bash
+# Check health
+curl -f https://api.example.com/health
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+# Check error rate
+# Monitor for 15 minutes
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Rollback executed
+- Issue documented
+- Prevention plan

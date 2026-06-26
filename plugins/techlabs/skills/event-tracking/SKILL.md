@@ -1,51 +1,38 @@
 # event-tracking
 
-Analytics event schema and tracking.
+Implement analytics event tracking for user behavior.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 1: Define Events
+```typescript
+const events = {
+  page_view: { path: string, referrer?: string },
+  button_click: { button_id: string, page: string },
+  form_submit: { form_id: string, success: boolean },
+  purchase: { amount: number, currency: string, items: number },
+};
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 2: Track Function
+```typescript
+function track(event: string, properties: Record<string, unknown>) {
+  analytics.track(event, {
+    ...properties,
+    timestamp: Date.now(),
+    userId: getCurrentUserId(),
+  });
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Page Views
+```typescript
+useEffect(() => {
+  track('page_view', { path: pathname });
+}, [pathname]);
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Event definitions
+- Track function
+- Page view tracking

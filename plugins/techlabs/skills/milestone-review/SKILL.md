@@ -1,51 +1,36 @@
 # milestone-review
 
-Milestone retrospective.
+Review project milestones and progress.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Status Check
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+MILESTONE: [Name]
+Status: In Progress | Complete | Blocked
+Progress: 75%
+
+COMPLETED:
+- [x] Feature A
+- [x] Feature B
+
+REMAINING:
+- [ ] Feature C
+- [ ] Testing
 ```
 
-### Step 2: Load Context
+### Step 2: Risks
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+BLOCKERS:
+- Dependency on external API
+- Resource availability
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+MITIGATIONS:
+- Parallel development path
+- Additional resources
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Milestone status
+- Risk assessment
+- Next steps

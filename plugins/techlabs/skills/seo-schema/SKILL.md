@@ -1,51 +1,47 @@
 # seo-schema
 
-Structured data implementation.
+Add structured data (JSON-LD) for rich search results.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Identify Schema Type
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+TYPES:
+- Article (blog posts)
+- Product (e-commerce)
+- FAQ (help pages)
+- Organization (company)
+- BreadcrumbList (navigation)
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+### Step 2: Generate Schema
+```typescript
+function generateSchema(type: string, data: any) {
+  const schemas = {
+    article: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: data.title,
+      datePublished: data.date,
+      author: { '@type': 'Person', name: data.author },
+    },
+    product: {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: data.name,
+      offers: { '@type': 'Offer', price: data.price, priceCurrency: 'USD' },
+    },
+  };
+  return schemas[type];
+}
 ```
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Validate
+```bash
+npx schema-dts-validator schema.json
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Schema markup
+- Validation
+- Page integration

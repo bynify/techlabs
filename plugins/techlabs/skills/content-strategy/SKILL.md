@@ -1,51 +1,54 @@
 # content-strategy
 
-Content planning, editorial calendar.
+Plan content topics, publishing schedule, and distribution.
+
+## When to Use
+- Blog planning
+- SEO content
+- Developer docs
+- Marketing content
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Goals
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Target audience?
+2. Content goals? (traffic, leads, authority)
+3. Resources? (writers, budget)
+4. Timeline?
 ```
 
-### Step 2: Load Context
+### Step 2: Topic Research
 ```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+ANALYZE:
+- Competitor content gaps
+- Search volume for topics
+- User questions (support, forums)
+- Industry trends
 ```
 
-### Step 4: Verify
+### Step 3: Content Calendar
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+| Week | Topic | Type | Keywords | Status |
+|------|-------|------|----------|--------|
+| 1 | Getting Started | Guide | "how to use X" | Draft |
+| 2 | Best Practices | Blog | "X best practices" | Idea |
+| 3 | Case Study | Story | "company Y uses X" | Research |
 ```
 
-### Step 5: Report
+### Step 4: Distribution Plan
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+CHANNELS:
+- Blog (SEO)
+- Twitter/X (engagement)
+- LinkedIn (B2B)
+- Dev.to (developers)
+- Newsletter (retention)
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Content calendar
+- Topic ideas
+- Distribution plan
+- Success metrics

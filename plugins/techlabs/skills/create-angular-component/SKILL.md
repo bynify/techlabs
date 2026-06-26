@@ -1,51 +1,65 @@
 # create-angular-component
 
-Angular standalone component with signals.
+Create Angular standalone component with proper typing and template.
+
+## When to Use
+- Building Angular UI
+- Adding new features
+- Creating reusable components
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Define Component
+```typescript
+// src/app/components/user-card.component.ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-user-card',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="card">
+      <h3>{{ user.name }}</h3>
+      <p>{{ user.email }}</p>
+      <button (click)="onEdit.emit(user.id)">Edit</button>
+    </div>
+  `,
+})
+export class UserCardComponent {
+  @Input() user!: User;
+  @Output() onEdit = new EventEmitter<string>();
+}
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
+### Step 2: Add Tests
+```typescript
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { UserCardComponent } from './user-card.component';
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
+describe('UserCardComponent', () => {
+  let component: UserCardComponent;
+  let fixture: ComponentFixture<UserCardComponent>;
 
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [UserCardComponent],
+    }).compileComponents();
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+    fixture = TestBed.createComponent(UserCardComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should display user name', () => {
+    component.user = { id: '1', name: 'Test', email: 'test@test.com' };
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toContain('Test');
+  });
+});
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Component file
+- Test file
+- Module registration (if not standalone)

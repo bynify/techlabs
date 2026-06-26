@@ -4,48 +4,35 @@ Detect current project stage and recommend next steps.
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
+### Step 1: Scan Project
 ```
 CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+- docs/PRD.md exists?
+- src/ has code?
+- tests/ exists?
+- CI/CD configured?
+- Production deployed?
 ```
 
-### Step 5: Report
+### Step 2: Determine Stage
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+IF no_prd AND no_code: IDEA
+IF prd AND no_code: PLANNING
+IF code AND no_tests: DEVELOPMENT
+IF code AND tests AND no_deploy: TESTING
+IF deployed: PRODUCTION
+```
+
+### Step 3: Recommend
+```
+STAGE: DEVELOPMENT
+NEXT:
+1. /create-tests
+2. /create-ci-cd
+3. /security-audit
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Stage detection
+- Recommendations
+- Next steps

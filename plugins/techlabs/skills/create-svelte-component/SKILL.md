@@ -1,51 +1,91 @@
 # create-svelte-component
 
-Svelte component with stores.
+Create Svelte component/page with proper typing, state management, and accessibility.
+
+## When to Use
+- Building UI features
+- Adding new pages
+- Creating reusable components
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Requirements
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Component/page purpose?
+2. Data requirements?
+3. Interactions needed?
+4. Auth required?
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Create Implementation
+```svelte
+<script lang="ts">
+  interface User {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+  }
+
+  interface Props {
+    users: User[];
+    onEdit: (id: string) => void;
+    onDelete: (id: string) => void;
+  }
+
+  let { users, onEdit, onDelete }: Props = $props();
+  let search = $state("");
+
+  let filtered = $derived(
+    users.filter(u => u.name.toLowerCase().includes(search.toLowerCase()))
+  );
+</script>
+
+<div>
+  <input bind:value={search} placeholder="Search users..." class="border p-2 rounded w-full" />
+  
+  {#each filtered as user (user.id)}
+    <div class="border p-4 rounded mt-2 flex justify-between items-center">
+      <div>
+        <h3 class="font-semibold">{user.name}</h3>
+        <p class="text-gray-600">{user.email}</p>
+        <span class="text-xs bg-gray-100 px-2 py-1 rounded">{user.role}</span>
+      </div>
+      <div class="flex gap-2">
+        <button onclick={() => onEdit(user.id)}>Edit</button>
+        <button onclick={() => onDelete(user.id)}>Delete</button>
+      </div>
+    </div>
+  {/each}
+</div>
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Add Types
+```typescript
+// src/types/create-svelte-component.ts
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user" | "viewer";
+  createdAt: string;
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Add Tests
+```typescript
+import { render, screen } from "@testing-library/react";
+import { UserCard } from "./UserCard";
+
+test("renders user name", () => {
+  render(<UserCard user={mockUser} onEdit={vi.fn()} onDelete={vi.fn()} />);
+  expect(screen.getByText("Test User")).toBeInTheDocument();
+});
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Component/page file
+- Type definitions
+- Unit tests
+- Documentation

@@ -1,45 +1,43 @@
 # auto-security
 
-Auto-setup security scanning and protection.
+Automated security scanning and hardening.
+
+## When to Use
+- Pre-deployment checks
+- Periodic security audits
+- New dependency additions
 
 ## Execution
 
-### Step 1: Scan Codebase
-```
-CHECK:
-- Dependency vulnerabilities
-- Code vulnerabilities
-- Secret leaks
-- Configuration issues
+### Step 1: Dependency Scan
+```bash
+npm audit
+govulncheck ./...
+pip-audit
 ```
 
-### Step 2: Setup Security
-```
-CONFIGURE:
-- SAST scanning
-- DAST scanning
-- Dependency scanning
-- Secret scanning
+### Step 2: Secret Detection
+```bash
+trufflehog filesystem . --only-verified
 ```
 
-### Step 3: Implement Protection
-```
-ADD:
-- Rate limiting
-- CORS configuration
-- Input validation
-- Output encoding
+### Step 3: Security Headers
+```typescript
+app.use(helmet());
+app.use(cors({ origin: process.env.ALLOWED_ORIGINS?.split(',') }));
 ```
 
-### Step 4: Documentation
+### Step 4: Generate Report
 ```
-CREATE:
-- Security policy
-- Incident response plan
-- Compliance checklist
+SECURITY SCAN RESULTS:
+- Dependencies: 0 critical, 2 high, 5 moderate
+- Secrets: None detected
+- Headers: All configured
+- OWASP: 9/10 checks passed
 ```
 
 ## Output
-- Security configuration
-- Scanning setup
-- Documentation
+- Dependency scan
+- Secret detection
+- Security headers
+- Report

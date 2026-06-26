@@ -1,51 +1,39 @@
 # product-roadmap
 
-Timeline, milestones, dependencies.
+Strategic product roadmap with phases and milestones.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Themes
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+Q1: Foundation (MVP)
+Q2: Growth (features)
+Q3: Scale (performance)
+Q4: Monetization (enterprise)
 ```
 
-### Step 3: Implement
+### Step 2: Features per Theme
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+Q1:
+- Core auth
+- Basic dashboard
+- API v1
+
+Q2:
+- Advanced analytics
+- Integrations
+- Mobile app
 ```
 
-### Step 4: Verify
+### Step 3: Dependencies
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+MAP:
+- Feature A blocks Feature B
+- External API dependency
+- Team capacity
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Quarterly roadmap
+- Feature prioritization
+- Dependency map

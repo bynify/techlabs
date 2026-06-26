@@ -1,51 +1,59 @@
 # create-feature-flag
 
-Feature flag implementation.
+Feature flag system for gradual rollouts and A/B testing.
+
+## When to Use
+- Gradual feature rollout
+- A/B testing
+- Kill switches
+- Beta features
 
 ## Execution
 
-### Step 1: Gather Requirements
-```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+### Step 1: Feature Flag Config
+```typescript
+// src/feature-flags.ts
+interface FeatureFlag {
+  name: string;
+  enabled: boolean;
+  rolloutPercentage?: number;
+  allowedUsers?: string[];
+}
+
+const flags: Record<string, FeatureFlag> = {
+  new_checkout: { name: 'new_checkout', enabled: true, rolloutPercentage: 50 },
+  beta_dashboard: { name: 'beta_dashboard', enabled: true, allowedUsers: ['usr_123'] },
+};
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 2: Check Flag
+```typescript
+function isEnabled(flagName: string, userId: string): boolean {
+  const flag = flags[flagName];
+  if (!flag || !flag.enabled) return false;
+  
+  if (flag.allowedUsers?.includes(userId)) return true;
+  
+  if (flag.rolloutPercentage !== undefined) {
+    const hash = hashCode(`${flagName}:${userId}`);
+    return (hash % 100) < flag.rolloutPercentage;
+  }
+  
+  return true;
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Component Wrapper
+```tsx
+function FeatureGate({ flag, children, fallback }: Props) {
+  const userId = useUserId();
+  if (!isEnabled(flag, userId)) return fallback;
+  return children;
+}
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Flag configuration
+- Evaluation logic
+- Component wrapper
+- Admin interface

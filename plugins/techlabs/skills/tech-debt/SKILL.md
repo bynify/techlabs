@@ -1,51 +1,36 @@
 # tech-debt
 
-Debt inventory and prioritization.
+Identify and prioritize technical debt.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Identify
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+SCAN FOR:
+- TODO comments
+- Deprecated dependencies
+- Code duplication
+- Missing tests
+- Performance issues
 ```
 
-### Step 3: Implement
+### Step 2: Categorize
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+TECH DEBT:
+1. Legacy auth system (HIGH)
+2. Missing error handling (MEDIUM)
+3. Outdated dependencies (LOW)
+4. No caching layer (MEDIUM)
 ```
 
-### Step 5: Report
+### Step 3: Prioritize
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+QUICK WINS: Outdated dependencies
+HIGH IMPACT: Legacy auth system
+STRATEGIC: Caching layer
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Debt inventory
+- Priority matrix
+- Remediation plan

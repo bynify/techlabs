@@ -1,51 +1,49 @@
 # incident-response
 
-On-call runbook and escalation.
+Structured incident response and post-mortem process.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Severity Classification
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+SEV1: Service down, data loss
+SEV2: Major feature broken
+SEV3: Minor issue, workaround exists
 ```
 
-### Step 3: Implement
+### Step 2: Response Steps
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+1. Acknowledge incident
+2. Communicate status (#incident channel)
+3. Investigate root cause
+4. Implement fix
+5. Verify resolution
+6. Update status page
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 3: Post-Mortem
+```markdown
+# Incident Report
+
+## Summary
+- Duration: 45 minutes
+- Impact: 500 users affected
+- Root cause: Database connection pool exhaustion
+
+## Timeline
+14:00 - Alert fired
+14:05 - Team acknowledged
+14:20 - Root cause identified
+14:35 - Fix deployed
+14:45 - Verified resolved
+
+## Action Items
+- [ ] Add connection pool monitoring
+- [ ] Increase pool size
+- [ ] Add circuit breaker
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Response process
+- Communication templates
+- Post-mortem template

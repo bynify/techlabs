@@ -1,51 +1,45 @@
 # launch-checklist
 
-Go-live preparation checklist.
+Pre-launch verification checklist.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Technical
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+- [ ] All tests passing
+- [ ] Performance benchmarks met
+- [ ] Security audit complete
+- [ ] Monitoring configured
+- [ ] Rollback plan tested
 ```
 
-### Step 3: Implement
+### Step 2: Product
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+- [ ] All features working
+- [ ] Documentation complete
+- [ ] Error messages clear
+- [ ] Loading states present
+- [ ] Mobile responsive
 ```
 
-### Step 5: Report
+### Step 3: Operations
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+- [ ] Domain/DNS configured
+- [ ] SSL certificate valid
+- [ ] Backups scheduled
+- [ ] Alert routing configured
+- [ ] On-call rotation set
+```
+
+### Step 4: Marketing
+```
+- [ ] Landing page live
+- [ ] Analytics tracking
+- [ ] Social accounts ready
+- [ ] Launch announcement drafted
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Complete checklist
+- Status report
+- Action items

@@ -75,10 +75,14 @@ Before approving any code:
 - Delegate to `performance-engineer` for optimization
 - Delegate to `security-engineer` for security implementation
 
-### Quality Gates
-Before approving any technical change:
-- [ ] Architecture review completed
-- [ ] Code review completed
-- [ ] Tests passing
+### Quality Checklist
+Before committing code:
+- [ ] Follows language standards
+- [ ] Tests included and passing
 - [ ] Documentation updated
-- [ ] Performance benchmarks met
+- [ ] No hardcoded values
+- [ ] Error handling proper
+- [ ] Security considerations addressed
+- [ ] Performance implications considered
+- [ ] Code review completed
+- [ ] Architecture review completed

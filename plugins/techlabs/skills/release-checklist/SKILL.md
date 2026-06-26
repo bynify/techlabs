@@ -1,51 +1,68 @@
 # release-checklist
 
-Pre-release validation checklist.
+Pre-release verification checklist for safe deployments.
+
+## When to Use
+- Before production releases
+- After QA sign-off
+- Sprint completion
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Code Quality
+```bash
+# Run all checks
+npm test
+npm run lint
+npm run typecheck
+npm run build
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
+- [ ] All tests passing
+- [ ] No lint errors
+- [ ] TypeScript compiles
+- [ ] Code reviewed and approved
+- [ ] Changelog updated
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
-```
-
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
+### Step 2: Deployment Preparation
 ```
 CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+- [ ] Staging deployed and tested
+- [ ] Database migrations tested
+- [ ] Rollback plan documented
+- [ ] Feature flags configured
+- [ ] Environment variables set
 ```
 
-### Step 5: Report
+### Step 3: Monitoring & Alerting
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+VERIFY:
+- [ ] Health checks configured
+- [ ] Error tracking active
+- [ ] Performance monitoring enabled
+- [ ] Alert routing configured
+- [ ] On-call rotation set
+```
+
+### Step 4: Communication
+```
+NOTIFY:
+- [ ] Team notified of release window
+- [ ] Status page updated
+- [ ] Customers informed (if breaking changes)
+- [ ] Support team briefed
+```
+
+### Step 5: Post-Release
+```
+MONITOR:
+- [ ] Error rate stable
+- [ ] Performance metrics normal
+- [ ] No user complaints
+- [ ] Rollback if issues detected
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Checklist completed
+- Sign-off obtained
+- Release authorized
+- Monitoring confirmed

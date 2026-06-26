@@ -1,51 +1,50 @@
 # choose-mode
 
-Serverless vs Docker decision.
+Select project operating mode (speed, quality, research).
+
+## When to Use
+- Project kickoff
+- Sprint planning
+- Resource allocation
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Modes
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+MODES:
+- Speed: Ship fast, technical debt OK
+- Quality: Production-ready, tests required
+- Research: Spike, disposable code OK
 ```
 
-### Step 3: Implement
+### Step 2: Ask Context
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+QUESTIONS:
+1. What's the deadline?
+2. Is this production or prototype?
+3. What's the risk tolerance?
+4. Team capacity?
 ```
 
-### Step 5: Report
+### Step 3: Configure
 ```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+IF mode == "speed":
+  → Skip optional tests
+  → Minimal docs
+  → Quick iterations
+
+IF mode == "quality":
+  → Full test coverage
+  → Documentation required
+  → Code review mandatory
+
+IF mode == "research":
+  → Spike solution
+  → Document findings
+  → No production deploy
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Mode selected
+- Configuration applied
+- Team aligned

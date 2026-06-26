@@ -1,51 +1,77 @@
 # create-nextjs-page
 
-Next.js page with SSR and loading states.
+Create Next.js component/page with proper typing, state management, and accessibility.
+
+## When to Use
+- Building UI features
+- Adding new pages
+- Creating reusable components
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Define Requirements
 ```
 ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
+1. Component/page purpose?
+2. Data requirements?
+3. Interactions needed?
+4. Auth required?
 ```
 
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+### Step 2: Create Implementation
+```tsx
+// app/dashboard/page.tsx
+import { Suspense } from "react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
+export default async function DashboardPage() {
+  const session = await getServerSession();
+  if (!session) redirect("/login");
+
+  const stats = await getStats(session.user.id);
+
+  return (
+    <div className="container py-8">
+      <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <StatCard title="Orders" value={stats.orders} />
+        <StatCard title="Revenue" value={`$${stats.revenue}`} />
+        <StatCard title="Customers" value={stats.customers} />
+      </div>
+      <Suspense fallback={<div>Loading chart...</div>}>
+        <RecentOrdersChart userId={session.user.id} />
+      </Suspense>
+    </div>
+  );
+}
 ```
 
-### Step 3: Implement
-```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
-```
-
-### Step 4: Verify
-```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
+### Step 3: Add Types
+```typescript
+// src/types/create-nextjs-page.ts
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user" | "viewer";
+  createdAt: string;
+}
 ```
 
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+### Step 4: Add Tests
+```typescript
+import { render, screen } from "@testing-library/react";
+import { UserCard } from "./UserCard";
+
+test("renders user name", () => {
+  render(<UserCard user={mockUser} onEdit={vi.fn()} onDelete={vi.fn()} />);
+  expect(screen.getByText("Test User")).toBeInTheDocument();
+});
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Component/page file
+- Type definitions
+- Unit tests
+- Documentation

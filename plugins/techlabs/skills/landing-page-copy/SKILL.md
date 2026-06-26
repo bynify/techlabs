@@ -1,51 +1,40 @@
 # landing-page-copy
 
-Conversion-focused copywriting.
+Write high-converting landing page copy.
 
 ## Execution
 
-### Step 1: Gather Requirements
+### Step 1: Structure
 ```
-ASK USER:
-- What is the goal?
-- What are the constraints?
-- What is the timeline?
-```
-
-### Step 2: Load Context
-```
-READ:
-- docs/PRD.md
-- docs/architecture.md
-- production/session-state/active.md
+SECTIONS:
+1. Hero (headline + subheadline + CTA)
+2. Social proof
+3. Features/benefits
+4. How it works
+5. Testimonials
+6. Pricing
+7. FAQ
+8. Final CTA
 ```
 
-### Step 3: Implement
+### Step 2: Write Headlines
 ```
-FOR EACH change:
-1. Show draft to user
-2. Get approval
-3. Write file
-4. Run validation
+FORMULA: [Benefit] without [Pain]
+
+EXAMPLES:
+- "Ship faster without technical debt"
+- "Scale your team without scaling your chaos"
+- "Beautiful analytics without the complexity"
 ```
 
-### Step 4: Verify
+### Step 3: CTA Copy
 ```
-CHECK:
-- Code follows standards
-- Tests pass
-- Documentation updated
-```
-
-### Step 5: Report
-```
-SHOW:
-- Files created/modified
-- Test results
-- Next steps
+GOOD: Start building for free
+BETTER: Start shipping in 5 minutes
+BEST: Get started free - no credit card required
 ```
 
 ## Output
-- Implementation complete
-- Tests passing
-- Documentation updated
+- Headlines
+- Section copy
+- CTA variations
