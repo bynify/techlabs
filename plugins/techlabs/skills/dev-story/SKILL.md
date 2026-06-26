@@ -41,6 +41,30 @@ IF out-of-scope → scope-approval → lead-docs-update
 
 ## Execution
 
+### Step 0: CRITICAL THINKING (FIRST)
+```
+⚠️ MANDATORY: Dev must think critically before implementing
+
+RUN: /critical-thinking
+
+WITH:
+- story: {story-id}
+
+RESULT:
+- Issues identified
+- Questions formulated
+- Lead clarified
+- Task updated with clarity
+
+RULES:
+- NO GUESSING ALLOWED
+- If unclear → Ask lead
+- If ambiguous → Ask lead
+- If incomplete → Ask lead
+- If conflicting → Ask lead
+- Wait for answers before implementing
+```
+
 ### Step 1: Load Story Context
 ```
 READ:
@@ -50,6 +74,7 @@ READ:
 - docs/architecture.md (architecture)
 - docs/api-design.md (API design)
 - docs/database-design.md (database design)
+- production/clarifications/{story-id}.json (if exists)
 ```
 
 ### Step 2: Plan Implementation (WITH DOCS)

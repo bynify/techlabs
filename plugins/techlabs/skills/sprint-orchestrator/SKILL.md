@@ -269,6 +269,22 @@ async function executeStory(story) {
     return;
   }
   
+  // CHECKPOINT 1b: Critical Thinking (MANDATORY)
+  // Dev must think critically before receiving task
+  const clarification = await runSkill('critical-thinking', { story });
+  if (clarification.questions.length > 0) {
+    console.log(`\n⚠️ Dev has ${clarification.questions.length} questions before implementing`);
+    const answers = await askLeadForClarification(clarification.questions);
+    
+    if (!answers.allResolved) {
+      await updateStoryState(story.id, 'BLOCKED', { reason: 'Questions not answered' });
+      return;
+    }
+    
+    // Save clarifications
+    await saveClarifications(story.id, answers);
+  }
+  
   // CHECKPOINT 2: Dispatch to Specialist
   const agent = await runSkill('dispatch-story', { story });
   await updateStoryState(story.id, 'IN_PROGRESS', { assignedTo: agent });
