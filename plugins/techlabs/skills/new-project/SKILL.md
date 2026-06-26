@@ -478,7 +478,7 @@ async function saveProgress(completedStep) {
   const progress = {
     shortcut: 'new-project',
     completedSteps: completedStep,
-    totalSteps: 11,
+    totalSteps: 23,
     status: 'in-progress',
     completedAt: new Date().toISOString()
   };
