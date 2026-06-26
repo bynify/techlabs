@@ -63,8 +63,32 @@ npm create svelte@latest app
 npm create astro@latest app
 ```
 
+### Step 5: Deployment Target
+```
+RECOMMEND DEPLOYMENT:
+
+Cloudflare Pages (recommended):
+- Next.js → @cloudflare/next-on-pages
+- React (Vite) → wrangler pages deploy ./dist
+- Vue (Vite) → wrangler pages deploy ./dist
+- Nuxt → NITRO_PRESET=cloudflare_pages
+- SvelteKit → @sveltejs/adapter-cloudflare
+- Astro → @astrojs/cloudflare
+- Remix → @remix-run/cloudflare-pages
+- Angular → wrangler pages deploy ./dist/my-app
+
+Other options:
+- Vercel (Next.js native)
+- Netlify (JAMstack)
+- AWS Amplify
+- Self-hosted
+
+REFERENCE: docs/stack-reference/frontend-deployment.md
+```
+
 ## Output
 - Framework recommendation with rationale
 - Comparison matrix
 - Setup instructions
+- Deployment instructions (Cloudflare Pages)
 - Migration path (if existing project)

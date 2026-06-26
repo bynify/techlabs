@@ -51,6 +51,10 @@ RECOMMEND:
 - Supporting technologies
 - Development tools
 - Deployment platform
+
+REFERENCE:
+- docs/stack-reference/frontend-deployment.md (frontend deploy)
+- docs/stack-reference/backend-stack.md (backend options)
 ```
 
 ### Step 5: Document Decision
