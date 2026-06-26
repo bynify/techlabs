@@ -2,6 +2,22 @@
 
 Master dispatch logic that determines when and which agents to involve at each skill.
 
+## CRITICAL RULE
+
+**STRICT DISPATCH ENFORCEMENT:**
+
+When skill has "## Agents to Dispatch":
+1. MUST load agent definition from `agents/{agent-name}.md`
+2. MUST follow agent's System Prompt
+3. MUST follow agent's Code Standards
+4. NEVER implement without agent context
+5. NEVER skip dispatch
+
+When skill has "## Quality Checklist":
+1. MUST complete ALL checklist items
+2. MUST verify each item
+3. NEVER mark done without verification
+
 ## When to Use
 - Skill execution
 - Agent routing

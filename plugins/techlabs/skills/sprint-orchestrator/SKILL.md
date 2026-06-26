@@ -52,6 +52,28 @@ Master workflow engine that connects all sprint skills end-to-end.
 
 ## Execution
 
+### MANDATORY GATES (Must Complete)
+```
+GATE 1: CONTEXT GATE ✅
+- Load sprint state
+- Load session state
+- Verify sprint is active
+
+GATE 2: APPROVAL GATE ✅
+- Show sprint status to user
+- Wait for approval to continue
+
+GATE 3: DISPATCH GATE ✅
+- Dispatch to specialist agent
+- Load agent context
+- Verify agent is loaded
+
+GATE 4: REVIEW GATE ✅
+- Run code review
+- Run quality gates
+- Wait for review approval
+```
+
 ### Step 1: Load Sprint Context
 ```
 READ:

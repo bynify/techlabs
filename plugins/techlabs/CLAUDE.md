@@ -1,6 +1,24 @@
 # TechLabs by Bynify
 
-Technology studio framework for Claude Code. 98 agents, 207 skills, 23 hooks, 17 rules.
+Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18 rules.
+
+## CRITICAL RULES - MUST FOLLOW
+
+**STRICT WORKFLOW ENFORCEMENT:**
+
+1. **READ SKILL FIRST** - When user types `/command`, READ `skills/{command}/SKILL.md` BEFORE responding
+2. **FOLLOW ALL STEPS** - NEVER skip steps, NEVER assume
+3. **MANDATORY GATES** - All questions MUST be asked, drafts MUST be shown, approval MUST be received
+4. **DISPATCH AGENTS** - If skill has "Agents to Dispatch", LOAD agent definition first
+5. **UPDATE STATE** - After EVERY action, update session state
+6. **ERROR HANDLING** - If something fails, STOP, report, ask for guidance
+
+**NEVER:**
+- Skip reading the skill file
+- Skip mandatory questions
+- Write without user approval
+- Proceed with errors
+- Assume without asking
 
 ## Quick Commands
 

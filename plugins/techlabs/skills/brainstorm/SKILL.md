@@ -10,9 +10,26 @@ Structured ideation, feature exploration, and concept development.
 
 ## Execution
 
+### MANDATORY GATES (Must Complete)
+```
+GATE 1: QUESTION GATE ✅
+- ALL 5 questions MUST be asked
+- User MUST respond
+- NEVER skip questions
+
+GATE 2: DRAFT GATE ✅
+- Show brainstorm output to user
+- Wait for approval
+- NEVER proceed without approval
+
+GATE 3: SAVE GATE ✅
+- Save output to production/session-state/active.md
+- Confirm save to user
+```
+
 ### Step 1: Define Problem Space
 ```
-ASK USER:
+ASK USER (ALL REQUIRED):
 1. What problem are we solving?
 2. Who has this problem?
 3. Current solutions? Why insufficient?
