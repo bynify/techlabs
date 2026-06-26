@@ -229,6 +229,8 @@ ALL AGENTS MUST AGREE BEFORE PROCEEDING
 
 ### Step 1: Start Flow
 ```
+⚠️ MANDATORY: Agent MUST ask all these questions before proceeding
+
 ANNOUNCE:
 "Starting new project setup. This will run 23 planning skills."
 
@@ -241,12 +243,12 @@ PHASES:
 - Phase 4: Monitoring (2 skills)
 - Phase 5: Sprint Planning (3 skills)
 
-ASK USER:
+ASK USER (ALL MANDATORY):
 1. Project name?
 2. Project description?
 3. Main goal?
 
-ASK USER (EXISTING ASSETS):
+ASK USER (EXISTING ASSETS - ALL MANDATORY):
 4. Do you have existing BRD? (yes/no)
    - If yes: "Provide BRD file path or paste content"
 5. Do you have existing PRD? (yes/no)
@@ -261,6 +263,8 @@ ASK USER (EXISTING ASSETS):
    - If yes: "Provide API docs file path or URL"
 10. Do you have existing code? (yes/no)
     - If yes: "Provide code repository path"
+
+⚠️ DO NOT proceed without asking ALL questions above
 
 EXISTING ASSETS FOLDER:
 ```
