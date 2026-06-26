@@ -1,109 +1,137 @@
 # api-test
 
-Create comprehensive API tests with unit, integration, and contract tests.
+API testing with automated test suites.
 
 ## When to Use
-- Testing API endpoints
-- Validating request/response contracts
-- Checking error handling
-- Load testing preparation
+- API validation
+- Integration testing
+- Regression testing
+- Pre-deployment checks
 
 ## Execution
 
-### Step 1: Identify Endpoints
-```
-SCAN:
-- src/api/ or src/routes/ for handlers
-- OpenAPI spec for endpoints
-- Existing test patterns
+### Step 1: Define Test Cases
+```yaml
+# Test cases for /api/users
+GET /api/users:
+  - 200: List users
+  - 401: Unauthorized
+  - 403: Forbidden
+
+POST /api/users:
+  - 201: Create user
+  - 400: Validation error
+  - 409: Duplicate email
+
+GET /api/users/:id:
+  - 200: Get user
+  - 404: Not found
 ```
 
-### Step 2: Create Unit Tests
+### Step 2: Write API Tests
 ```typescript
-// src/api/__tests__/users.test.ts
-import { describe, it, expect } from 'vitest';
-import { createUserHandler } from '../users/handler';
-import { mockDB } from './mocks';
-
-describe('POST /users', () => {
-  it('should create user with valid data', async () => {
-    const req = { name: 'Test', email: 'test@example.com' };
-    const response = await createUserHandler(req, mockDB);
-    expect(response.status).toBe(201);
-    expect(response.body).toHaveProperty('id');
-  });
-
-  it('should reject duplicate email', async () => {
-    mockDB.findUserByEmail.mockResolvedValue({ id: '1' });
-    const req = { name: 'Test', email: 'existing@example.com' };
-    const response = await createUserHandler(req, mockDB);
-    expect(response.status).toBe(409);
-  });
-});
-```
-
-### Step 3: Create Integration Tests
-```typescript
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { createApp } from '../app';
-
-let app: ReturnType<typeof createApp>;
-
-beforeAll(async () => {
-  app = await createApp({ db: testDB });
-});
+// tests/api/users.test.ts
+import request from 'supertest';
+import app from '../../src/app';
 
 describe('Users API', () => {
-  it('should create and retrieve user', async () => {
-    const createRes = await app.inject({
-      method: 'POST',
-      url: '/api/v1/users',
-      payload: { name: 'Test', email: 'test@example.com' },
+  let authToken: string;
+
+  beforeEach(async () => {
+    const res = await request(app)
+      .post('/api/auth/login')
+      .send({ email: 'test@example.com', password: 'password' });
+    authToken = res.body.token;
+  });
+
+  describe('GET /api/users', () => {
+    it('should list users', async () => {
+      const res = await request(app)
+        .get('/api/users')
+        .set('Authorization', `Bearer ${authToken}`);
+      
+      expect(res.status).toBe(200);
+      expect(res.body.data).toBeInstanceOf(Array);
     });
-    expect(createRes.statusCode).toBe(201);
-    
-    const { id } = createRes.json();
-    const getRes = await app.inject({ method: 'GET', url: `/api/v1/users/${id}` });
-    expect(getRes.statusCode).toBe(200);
-    expect(getRes.json().name).toBe('Test');
+
+    it('should require auth', async () => {
+      const res = await request(app)
+        .get('/api/users');
+      
+      expect(res.status).toBe(401);
+    });
+  });
+
+  describe('POST /api/users', () => {
+    it('should create user', async () => {
+      const res = await request(app)
+        .post('/api/users')
+        .set('Authorization', `Bearer ${authToken}`)
+        .send({
+          name: 'Test User',
+          email: 'new@example.com',
+          password: 'password123'
+        });
+      
+      expect(res.status).toBe(201);
+      expect(res.body.name).toBe('Test User');
+    });
+
+    it('should validate email', async () => {
+      const res = await request(app)
+        .post('/api/users')
+        .set('Authorization', `Bearer ${authToken}`)
+        .send({
+          name: 'Test User',
+          email: 'invalid',
+          password: 'password123'
+        });
+      
+      expect(res.status).toBe(400);
+    });
   });
 });
 ```
 
-### Step 4: Add Contract Tests
-```typescript
-import { Pact } from '@pact-foundation/pact';
+### Step 3: Run Tests
+```bash
+# Run API tests
+npm test -- --testPathPattern=api
 
-describe('API Contract', () => {
-  it('should match expected response format', async () => {
-    const provider = new Pact({ consumer: 'Frontend', provider: 'API' });
-    await provider.addInteraction({
-      state: 'user exists',
-      uponReceiving: 'GET /users/123',
-      withRequest: { method: 'GET', path: '/api/v1/users/123' },
-      willRespondWith: {
-        status: 200,
-        body: { id: '123', name: 'Test' },
-      },
-    });
-    // Test against pact
-  });
-});
+# Run with coverage
+npm test -- --coverage --testPathPattern=api
+
+# Run specific test
+npm test -- --testNamePattern="Users API"
 ```
 
-### Step 5: Validate Error Paths
-```
-TEST FOR EACH endpoint:
-- Missing required fields → 400
-- Invalid data format → 400
-- Resource not found → 404
-- Unauthorized access → 401
-- Forbidden action → 403
-- Rate limit exceeded → 429
+### Step 4: Generate Report
+```markdown
+# API Test Report
+
+## Summary
+- Tests: 25
+- Passed: 24
+- Failed: 1
+- Coverage: 87%
+
+## Failures
+1. POST /api/users - Timeout after 5s
+   - Cause: Database slow
+   - Fix: Add index
+
+## Coverage by Endpoint
+| Endpoint | Tests | Coverage |
+|----------|-------|----------|
+| GET /api/users | 3 | 100% |
+| POST /api/users | 4 | 100% |
+| GET /api/users/:id | 3 | 100% |
+| PUT /api/users/:id | 4 | 100% |
+| DELETE /api/users/:id | 2 | 100% |
 ```
 
 ## Output
-- Unit tests for handlers
-- Integration tests for full flow
-- Contract tests for consumers
-- Error path coverage
+- Test cases defined
+- API tests written
+- Tests executed
+- Report generated

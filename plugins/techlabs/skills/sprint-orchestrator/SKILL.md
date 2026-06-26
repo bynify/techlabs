@@ -226,13 +226,25 @@ async function executeStory(story) {
 ### Step 4: Run Review Phase
 ```javascript
 async function runReviewPhase() {
-  // 1. Sprint review
+  // 1. Performance baseline
+  await runSkill('perf-baseline', { sprintId: currentSprint.id });
+  
+  // 2. Load testing
+  await runSkill('load-test', { endpoints: getAPIEndpoints() });
+  
+  // 3. Security audit
+  await runSkill('security-audit', { codebase: 'src/' });
+  
+  // 4. Compliance check
+  await runSkill('compliance-audit', { framework: 'gdpr' });
+  
+  // 5. Sprint review
   await runSkill('milestone-review', {
     sprintId: currentSprint.id,
     stories: completedStories,
   });
   
-  // 2. Post-mortem
+  // 6. Post-mortem
   await runSkill('post-mortem', {
     sprintId: currentSprint.id,
     metrics: sprintMetrics,

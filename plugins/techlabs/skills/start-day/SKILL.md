@@ -1,283 +1,287 @@
 # start-day
 
-Resume work from previous session. Load context, check status, and continue sprint.
+Resume work from previous session. Detect current phase and continue accordingly.
 
 ## When to Use
 - Start of work day
 - Resume interrupted work
-- Continue sprint from yesterday
-- Check current sprint status
+- Continue from yesterday
+- Check current progress
 
-## Session Continuity
+## Phases Detected
 
 ```
-SESSION CONTINUITY FLOW:
+PHASE DETECTION:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-YESTERDAY (Session 1)
-    │
-    ▼
-┌─────────────────────────────────────────────────────────┐
-│  WORK DONE                                              │
-│  ─────────────────────────────────────────────────────  │
-│  - Story AUTH-001: 60% complete                         │
-│  - Story UI-001: 100% complete                          │
-│  - Sprint state saved                                   │
-│  - Session state saved                                  │
-└─────────────────────────────────────────────────────────┘
-    │
-    ▼
-[SESSION END - auto-save via hook]
-    │
-    ▼
-TODAY (Session 2)
-    │
-    ▼
-┌─────────────────────────────────────────────────────────┐
-│  /start-day                                             │
-│  ─────────────────────────────────────────────────────  │
-│  1. Load session state                                  │
-│  2. Load sprint state                                   │
-│  3. Check what was in progress                          │
-│  4. Show status                                         │
-│  5. Ask: "Continue where you left off?"                 │
-└─────────────────────────────────────────────────────────┘
-    │
-    ▼
-┌─────────────────────────────────────────────────────────┐
-│  CONTINUE WORK                                          │
-│  ─────────────────────────────────────────────────────  │
-│  Story AUTH-001: In Progress (60%)                      │
-│  Agent: go-specialist                                   │
-│  Next: Complete API endpoints                           │
-│  Resume? Yes → Continue implementation                  │
-└─────────────────────────────────────────────────────────┘
+PHASE 1: PLANNING
+  Check: production/project-context.json exists?
+  Check: production/sprint/state.json exists?
+  Result: In planning phase, no sprint yet
+
+PHASE 2: SPRINT PLANNING
+  Check: production/sprint/state.json with PLANNING status
+  Result: Sprint planned, not yet executing
+
+PHASE 3: SPRINT EXECUTION
+  Check: production/sprint/state.json with ACTIVE status
+  Result: Sprint running, stories in progress
+
+PHASE 4: SPRINT COMPLETE
+  Check: production/sprint/state.json with CLOSED status
+  Result: Sprint done, ready for next sprint
 ```
 
 ## Execution
 
-### Step 1: Load Session State
+### Step 1: Detect Current Phase
 ```
-READ:
-- production/session-state/active.md (last session)
-- production/sprint/state.json (sprint status)
-- production/sprint/current.json (sprint config)
-- production/stories/ (all stories)
+CHECK FILES:
+1. production/session-state/active.md → Last session state
+2. production/project-context.json → Project planning status
+3. production/sprint/state.json → Sprint status
+4. production/epics/ → Epics created
+5. production/stories/ → Stories created
+
+DETERMINE PHASE:
+IF no project-context.json → PHASE 0 (Not started)
+IF project-context.json AND no sprint → PHASE 1 (Planning)
+IF sprint.state == PLANNING → PHASE 2 (Sprint Planning)
+IF sprint.state == ACTIVE → PHASE 3 (Sprint Execution)
+IF sprint.state == CLOSED → PHASE 4 (Sprint Complete)
 ```
 
-### Step 2: Check Last Session
+### Step 2: Show Status Based on Phase
+
 ```markdown
-# Last Session Summary
+# Session Status
+
+## Detected Phase: [PHASE NAME]
+
+### If Phase 0 (Not Started)
+```
+Status: No project started yet
+Next: /start (guided onboarding)
+```
+
+### If Phase 1 (Planning)
+```
+Status: Planning in progress
+
+Done:
+- [ ] /brainstorm
+- [ ] /create-prd
+- [ ] /project-planning
+- [ ] /choose-stack
+- [ ] /choose-frontend
+- [ ] /create-architecture
+
+Remaining:
+- [ ] /create-epics
+- [ ] /user-stories
+- [ ] /sprint-plan
+
+Next Step: /create-epics
+```
+
+### If Phase 2 (Sprint Planning)
+```
+Status: Sprint planned, ready to execute
+
+Sprint: 2024-S1
+Stories: 5 (34 points)
+Status: PLANNING
+
+Next: /sprint-orchestrator
+```
+
+### If Phase 3 (Sprint Execution)
+```
+Status: Sprint in progress
+
+Sprint: 2024-S1 (Day 4/10)
+Progress: 13/34 points (38%)
+In Progress: AUTH-001 (60%)
+
+Next: Continue story execution
+```
+
+### If Phase 4 (Sprint Complete)
+```
+Status: Sprint complete, ready for next
+
+Sprint: 2024-S1 ✅
+Velocity: 34 points
+Stories: 8/10 complete
+
+Next: /sprint-transition → Start Sprint 2
+```
+```
+
+### Step 3: Load Session State
+```markdown
+# Last Session
 
 ## Date: 2024-01-15
 ## Duration: 4 hours
+## Phase: 1 (Planning)
 
 ## Work Done
-- Story AUTH-001: In Progress (60%)
-  - ✅ Database schema
-  - ✅ Auth endpoints
-  - ⬜ JWT middleware
-  - ⬜ Login page
-  - ⬜ Tests
+- ✅ /brainstorm
+- ✅ /create-prd
+- ✅ /project-planning
+- ⬜ /choose-stack (in progress)
 
-- Story UI-001: Complete ✅
-  - ✅ All tasks done
-  - ✅ Review passed
-  - ✅ QA verified
-
-## Current State
-- **Sprint:** 2024-S1 (Day 3/10)
-- **Progress:** 2/5 stories (40%)
-- **Points:** 13/34 (38%)
-- **In Progress:** AUTH-001
-
-## Blockers
-- None currently
+## Files Created
+- docs/PRD.md
+- production/project-context.json
+- production/session-state/active.md
 
 ## Next Steps
-1. Continue AUTH-001 (JWT middleware)
-2. Start API-001 after AUTH-001
+1. Complete /choose-stack
+2. Run /choose-frontend
+3. Continue planning flow
 ```
 
-### Step 3: Show Sprint Status
-```markdown
-# Sprint Status: 2024-S1
-
-## Day 3/10
-
-## Stories
-| Story | Points | Status | Progress |
-|-------|--------|--------|----------|
-| AUTH-001 | 8 | 🔄 In Progress | 60% |
-| AUTH-002 | 5 | ⏳ Pending | 0% |
-| UI-001 | 5 | ✅ Done | 100% |
-| API-001 | 13 | ⏳ Pending | 0% |
-| UI-002 | 3 | ⏳ Pending | 0% |
-
-## Burndown
+### Step 4: Ask User Based on Phase
 ```
-Points
-34 |████████████████████
-30 |██████████████████  
-26 |████████████████    
-22 |██████████████      
-18 |████████████        ← Today (13 points left)
-   +--------------------
-   D1 D2 D3 D4 D5 D6 D7 D8 D9 D10
-```
+PHASE 1 (PLANNING):
+1. Continue planning?
+   - Yes → Resume from last step
+   - No → Show remaining steps
 
-## Today's Focus
-1. Complete AUTH-001 (JWT middleware + login page + tests)
-2. Start AUTH-002 if time permits
-```
+2. Any changes to project?
+   - New requirements?
+   - Stack changes?
+   - Team changes?
 
-### Step 4: Ask User
-```
-QUESTIONS:
+PHASE 2 (SPRINT PLANNING):
+1. Start sprint execution?
+   - Yes → Run /sprint-orchestrator
+   - No → Review sprint plan first
 
+PHASE 3 (SPRINT EXECUTION):
 1. Continue where you left off?
-   - Yes → Resume AUTH-001 from JWT middleware
+   - Yes → Resume current story
    - No → Choose different story
 
 2. Any changes since yesterday?
    - New requirements?
    - Blockers?
    - Priority changes?
-
-3. Need help with anything?
-   - Technical questions?
-   - Design decisions?
-   - Architecture questions?
 ```
 
-### Step 5: Resume Work
+### Step 5: Resume Based on Phase
 ```javascript
 async function startDay() {
-  // 1. Load session state
-  const sessionState = await loadSessionState();
-  const sprintState = await loadSprintState();
+  const phase = await detectPhase();
   
-  // 2. Find in-progress stories
-  const inProgressStories = Object.entries(sprintState.stories)
-    .filter(([_, story]) => story.state === 'IN_PROGRESS');
-  
-  // 3. Show status
-  console.log('=== SPRINT STATUS ===');
-  console.log(`Sprint: ${sprintState.sprintId}`);
-  console.log(`Day: ${getDayNumber(sprintState)}/10`);
-  console.log(`Progress: ${getCompletionRate(sprintState)}%`);
-  
-  if (inProgressStories.length > 0) {
-    console.log('\n=== IN PROGRESS ===');
-    for (const [id, story] of inProgressStories) {
-      console.log(`${id}: ${story.title} (${story.progress}%)`);
-      console.log(`  Next: ${story.nextTask}`);
-      console.log(`  Agent: ${story.assignedTo}`);
-    }
-  }
-  
-  // 4. Ask user
-  const answer = await askUser({
-    question: 'Continue where you left off?',
-    options: ['Yes, continue', 'No, choose different story', 'Check changes first'],
-  });
-  
-  if (answer === 'Yes, continue') {
-    // Resume in-progress story
-    for (const [id, story] of inProgressStories) {
-      await executeStory(story);
-    }
-  } else if (answer === 'Check changes first') {
-    // Check for changes
-    await runSkill('change-request', { type: 'check' });
-  } else {
-    // Show available stories
-    await showAvailableStories();
+  switch (phase) {
+    case 'not-started':
+      console.log('No project started. Run /start to begin.');
+      break;
+      
+    case 'planning':
+      const lastStep = await getLastPlanningStep();
+      const nextStep = getNextPlanningStep(lastStep);
+      console.log(`Last step: ${lastStep}`);
+      console.log(`Next step: ${nextStep}`);
+      
+      const answer = await askUser({
+        question: `Continue with ${nextStep}?`,
+        options: ['Yes', 'Show remaining steps', 'Review what I have'],
+      });
+      
+      if (answer === 'Yes') {
+        await runSkill(nextStep);
+      } else if (answer === 'Show remaining steps') {
+        await showRemainingSteps();
+      } else {
+        await showPlanningStatus();
+      }
+      break;
+      
+    case 'sprint-planning':
+      const sprintPlan = await loadSprintPlan();
+      console.log(`Sprint: ${sprintPlan.id}`);
+      console.log(`Stories: ${sprintPlan.stories.length}`);
+      console.log(`Points: ${sprintPlan.totalPoints}`);
+      
+      const startSprint = await askUser({
+        question: 'Start sprint execution?',
+        options: ['Yes, start sprint', 'No, review plan first'],
+      });
+      
+      if (startSprint === 'Yes, start sprint') {
+        await runSkill('sprint-orchestrator');
+      } else {
+        await showSprintPlan();
+      }
+      break;
+      
+    case 'sprint-execution':
+      const sprintState = await loadSprintState();
+      const inProgress = Object.entries(sprintState.stories)
+        .filter(([_, s]) => s.state === 'IN_PROGRESS');
+      
+      if (inProgress.length > 0) {
+        console.log('In progress:');
+        for (const [id, story] of inProgress) {
+          console.log(`- ${id}: ${story.title} (${story.progress}%)`);
+        }
+        
+        const continueWork = await askUser({
+          question: 'Continue where left off?',
+          options: ['Yes', 'Choose different story', 'Check changes'],
+        });
+        
+        if (continueWork === 'Yes') {
+          for (const [id, story] of inProgress) {
+            await executeStory(story);
+          }
+        } else if (continueWork === 'Check changes') {
+          await runSkill('change-request', { type: 'check' });
+        } else {
+          await showAvailableStories();
+        }
+      } else {
+        await showSprintStatus();
+      }
+      break;
+      
+    case 'sprint-complete':
+      console.log('Sprint complete!');
+      console.log('Run /sprint-transition to start next sprint.');
+      break;
   }
 }
 ```
 
-### Step 6: Handle Overnight Changes
-```markdown
-# Overnight Changes
-
-## Check For
-1. New feature requests
-2. Bug reports
-3. Requirement changes
-4. Blocker resolutions
-
-## If Changes Found
-1. Classify change type
-2. Assess impact
-3. Update sprint if needed
-4. Notify team
-
-## Example
-**Change Found:** External API for AUTH-003 now available
-**Impact:** Can unblock AUTH-003
-**Action:** Add AUTH-003 back to current sprint
-```
-
-### Step 7: Generate Day Plan
-```markdown
-# Day Plan: 2024-01-16
-
-## Sprint: 2024-S1 (Day 4/10)
-
-## Today's Goals
-1. Complete AUTH-001 (2h remaining)
-2. Start AUTH-002 (3h)
-3. Code review for UI-001 (1h)
-
-## Time Allocation
-| Task | Time | Priority |
-|------|------|----------|
-| AUTH-001 (JWT) | 2h | P0 |
-| AUTH-001 (Tests) | 1h | P0 |
-| AUTH-002 (Start) | 3h | P1 |
-| Code Review | 1h | P1 |
-| **Total** | **7h** | |
-
-## Dependencies
-- AUTH-001 must complete before AUTH-002
-- AUTH-002 can start after AUTH-001 auth endpoints
-
-## Risks
-- JWT middleware might need more testing
-- External API dependency for AUTH-003
-```
-
-### Step 8: Update Session State
+### Step 6: Update Session State
 ```json
-// production/session-state/active.md
 {
   "sessionId": "session-2024-01-16",
   "startDate": "2024-01-16",
-  "sprintId": "2024-S1",
-  "dayNumber": 4,
-  "currentStory": "AUTH-001",
-  "currentTask": "JWT middleware",
-  "progress": 60,
-  "lastSession": {
-    "date": "2024-01-15",
-    "workDone": ["AUTH-001: 60%", "UI-001: 100%"],
-    "blockers": []
-  },
-  "todayPlan": {
-    "goals": ["Complete AUTH-001", "Start AUTH-002"],
-    "timeAllocation": {
-      "AUTH-001": "3h",
-      "AUTH-002": "3h",
-      "codeReview": "1h"
-    }
+  "detectedPhase": "planning",
+  "lastPhase": "planning",
+  "lastStep": "project-planning",
+  "nextStep": "create-epics",
+  "progress": {
+    "brainstorm": "done",
+    "create-prd": "done",
+    "project-planning": "done",
+    "choose-stack": "pending",
+    "choose-frontend": "pending",
+    "create-architecture": "pending",
+    "create-epics": "pending",
+    "user-stories": "pending",
+    "sprint-plan": "pending"
   }
 }
 ```
 
 ## Output
-- Session state loaded
-- Sprint status displayed
-- In-progress work identified
-- Day plan generated
-- Ready to continue
+- Phase detected correctly
+- Status displayed based on phase
+- User asked appropriate questions
+- Work resumed from correct point

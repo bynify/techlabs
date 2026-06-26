@@ -37,11 +37,39 @@ Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18
 - `/dispatch-story` — Route story to specialist agent
 - `/story-done` — Verify story completion
 
-### Quality
+### Quality & Testing
 - `/review-gate` — Code review checkpoint
 - `/gate-check` — Automated quality gates
 - `/qa-plan` — QA strategy
 - `/security-audit` — Security review
+- `/load-test` — Load testing
+- `/stress-test` — Stress testing
+- `/api-test` — API testing
+- `/e2e-setup` — E2E test framework
+- `/visual-test` — Visual regression testing
+
+### Operations & Compliance
+- `/backup-plan` — Backup strategy
+- `/disaster-recovery` — DR plan
+- `/compliance-audit` — GDPR, HIPAA compliance
+- `/audit-trail` — Activity logging
+- `/data-retention` — Data retention policies
+- `/cost-monitor` — Cost tracking
+- `/budget-alerts` — Budget notifications
+- `/alert-config` — Alert rules
+- `/uptime-monitor` — Uptime monitoring
+- `/log-aggregation` — Centralized logging
+
+### Documentation
+- `/api-docs` — API documentation
+- `/update-docs` — Update documentation
+- `/user-guide` — User guides
+
+### Performance
+- `/perf-baseline` — Performance baseline
+- `/query-optimize` — SQL optimization
+- `/cache-strategy` — Caching strategy
+- `/capacity-plan` — Capacity planning
 
 ### Change Management
 - `/change-request` — Handle feature requests during sprint

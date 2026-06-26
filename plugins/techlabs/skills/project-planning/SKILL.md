@@ -386,6 +386,25 @@ QUESTIONS:
 
 ### Step 9: Save Project Context
 ```javascript
+// production/session-state/active.md
+{
+  "sessionId": "session-2024-01-15",
+  "detectedPhase": "planning",
+  "lastStep": "project-planning",
+  "nextStep": "choose-stack",
+  "progress": {
+    "brainstorm": "done",
+    "create-prd": "done",
+    "project-planning": "done",
+    "choose-stack": "pending",
+    "choose-frontend": "pending",
+    "create-architecture": "pending",
+    "create-epics": "pending",
+    "user-stories": "pending",
+    "sprint-plan": "pending"
+  }
+}
+
 // production/project-context.json
 {
   "project": {
