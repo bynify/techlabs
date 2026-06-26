@@ -229,7 +229,16 @@ ALL AGENTS MUST AGREE BEFORE PROCEEDING
 ### Step 1: Start Flow
 ```
 ANNOUNCE:
-"Starting new project setup. This will run 11 planning skills."
+"Starting new project setup. This will run 23 planning skills."
+
+PHASES:
+- Phase 0: Research & Discovery (4 skills)
+- Phase 0.5: Stack Selection (3 skills)
+- Phase 1: Business Documents (3 skills)
+- Phase 2: Technical Documents (7 skills)
+- Phase 3: Knowledge Base (1 skill)
+- Phase 4: Monitoring (2 skills)
+- Phase 5: Sprint Planning (3 skills)
 
 ASK USER:
 1. Project name?
@@ -241,7 +250,7 @@ SAVE to session state:
   "shortcut": "new-project",
   "projectName": "[user-input]",
   "currentStep": 1,
-  "totalSteps": 11
+  "totalSteps": 23
 }
 ```
 
@@ -351,50 +360,109 @@ function isCriticalStep(stepIndex) {
 ```markdown
 # New Project Setup Progress
 
-## Step 1/11: Brainstorm ✅
+## PHASE 0: RESEARCH
+## Step 1/23: Brainstorm ✅
 - Ideas generated
 - Problem space defined
 
-## Step 2/11: PRD ✅ (CHECKPOINT)
-- Requirements documented
-- Features defined
-- → Continue? [Yes/Review/Stop]
+## Step 2/23: Market Research ✅
+- Market size analyzed
+- Trends identified
 
-## Step 3/11: Project Planning ✅
-- Team planned
-- Infrastructure decided
+## Step 3/23: Competitor Research ✅
+- Competitor profiles created
+- Competitive analysis done
 
-## Step 4/11: Choose Stack ✅
+## Step 4/23: User Research ✅
+- User personas created
+- User journeys mapped
+
+## PHASE 0.5: STACK SELECTION
+## Step 5/23: Choose Stack ✅ (CHECKPOINT)
 - Backend: [selected]
 - Database: [selected]
 - Messaging: [selected]
+- → Continue? [Yes/Review/Stop]
 
-## Step 5/11: Choose Frontend ✅
+## Step 6/23: Choose Frontend ✅
 - Framework: [selected]
 - UI Library: [selected]
 
-## Step 6/11: Architecture ✅ (CHECKPOINT)
+## Step 7/23: Choose Messaging ✅
+- Messaging: [selected]
+
+## PHASE 1: BUSINESS DOCUMENTS
+## Step 8/23: BRD ✅ (CHECKPOINT)
+- Business requirements documented
+- Budget approved
+- → Continue? [Yes/Review/Stop]
+
+## Step 9/23: PRD ✅
+- Product requirements documented
+- Features defined
+
+## Step 10/23: URS ✅
+- User requirements specified
+- Use cases documented
+
+## PHASE 2: TECHNICAL DOCUMENTS
+## Step 11/23: Project Planning ✅
+- Team planned
+- Infrastructure decided
+
+## Step 12/23: Project Lead ✅
+- Lead agent created
+- Knowledge base built
+
+## Step 13/23: SRS ✅ (CHECKPOINT)
+- Software requirements documented
+- Non-functional requirements defined
+- → Continue? [Yes/Review/Stop]
+
+## Step 14/23: ADR ✅
+- Architecture decisions documented
+- Trade-offs recorded
+
+## Step 15/23: Architecture ✅ (CHECKPOINT)
 - System designed
 - Components defined
 - → Continue? [Yes/Review/Stop]
 
-## Step 7/11: API Design ✅
+## Step 16/23: API Design ✅
 - Endpoints defined
 - Schemas created
 
-## Step 8/11: Database Design ✅
+## Step 17/23: Database Design ✅
 - Schema created
 - Indexes defined
 
-## Step 9/11: Epics ✅
+## PHASE 3: KNOWLEDGE BASE
+## Step 18/23: Knowledge Base ✅
+- Documentation loaded
+- Patterns organized
+- Best practices documented
+
+## PHASE 4: MONITORING
+## Step 19/23: Monitoring Plan ✅
+- Business metrics defined
+- UX metrics defined
+- Technical metrics defined
+
+## Step 20/23: Revenue Analysis ✅
+- Revenue model defined
+- Conversion targets set
+- Churn targets set
+
+## PHASE 5: SPRINT PLANNING
+## Step 21/23: Epics ✅
 - Features broken into epics
 - Points estimated
 
-## Step 10/11: User Stories ✅
+## Step 22/23: User Stories ✅
 - Stories created
 - Acceptance criteria defined
 
-## Step 11/11: Sprint Plan ✅ (CHECKPOINT)
+## Step 23/23: Sprint Plan ✅ (CHECKPOINT)
 - First sprint planned
 - Stories selected
 - → Continue? [Yes/Review/Stop]
