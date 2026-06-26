@@ -87,6 +87,11 @@ Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18
 - `/create-react-component` — React component
 - `/create-nextjs-page` — Next.js page
 
+### Infrastructure
+- `/setup-loadbalancer` — Load balancing (Nginx, Caddy, Traefik, Cloudflare)
+- `/setup-reverse-proxy` — Reverse proxy with SSL, caching, rate limiting
+- `/setup-tunnel` — Secure tunnels (Cloudflare Tunnel, ngrok, Tailscale)
+
 ### Existing Project
 - `/adopt-existing` — Scan existing project
 - `/remap-paths` — Override path conventions
