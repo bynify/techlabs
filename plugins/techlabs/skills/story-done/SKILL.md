@@ -107,17 +107,43 @@ CHECK:
 - [ ] Final review after fix (assigned: dev2)
 ```
 
-### Step 7: Update Status
+### Step 7: Check Revision Limit
+```
+⚠️ ANOMALY PREVENTION: MAX_REVISION = 3
+
+LOAD story.revisionCount from sprint state
+
+IF revisionCount >= 3:
+  → ESCALATE to lead-engineer
+  → Log: "Story exceeded max revisions"
+  → Options:
+    1. SPLIT story into smaller pieces
+    2. REJECT story (move to backlog)
+    3. REASSIGN to different specialist
+    4. ESCALATE to technical-director
+  → SHOW escalation report to user
+  → WAIT for decision before proceeding
+
+IF revisionCount < 3:
+  → Increment revisionCount
+  → Continue with normal flow
+```
+
+### Step 8: Update Status
 ```
 IF all checks pass:
   - Move story to "Done" column
   - Update sprint board
   - Notify stakeholders
 
-IF checks fail:
+IF checks fail AND revisionCount < 3:
   - Create subtasks for missing items
   - Assign to team members
   - Keep story in progress
+  - Increment revisionCount
+
+IF checks fail AND revisionCount >= 3:
+  - ESCALATE (see Step 7)
 ```
 
 ## Output
@@ -125,3 +151,4 @@ IF checks fail:
 - Pass/fail status
 - Missing items identified
 - Action items created
+- Revision count tracked

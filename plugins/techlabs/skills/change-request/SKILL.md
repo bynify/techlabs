@@ -43,13 +43,32 @@ TYPE 4: EMERGENCY (HOTFIX)
 
 ## Execution
 
-### Step 1: Classify Change Request
+### Step 1: Check for Batch Changes
+```
+⚠️ ANOMALY PREVENTION: Batch Change Detection
+
+CHECK if multiple change requests are pending:
+- Load pending change requests from state
+- Count how many changes are pending
+
+IF multiple changes pending (≥2):
+  → SHOW all pending changes
+  → ASK: "Process all at once?"
+  → SHOW combined impact
+  → PROCESS batch
+
+IF single change:
+  → Continue with normal flow
+```
+
+### Step 2: Classify Change Request
 ```
 ASK USER:
 1. What type of change? (Feature/Bug/Scope/Emergency)
 2. When is it needed? (Now/This sprint/Backlog)
 3. Priority? (P0-Critical/P1-High/P2-Medium/P3-Low)
 4. Impact? (Affects current sprint work?)
+5. Which stories are affected? (all/selected)
 ```
 
 ### Step 2: Impact Analysis

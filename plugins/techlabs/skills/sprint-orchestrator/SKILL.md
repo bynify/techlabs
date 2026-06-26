@@ -146,13 +146,60 @@ async function runPlanningPhase() {
 ```javascript
 async function executeSprintStories(sprintPlan) {
   for (const story of sprintPlan.stories) {
-    // CHECK FOR MID-SPRINT CHANGES
+    // ⚠️ ANOMALY PREVENTION: Check for changes MORE OFTEN
+    
+    // Check before EACH story
+    const pendingChanges = await checkForPendingChanges();
+    if (pendingChanges.length > 0) {
+      // ⚠️ ANOMALY PREVENTION: Batch process
+      console.log(`Found ${pendingChanges.length} pending changes`);
+      const impact = await analyzeBatchImpact(pendingChanges);
+      
+      // Show combined impact
+      await showBatchImpactReport(impact);
+      
+      // Ask user: process all at once?
+      const processBatch = await askUser({
+        question: 'Process all pending changes?',
+        options: ['Yes, process all', 'No, one at a time']
+      });
+      
+      if (processBatch === 'Yes, process all') {
+        await processBatchChanges(pendingChanges);
+      } else {
+        // Process one at a time
+        for (const change of pendingChanges) {
+          await handleChangeRequest(change);
+        }
+      }
+    }
+    
+    // Check for changes BETWEEN stories
     const changeRequest = await checkForChanges();
     if (changeRequest) {
       await handleChangeRequest(changeRequest);
     }
     
     await executeStory(story);
+  }
+}
+
+// ⚠️ ANOMALY PREVENTION: Batch change processing
+async function processBatchChanges(changes) {
+  // Group changes by affected stories
+  const changesByStory = {};
+  for (const change of changes) {
+    for (const storyId of change.affectedStories) {
+      if (!changesByStory[storyId]) {
+        changesByStory[storyId] = [];
+      }
+      changesByStory[storyId].push(change);
+    }
+  }
+  
+  // Apply all changes to each story
+  for (const [storyId, changes] of Object.entries(changesByStory)) {
+    await applyBatchChanges(storyId, changes);
   }
 }
 

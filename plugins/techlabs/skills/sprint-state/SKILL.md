@@ -122,7 +122,7 @@ SPRINT LIFECYCLE:
 }
 ```
 
-### Step 2: State Transition Function
+### Step 2: State Transition Function (WITH VERSION CONTROL)
 ```javascript
 const VALID_TRANSITIONS = {
   'BACKLOG': ['READY', 'BLOCKED'],
@@ -137,13 +137,29 @@ const VALID_TRANSITIONS = {
   'DONE': [],
 };
 
+// ⚠️ ANOMALY PREVENTION: Version control for state consistency
+const MAX_REVISIONS = 3;
+
 async function transitionStory(storyId, newState, metadata = {}) {
+  // Load state with version check
   const state = await loadSprintState();
   const story = state.stories[storyId];
   
   // Validate transition
   if (!VALID_TRANSITIONS[story.state]?.includes(newState)) {
     throw new Error(`Invalid transition: ${story.state} → ${newState}`);
+  }
+  
+  // ⚠️ Check revision limits
+  if (newState === 'REVISION_NEEDED') {
+    story.revisionCount = (story.revisionCount || 0) + 1;
+    if (story.revisionCount >= MAX_REVISIONS) {
+      // Escalate instead of loop
+      story.state = 'ESCALATED';
+      story.escalationReason = `Exceeded ${MAX_REVISIONS} revisions`;
+      await escalateToLeadEngineer(story);
+      return story;
+    }
   }
   
   // Record transition
@@ -157,10 +173,14 @@ async function transitionStory(storyId, newState, metadata = {}) {
   // Update state
   story.state = newState;
   
+  // Update version for optimistic locking
+  state.version = (state.version || 0) + 1;
+  state.updatedAt = new Date().toISOString();
+  
   // Update metrics
   updateSprintMetrics(state);
   
-  // Save state
+  // Save state with version
   await saveSprintState(state);
   
   // Log transition

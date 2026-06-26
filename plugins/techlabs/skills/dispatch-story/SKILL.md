@@ -192,13 +192,29 @@ async function loadAgentContext(agentName, story) {
 ```
 
 ### Step 5: Dispatch with Instructions
+```
+⚠️ ANOMALY PREVENTION: Multi-Agent Dispatch
+
+CHECK if story needs multiple agents:
+- Story has frontend AND backend components?
+- Story needs infra AND application changes?
+- Story touches multiple domains?
+
+IF multi-agent needed:
+  → DISPATCH to PRIMARY agent first
+  → DISPATCH to SECONDARY agent for support
+  → OR: SPLIT story into agent-specific stories
+```
+
 ```markdown
-# Dispatch to: go-specialist
+# Dispatch to: go-specialist (PRIMARY)
+# Support: ui-engineer (SECONDARY)
 
 ## Story: AUTH-001 - Implement JWT Authentication
 
 ## Context Loaded:
-- Agent: go-specialist.md
+- Primary Agent: go-specialist.md
+- Secondary Agent: ui-engineer.md
 - Skills: add-jwt, create-api-endpoint, auth-setup
 - PRD: docs/PRD.md (auth requirements)
 - Architecture: docs/architecture.md (service design)
@@ -211,10 +227,10 @@ async function loadAgentContext(agentName, story) {
 5. Update story status when done
 
 ## Acceptance Criteria:
-- [ ] JWT token generation
-- [ ] Token validation middleware
-- [ ] Refresh token logic
-- [ ] Error handling
+- [ ] JWT token generation (go-specialist)
+- [ ] Token validation middleware (go-specialist)
+- [ ] Login page (ui-engineer)
+- [ ] Error handling (go-specialist)
 - [ ] Unit tests (≥80% coverage)
 
 ## Handoff:

@@ -111,43 +111,101 @@ CHECK FOR:
 [Repeat for each feature]
 ```
 
-### Step 5: Save Generated Docs
+### Step 5: Save Generated Docs (WITH BACKUP)
 ```javascript
 async function saveGeneratedDocs(docs) {
   // Create directories if not exist
   await fs.mkdir('docs', { recursive: true });
+  await fs.mkdir('docs/.backup', { recursive: true });
   await fs.mkdir('production/epics', { recursive: true });
   await fs.mkdir('production/stories', { recursive: true });
   
-  // Save each document
+  // ⚠️ ANOMALY PREVENTION: Check existing files
   for (const [filename, content] of Object.entries(docs)) {
-    await fs.writeFile(filename, content);
-    console.log(`Created: ${filename}`);
+    if (await fs.exists(filename)) {
+      // File exists - ASK USER
+      const action = await askUser({
+        question: `${filename} already exists. What to do?`,
+        options: [
+          'Backup and overwrite',
+          'Merge with existing',
+          'Skip this file',
+          'Show diff first'
+        ]
+      });
+      
+      if (action === 'Backup and overwrite') {
+        // Create backup
+        const backupPath = `docs/.backup/${filename}-${Date.now()}.md`;
+        await fs.copy(filename, backupPath);
+        console.log(`Backup created: ${backupPath}`);
+        // Overwrite
+        await fs.writeFile(filename, content);
+      } else if (action === 'Merge with existing') {
+        // Merge logic
+        const existing = await fs.readFile(filename, 'utf8');
+        const merged = mergeDocuments(existing, content);
+        await fs.writeFile(filename, merged);
+      } else if (action === 'Skip this file') {
+        console.log(`Skipped: ${filename}`);
+      } else if (action === 'Show diff first') {
+        const existing = await fs.readFile(filename, 'utf8');
+        showDiff(existing, content);
+        // Ask again after showing diff
+        const confirm = await askUser({
+          question: 'Proceed with overwrite?',
+          options: ['Yes, overwrite', 'No, skip']
+        });
+        if (confirm === 'Yes, overwrite') {
+          await fs.copy(filename, `docs/.backup/${filename}-${Date.now()}.md`);
+          await fs.writeFile(filename, content);
+        }
+      }
+    } else {
+      // File doesn't exist - create new
+      await fs.writeFile(filename, content);
+    }
+    console.log(`Processed: ${filename}`);
   }
 }
 ```
 
-### Step 6: Validate Generated Docs
+### Step 6: Validate Generated Docs (WITH QUALITY WARNING)
 ```markdown
-# Validation Report
+# ⚠️ AUTO-GENERATED DOCUMENTS - QUALITY WARNING
 
 ## Generated Documents
-| Document | Status | Quality |
-|----------|--------|---------|
-| PRD | ✅ Generated | ⚠️ Basic |
-| Architecture | ✅ Generated | ⚠️ Basic |
-| User Stories | ✅ Generated | ⚠️ Basic |
+| Document | Status | Quality | Warning |
+|----------|--------|--------|--------|
+| PRD | ✅ Generated | ⚠️ 60% | Review required |
+| Architecture | ✅ Generated | ⚠️ 60% | Review required |
+| User Stories | ✅ Generated | ⚠️ 60% | Review required |
 
-## Warnings
-1. PRD is auto-generated - Review recommended
-2. Architecture is basic - May need refinement
-3. User stories need acceptance criteria review
+## ⚠️ QUALITY ASSESSMENT
+- Completeness: 60% (missing edge cases)
+- Accuracy: 70% (may have gaps)
+- Security: 40% (incomplete)
+- Testing: 30% (minimal)
 
-## Next Steps
-1. Review generated documents
-2. Add missing details
-3. Refine architecture
-4. Update user stories
+## ⚠️ CRITICAL Warnings
+1. PRD is AUTO-GENERATED - Review REQUIRED before sprint
+2. Architecture is BASIC - May miss critical components
+3. User stories NEED detailed acceptance criteria
+4. Security requirements NOT fully addressed
+5. Testing strategy NOT defined
+
+## RECOMMENDED ACTIONS
+1. Review ALL generated documents
+2. Add missing edge cases
+3. Refine architecture for your specific needs
+4. Add detailed acceptance criteria
+5. Define testing strategy
+6. Add security requirements
+7. Only proceed with sprint AFTER review
+
+## SPRINT SAFETY
+⚠️ Sprint NOT recommended with auto-generated docs
+✅ Recommended: Review and refine before sprint
 ```
 
 ### Step 7: Generate Recovery Report

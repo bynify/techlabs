@@ -59,7 +59,30 @@ CHECK:
 - Retrospective completed
 ```
 
-### Step 2: Generate Sprint Summary
+### Step 2: Check Carryover Limits
+```
+⚠️ ANOMALY PREVENTION: MAX_CARRYOVER = 2
+
+FOR EACH incomplete story:
+  LOAD story.carryoverCount from sprint history
+  
+  IF carryoverCount >= 2:
+    → ESCALATE to technical-director
+    → Log: "Story exceeded max carryovers"
+    → Options:
+      1. SPLIT story into smaller pieces
+      2. REJECT story (remove from backlog)
+      3. ESCALATE to technical-director for decision
+      4. MARK as "technical debt" for future
+    → SHOW escalation report
+    → WAIT for decision before moving to next sprint
+  
+  IF carryoverCount < 2:
+    → Increment carryoverCount
+    → Move to next sprint backlog
+```
+
+### Step 3: Generate Sprint Summary
 ```markdown
 # Sprint 1 Summary
 
@@ -75,10 +98,10 @@ CHECK:
 | UI-002 | 3 | ✅ Done | On time |
 
 ## Stories Incomplete
-| Story | Points | Status | Reason |
-|-------|--------|--------|--------|
-| AUTH-003 | 5 | ❌ Blocked | External API |
-| UI-003 | 3 | ❌ Incomplete | Scope change |
+| Story | Points | Status | Reason | Carryovers |
+|-------|--------|--------|--------|------------|
+| AUTH-003 | 5 | ❌ Blocked | External API | 1 |
+| UI-003 | 3 | ❌ Incomplete | Scope change | 2 ⚠️ ESCALATE |
 
 ## Metrics
 - **Planned:** 40 points
