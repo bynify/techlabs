@@ -2,6 +2,12 @@
 
 Create system architecture documentation.
 
+## When to Use
+- New project setup
+- Architecture review
+- Technical planning
+- Team onboarding
+
 ## Execution
 
 ### Step 1: Gather Requirements

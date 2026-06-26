@@ -2,6 +2,12 @@
 
 Build referral program with tracking and rewards.
 
+## When to Use
+- Growth initiatives
+- Viral loops
+- Customer acquisition
+- Retention programs
+
 ## Execution
 
 ### Step 1: Referral Schema

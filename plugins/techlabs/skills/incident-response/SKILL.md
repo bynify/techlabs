@@ -2,6 +2,12 @@
 
 Structured incident response and post-mortem process.
 
+## When to Use
+- Production incidents
+- Service outages
+- Security breaches
+- Data loss events
+
 ## Execution
 
 ### Step 1: Severity Classification

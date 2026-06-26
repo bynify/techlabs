@@ -2,6 +2,12 @@
 
 Create an internal admin dashboard.
 
+## When to Use
+- Internal tools
+- Content management
+- User management
+- Data administration
+
 ## Execution
 
 ### Step 1: Gather Requirements

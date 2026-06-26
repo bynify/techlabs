@@ -1,34 +1,127 @@
 # story-done
 
-Verify story meets Definition of Done.
+Verify story meets Definition of Done (DoD) with comprehensive checklist.
+
+## When to Use
+- Sprint review
+- Story completion
+- Quality gate
+- Release readiness
 
 ## Execution
 
-### Step 1: Checklist
+### Step 1: Code Completeness
+```
+CHECK:
+- [ ] All acceptance criteria implemented
+- [ ] No TODO/FIXME left in code
+- [ ] No console.log/debug statements
+- [ ] Error handling complete
+- [ ] Edge cases handled
+- [ ] No hardcoded values
+```
+
+### Step 2: Testing
+```
+CHECK:
+- [ ] Unit tests written (≥80% coverage)
+- [ ] Integration tests passing
+- [ ] E2E tests for critical paths
+- [ ] Manual testing completed
+- [ ] Performance acceptable
+- [ ] Security review done
+```
+
+### Step 3: Code Quality
+```
+CHECK:
+- [ ] Code reviewed by peer
+- [ ] Linting passes (0 warnings)
+- [ ] Type checking passes (0 errors)
+- [ ] No code duplication
+- [ ] Naming conventions followed
+- [ ] Comments on complex logic
+```
+
+### Step 4: Documentation
+```
+CHECK:
+- [ ] README updated (if needed)
+- [ ] API docs updated (if needed)
+- [ ] Changelog entry added
+- [ ] Runbook updated (if needed)
+- [ ] ADR created (if architectural decision)
+```
+
+### Step 5: Deployment
+```
+CHECK:
+- [ ] Builds successfully
+- [ ] Deploys to staging
+- [ ] Smoke tests pass
+- [ ] Feature flags configured
+- [ ] Database migrations ready
+- [ ] Rollback plan documented
+```
+
+### Step 6: Generate Report
 ```markdown
-## Story: [Title]
+# Story DoD Report
 
-### Definition of Done
-- [ ] Code complete
-- [ ] Tests passing
-- [ ] Code reviewed
-- [ ] Documentation updated
-- [ ] Acceptance criteria met
-- [ ] Deployed to staging
-```
+## Story: [PROJ-123] User Authentication
+## Date: 2024-01-15
+## Reviewer: [Name]
 
-### Step 2: Verify
-```
-STATUS: ✅ Done / ❌ Not Done
+## Status: ✅ DONE / ❌ NOT DONE
 
-CHECKED:
-- [x] Code complete
-- [x] Tests passing
+## Checklist
+
+### Code Completeness: ✅ PASS
+- [x] All acceptance criteria implemented
+- [x] No TODO/FIXME
+- [x] Error handling complete
+
+### Testing: ✅ PASS
+- [x] Unit tests: 85% coverage
+- [x] Integration tests passing
+- [x] Manual testing completed
+
+### Code Quality: ⚠️ NEEDS FIX
 - [x] Code reviewed
-- [ ] Documentation ← Missing
+- [ ] Linting: 2 warnings remaining
+- [x] Type checking passes
+
+### Documentation: ✅ PASS
+- [x] README updated
+- [x] API docs updated
+
+### Deployment: ✅ PASS
+- [x] Builds successfully
+- [x] Deploys to staging
+
+## Missing Items
+1. Fix 2 linting warnings
+
+## Action Items
+- [ ] Fix linting warnings (assigned: dev1)
+- [ ] Final review after fix (assigned: dev2)
+```
+
+### Step 7: Update Status
+```
+IF all checks pass:
+  - Move story to "Done" column
+  - Update sprint board
+  - Notify stakeholders
+
+IF checks fail:
+  - Create subtasks for missing items
+  - Assign to team members
+  - Keep story in progress
 ```
 
 ## Output
-- Done status
-- Missing items
-- Action items
+- DoD checklist completed
+- Pass/fail status
+- Missing items identified
+- Action items created

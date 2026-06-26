@@ -2,6 +2,12 @@
 
 Create a conversion-optimized landing page.
 
+## When to Use
+- Product launch
+- Marketing campaigns
+- Conversion optimization
+- A/B testing
+
 ## Execution
 
 ### Step 1: Gather Requirements

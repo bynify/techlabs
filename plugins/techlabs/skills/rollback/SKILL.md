@@ -2,6 +2,12 @@
 
 Deployment rollback procedure.
 
+## When to Use
+- Production incidents
+- Failed deployments
+- Critical bugs
+- Performance degradation
+
 ## Execution
 
 ### Step 1: Identify Issue
