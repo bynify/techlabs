@@ -8,7 +8,30 @@ Master workflow engine that connects all sprint skills end-to-end.
 - Sprint automation
 - End-to-end sprint flow
 
-## Architecture
+## Edge Case Handlers
+
+```
+⚠️ MANDATORY: Edge case handlers must be loaded
+
+SPRINT ORCHESTRATOR LOADS:
+
+1. EDGE CASE HANDLERS:
+   - agent-rejection: Handle agent rejecting scope change
+   - agent-conflict: Handle conflicting agent feedback
+   - condition-conflict: Handle conflicting conditions
+   - impl-blocked: Handle dev can't meet conditions
+   - review-loop: Handle reviewer rejecting repeatedly
+   - qa-critical: Handle critical bugs from QA
+   - qa-blocked: Handle QA can't proceed
+   - deploy-rollback: Handle deployment failure
+   - session-recover: Handle corrupted session state
+
+2. SPRINT LEAD KNOWLEDGE:
+   - Dependencies: Story dependencies
+   - Blockers: Current blockers
+   - Critical Path: Most important stories
+   - Timeline: Sprint timeline
+```
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
