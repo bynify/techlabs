@@ -249,14 +249,39 @@ SAVE to session state:
 ```javascript
 async function runNewProject(projectInfo) {
   const steps = [
+    // PHASE 0: RESEARCH
     { skill: 'brainstorm', args: { topic: projectInfo.goal } },
-    { skill: 'create-prd', args: {} },
-    { skill: 'project-planning', args: {} },
+    { skill: 'market-research', args: {} },
+    { skill: 'competitor-research', args: {} },
+    { skill: 'user-research', args: {} },
+    
+    // PHASE 0.5: STACK SELECTION (BEFORE BUSINESS DOCS)
     { skill: 'choose-stack', args: {} },
     { skill: 'choose-frontend', args: {} },
+    { skill: 'choose-messaging', args: {}, optional: true },
+    
+    // PHASE 1: BUSINESS DOCUMENTS (WITH STACK CONTEXT)
+    { skill: 'create-brd', args: {} },
+    { skill: 'create-prd', args: {} },
+    { skill: 'create-urs', args: {} },
+    
+    // PHASE 2: TECHNICAL DOCUMENTS
+    { skill: 'project-planning', args: {} },
+    { skill: 'create-project-lead', args: {} },
+    { skill: 'create-srs', args: {} },
+    { skill: 'create-adr', args: {} },
     { skill: 'create-architecture', args: {} },
     { skill: 'api-design', args: {} },
     { skill: 'database-design', args: {} },
+    
+    // PHASE 3: KNOWLEDGE BASE
+    { skill: 'knowledge-base', args: {} },
+    
+    // PHASE 4: MONITORING
+    { skill: 'create-monitoring-plan', args: {} },
+    { skill: 'create-revenue-analysis', args: {} },
+    
+    // PHASE 5: SPRINT PLANNING
     { skill: 'create-epics', args: {} },
     { skill: 'user-stories', args: {} },
     { skill: 'sprint-plan', args: {} }
@@ -264,6 +289,15 @@ async function runNewProject(projectInfo) {
   
   for (let i = 0; i < steps.length; i++) {
     const step = steps[i];
+    
+    // Skip optional steps if not needed
+    if (step.optional) {
+      const needed = await askUser({
+        question: `${step.skill} needed?`,
+        options: ['Yes', 'No']
+      });
+      if (needed === 'No') continue;
+    }
     
     console.log(`\n=== Step ${i + 1}/${steps.length}: /${step.skill} ===`);
     
@@ -292,7 +326,23 @@ async function runNewProject(projectInfo) {
 
 function isCriticalStep(stepIndex) {
   // Critical steps that need approval
-  const critical = [2, 5, 10]; // PRD, Architecture, Sprint Plan
+  // Index: 0=brainstorm, 1=market, 2=competitor, 3=user,
+  //        4=choose-stack, 5=choose-frontend, 6=choose-messaging,
+  //        7=brd, 8=prd, 9=urs,
+  //        10=project-planning, 11=project-lead, 12=srs,
+  //        13=adr, 14=architecture, 15=api-design, 16=database,
+  //        17=knowledge-base, 18=monitoring, 19=revenue,
+  //        20=epics, 21=user-stories, 22=sprint-plan
+  
+  const critical = [
+    4,   // choose-stack
+    7,   // brd
+    8,   // prd
+    12,  // srs
+    14,  // architecture
+    22   // sprint-plan
+  ];
+  
   return critical.includes(stepIndex);
 }
 ```
