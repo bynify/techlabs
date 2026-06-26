@@ -261,15 +261,34 @@ async function executeStory(story) {
   // CHECKPOINT 4: Implementation
   const implementation = await runSkill('dev-story', { story, agent, techPlan });
   
-  // CHECKPOINT 5: Code Review Gate
+  // CHECKPOINT 5: Scope Approval (if out-of-scope changes)
+  if (implementation.scopeChanges && implementation.scopeChanges.length > 0) {
+    console.log(`\\n⚠️ ${implementation.scopeChanges.length} out-of-scope changes detected`);
+    const approved = await runSkill('scope-approval', {
+      story,
+      changes: implementation.scopeChanges
+    });
+    
+    if (!approved) {
+      await updateStoryState(story.id, 'BLOCKED', { reason: 'Scope changes not approved' });
+      return;
+    }
+    
+    // Lead updates docs after approval
+    await runSkill('lead-docs-update', {
+      story,
+      changes: implementation.scopeChanges
+    });
+  }
+  
+  // CHECKPOINT 6: Code Review Gate
   const reviewPassed = await runSkill('review-gate', {
     story,
     code: implementation.files,
     type: 'code-review',
   });
   
-  // CHECKPOINT 6: Review Documentation (MANDATORY)
-  // ⚠️ ENFORCEMENT: Reviewer must create review docs
+  // CHECKPOINT 7: Review Documentation (MANDATORY)
   const reviewDoc = await runSkill('review-doc', { story, review: reviewPassed });
   if (!reviewDoc) {
     await updateStoryState(story.id, 'BLOCKED', { reason: 'No review docs' });
@@ -278,11 +297,11 @@ async function executeStory(story) {
   
   if (!reviewPassed) {
     await updateStoryState(story.id, 'REVISION_NEEDED');
-    // Re-run dev-story with feedback
     await runSkill('dev-story', { story, feedback: reviewPassed.feedback });
+    return;
   }
   
-  // CHECKPOINT 5: Automated QA Gate
+  // CHECKPOINT 8: Automated QA Gate
   const gatePassed = await runSkill('gate-check', {
     story,
     checks: ['tests', 'lint', 'types', 'coverage', 'security'],
@@ -291,33 +310,22 @@ async function executeStory(story) {
   if (!gatePassed) {
     await updateStoryState(story.id, 'QA_FAILED');
     await runSkill('dev-story', { story, feedback: gatePassed.failures });
+    return;
   }
   
-  // CHECKPOINT 7: Automated QA Gate
-  const gatePassed = await runSkill('gate-check', {
-    story,
-    checks: ['tests', 'lint', 'types', 'coverage', 'security'],
-  });
-  
-  if (!gatePassed) {
-    await updateStoryState(story.id, 'QA_FAILED');
-    await runSkill('dev-story', { story, feedback: gatePassed.failures });
-  }
-  
-  // CHECKPOINT 8: Manual QA (if needed)
+  // CHECKPOINT 9: Manual QA (if needed)
   if (story.requiresManualQA) {
     await runSkill('qa-plan', { story });
   }
   
-  // CHECKPOINT 9: QA Report (MANDATORY)
-  // ⚠️ ENFORCEMENT: QA must create QA report
+  // CHECKPOINT 10: QA Report (MANDATORY)
   const qaReport = await runSkill('qa-report', { story });
   if (!qaReport) {
     await updateStoryState(story.id, 'BLOCKED', { reason: 'No QA report' });
     return;
   }
   
-  // CHECKPOINT 10: Final Verification
+  // CHECKPOINT 11: Final Verification
   const isDone = await runSkill('story-done', { story });
   
   if (isDone) {
@@ -327,6 +335,7 @@ async function executeStory(story) {
   }
 }
 ```
+
 
 ### Step 4: Run Review Phase
 ```javascript

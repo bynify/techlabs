@@ -11,14 +11,45 @@ Implement a user story end-to-end with mandatory documentation.
 ## Agents to Dispatch
 - (uses dispatch-story for agent selection)
 
+## Enforcement
+
+```
+⚠️ MANDATORY: Documentation and scope control required
+
+DEV-FLOW:
+  tech-plan → implementation → docs-update → story-done
+
+SCOPE RULES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WITHIN SCOPE (no approval):
+  - Task items from story
+  - Direct implementation of criteria
+  - Bug fixes within feature
+  - Refactoring within same file
+
+OUT OF SCOPE (approval required):
+  - New files not in task
+  - Changes to other modules
+  - API signature changes
+  - Database schema changes
+  - New dependencies
+  - Architecture changes
+
+IF out-of-scope → scope-approval → lead-docs-update
+```
+
 ## Execution
 
-### Step 1: Load Story
+### Step 1: Load Story Context
 ```
 READ:
-- production/stories/{story-id}.md (story file)
+- production/stories/{story-id}.md
+- production/tech-plans/{story-id}.md
 - docs/PRD.md (requirements)
 - docs/architecture.md (architecture)
+- docs/api-design.md (API design)
+- docs/database-design.md (database design)
 ```
 
 ### Step 2: Plan Implementation (WITH DOCS)
@@ -28,11 +59,12 @@ READ:
 DETERMINE:
 1. Which files to create/modify
 2. Which tests to write
-3. Which documentation to update
+3. Which documentation to update:
    - README.md (if new feature)
    - API docs (if endpoints changed)
-   - Changelog (always)
+   - Database docs (if schema changed)
    - Architecture (if design changed)
+   - Changelog (always)
 4. Dependencies and order
 ```
 
@@ -43,36 +75,64 @@ FOR EACH FILE:
 2. Get approval
 3. Write file
 4. Run validation
+
+⚠️ SCOPE CHECK (during implementation):
+
+IF change is OUT OF SCOPE:
+  → STOP
+  → Document scope change
+  → RUN /scope-approval
+  → Wait for lead approval
+  → IF approved:
+    - RUN /lead-docs-update
+    - Continue implementation
+  → IF rejected:
+    - Revert change
+    - Continue within scope
 ```
 
 ### Step 4: Update Documentation (MANDATORY)
 ```
 ⚠️ ENFORCEMENT: Docs MUST be updated before story complete
 
-CHECKLIST:
-- [ ] README.md updated (new features, commands)
-- [ ] API docs updated (if endpoints changed)
-- [ ] Changelog updated (entry added)
-- [ ] Architecture updated (if design changed)
-- [ ] Comments added to complex logic
+API CHANGES (if endpoints changed):
+  - [ ] Update api-design.md
+  - [ ] Update OpenAPI spec
+  - [ ] Update endpoint examples
+  - [ ] Update request/response
+
+DATABASE CHANGES (if schema changed):
+  - [ ] Update database-design.md
+  - [ ] Update ER diagram
+  - [ ] Update migration SQL
+  - [ ] Update data dictionary
+
+GENERAL:
+  - [ ] README.md updated
+  - [ ] Changelog updated
+  - [ ] Comments on complex logic
 
 IF docs not updated → BLOCK story completion
 ```
 
-### Step 5: Test
+### Step 5: Self-Review
 ```
-RUN:
-- Unit tests
-- Integration tests
-- Linting
-- Type checking
+CHECK:
+- [ ] All acceptance criteria met
+- [ ] No TODO/FIXME left
+- [ ] Error handling complete
+- [ ] Tests passing
+- [ ] Linting clean
+- [ ] Type checking clean
+- [ ] Documentation complete
 ```
 
 ### Step 6: Update Story
 ```
 UPDATE:
-- Mark story as "Done"
-- Add completion notes
+- Mark story as "READY_FOR_REVIEW"
+- Add implementation notes
+- Link to docs updates
 - Update session state
 ```
 
@@ -80,4 +140,5 @@ UPDATE:
 - Implemented code
 - Tests passing
 - Documentation updated (MANDATORY)
-- Story marked as done
+- Scope changes approved (if any)
+- Story marked as ready for review
