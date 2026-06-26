@@ -376,7 +376,55 @@ IF OPTIMIZATION NEEDED:
 2. Consider reset if long day
 ```
 
-### Step 7: Create Session Rules
+### Step 7: Auto-Triggers
+
+```
+AUTO-TRIGGERS (via hooks):
+
+1. POST-EACH-TOOL-USE
+   └→ session-optimize.sh checks health
+   └→ If bad → show recommendation
+
+2. PRE-COMPACT
+   └→ pre-compact.sh saves state
+   └→ Compress old context
+
+3. POST-COMPACT
+   └→ post-compact.sh restores state
+   └→ Verify context intact
+
+4. SESSION-START
+   └→ session-start.sh loads state
+   └→ Check health on start
+
+5. SESSION-STOP
+   └→ session-stop.sh saves state
+   └→ Save checkpoint
+
+AUTO-ACTIONS:
+
+1. IF TOKEN > 70%
+   └→ Show warning
+   └→ Suggest /session-optimize
+
+2. IF CONTEXT > 10000
+   └→ Show warning
+   └→ Suggest compress
+
+3. IF FILES > 20
+   └→ Show warning
+   └→ Suggest unload
+
+4. IF SESSION > 4 HOURS
+   └→ Show warning
+   └→ Suggest /start-day reset
+
+5. IF PHASE COMPLETE
+   └→ Auto-checkpoint
+   └→ Suggest save progress
+```
+
+### Step 8: Create Session Rules
 ```markdown
 # Session Optimization Rules
 
@@ -434,4 +482,24 @@ DO:
 - Reset when needed
 - Resume via /start-day
 - Start fresh when stuck
+
+## Auto-Trigger Rules
+
+### When to Auto-Trigger
+1. After each tool use → check health
+2. Before compact → save state
+3. After compact → verify state
+4. On session start → load state
+5. On session stop → save state
+
+### What Happens
+1. Hook runs in background
+2. Checks session health metrics
+3. If unhealthy → shows recommendation
+4. User decides action
+
+### Manual Override
+- Run /session-optimize anytime
+- Ignore recommendations if needed
+- Force reset if urgent
 ```
