@@ -23,6 +23,11 @@ Technology studio framework for Claude Code. 98 agents, 207 skills, 23 hooks, 17
 - `/qa-plan` — QA strategy
 - `/security-audit` — Security review
 
+### Change Management
+- `/change-request` — Handle feature requests during sprint
+- `/sprint-replan` — Replan when blockers or scope changes
+- `/scope-change` — Handle scope changes within a story
+
 ### Build
 - `/create-worker` — Cloudflare Worker
 - `/create-pages` — Cloudflare Pages

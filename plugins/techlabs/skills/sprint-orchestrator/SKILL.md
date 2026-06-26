@@ -106,7 +106,41 @@ async function runPlanningPhase() {
 ```javascript
 async function executeSprintStories(sprintPlan) {
   for (const story of sprintPlan.stories) {
+    // CHECK FOR MID-SPRINT CHANGES
+    const changeRequest = await checkForChanges();
+    if (changeRequest) {
+      await handleChangeRequest(changeRequest);
+    }
+    
     await executeStory(story);
+  }
+}
+
+// Handle mid-sprint changes
+async function handleChangeRequest(changeRequest) {
+  switch (changeRequest.type) {
+    case 'emergency':
+      // Pause current work, fix emergency
+      await runSkill('change-request', changeRequest);
+      break;
+    
+    case 'feature':
+      // Add to sprint or backlog
+      await runSkill('change-request', changeRequest);
+      if (changeRequest.priority === 'P0') {
+        await runSkill('sprint-replan', { reason: 'New P0 feature' });
+      }
+      break;
+    
+    case 'scope-change':
+      // Update current story
+      await runSkill('scope-change', changeRequest);
+      break;
+    
+    case 'replan':
+      // Full sprint replan
+      await runSkill('sprint-replan', changeRequest);
+      break;
   }
 }
 
