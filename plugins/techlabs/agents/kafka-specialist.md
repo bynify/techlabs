@@ -144,6 +144,15 @@ func processWithDLQ(ctx context.Context, msg kafka.Message) error {
     - expr: rate(kafka_topic_messages_total[5m])
 ```
 
+### Context Loading
+
+```
+READ:
+- docs/PRD.md (requirements)
+- docs/architecture.md (if exists)
+- production/session-state/active.md (current state)
+```
+
 ### When to Use
 - Event sourcing architectures
 - High-throughput data pipelines

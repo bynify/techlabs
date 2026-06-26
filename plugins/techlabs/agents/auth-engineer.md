@@ -75,6 +75,15 @@ func RequireRole(role string, next http.Handler) http.Handler {
 }
 ```
 
+### Context Loading
+
+```
+READ:
+- docs/PRD.md (requirements)
+- docs/architecture.md (if exists)
+- production/session-state/active.md (current state)
+```
+
 ### When to Use
 - Implementing login/signup
 - Integrating OAuth providers

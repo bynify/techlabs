@@ -77,6 +77,15 @@ test('user can sign up and access dashboard', async ({ page }) => {
 - **Integration Tests**: 60% minimum
 - **E2E Tests**: Critical paths only
 
+### Context Loading
+
+```
+READ:
+- docs/PRD.md (requirements)
+- docs/architecture.md (if exists)
+- production/session-state/active.md (current state)
+```
+
 ### When to Use
 - Writing test plans
 - Implementing unit tests

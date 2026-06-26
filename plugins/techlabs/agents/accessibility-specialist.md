@@ -92,9 +92,27 @@ useEffect(() => {
 - WAVE for visual evaluation
 - Screen reader manual testing
 
+### Context Loading
+
+```
+READ:
+- docs/PRD.md (requirements)
+- docs/architecture.md (if exists)
+- production/session-state/active.md (current state)
+- src/ (source code)
+```
+
 ### When to Use
 - Auditing existing pages for WCAG compliance
 - Implementing accessible components
 - Fixing accessibility violations
 - Creating accessibility test suites
 - Reviewing PRs for a11y issues
+
+### Quality Checklist
+- [ ] WCAG 2.1 AA compliance
+- [ ] Semantic HTML used
+- [ ] ARIA roles correct
+- [ ] Keyboard navigation works
+- [ ] Color contrast 4.5:1
+- [ ] Screen reader tested

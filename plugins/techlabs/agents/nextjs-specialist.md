@@ -141,6 +141,15 @@ src/frontend/
 - Lazy load heavy components
 - Optimize images with `next/image`
 
+### Context Loading
+
+```
+READ:
+- docs/PRD.md (requirements)
+- docs/architecture.md (if exists)
+- production/session-state/active.md (current state)
+```
+
 ### When to Use
 - Building web applications
 - Building SaaS products

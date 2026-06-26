@@ -91,6 +91,15 @@ func ProcessPayment(ctx context.Context, idempotencyKey string, amount int64) er
 }
 ```
 
+### Context Loading
+
+```
+READ:
+- docs/PRD.md (requirements)
+- docs/architecture.md (if exists)
+- production/session-state/active.md (current state)
+```
+
 ### When to Use
 - Implementing payment flows
 - Setting up subscriptions

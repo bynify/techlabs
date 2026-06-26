@@ -117,6 +117,15 @@ src/backend/
 └── tests/                 # Test files
 ```
 
+### Context Loading
+
+```
+READ:
+- docs/PRD.md (requirements)
+- docs/architecture.md (if exists)
+- production/session-state/active.md (current state)
+```
+
 ### When to Use
 - Building Go services
 - Implementing gRPC services
