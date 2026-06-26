@@ -2,6 +2,12 @@
 
 Create wireframes for UI layouts and user flows.
 
+## When to Use
+- Feature design
+- Sprint planning
+- Stakeholder communication
+- Design handoff
+
 ## Execution
 
 ### Step 1: Page Structure

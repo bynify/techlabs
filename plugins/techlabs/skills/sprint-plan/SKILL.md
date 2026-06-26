@@ -2,6 +2,12 @@
 
 Sprint planning with story estimation and backlog prioritization.
 
+## When to Use
+- Sprint kickoff
+- Backlog grooming
+- Capacity planning
+- Team alignment
+
 ## Execution
 
 ### Step 1: Capacity

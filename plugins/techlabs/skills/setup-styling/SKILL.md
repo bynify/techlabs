@@ -2,6 +2,12 @@
 
 Setup styling system with Tailwind CSS, CSS variables, and design tokens.
 
+## When to Use
+- New project setup
+- Styling migration
+- Design system implementation
+- Theme customization
+
 ## Execution
 
 ### Step 1: Gather Requirements

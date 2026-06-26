@@ -2,6 +2,12 @@
 
 Create a Product Requirements Document (PRD).
 
+## When to Use
+- New product development
+- Feature planning
+- Stakeholder alignment
+- Team onboarding
+
 ## Execution
 
 ### Step 1: Gather Information

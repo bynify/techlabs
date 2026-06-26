@@ -2,6 +2,12 @@
 
 Setup custom fonts and icon system.
 
+## When to Use
+- New project setup
+- Brand refresh
+- Typography improvement
+- Icon system standardization
+
 ## Execution
 
 ### Step 1: Add Google Fonts

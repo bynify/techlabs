@@ -2,6 +2,12 @@
 
 Guided onboarding for new projects. Detects current state and recommends workflow.
 
+## When to Use
+- New project kickoff
+- First session with TechLabs
+- Project state unknown
+- Need workflow recommendation
+
 ## Execution
 
 ### Step 1: Detect Project State

@@ -2,6 +2,12 @@
 
 Implement responsive design patterns.
 
+## When to Use
+- Mobile-first development
+- Cross-device support
+- Layout optimization
+- Accessibility improvement
+
 ## Execution
 
 ### Step 1: Define Breakpoints

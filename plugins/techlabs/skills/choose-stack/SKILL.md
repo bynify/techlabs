@@ -2,6 +2,12 @@
 
 Select the right technology stack for your project.
 
+## When to Use
+- New project setup
+- Technology evaluation
+- Stack migration planning
+- Architecture decisions
+
 ## Execution
 
 ### Step 1: Determine Project Type
