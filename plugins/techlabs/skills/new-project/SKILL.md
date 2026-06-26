@@ -73,12 +73,12 @@ QUESTION 10: "Do you have existing code/repository? (yes/no)"
 ⚠️ DO NOT PROCEED TO STEP 2 UNTIL ALL QUESTIONS ARE ANSWERED!
 ```
 
-### Step 2: Create Project Structure
+### Step 2: Create Project Structure & Session State
 
 ```
 AFTER GATHERING ALL INFORMATION:
 
-CREATE FOLDERS:
+1. CREATE FOLDERS:
 - production/existing-assets/brd/
 - production/existing-assets/prd/
 - production/existing-assets/landing-page/
@@ -87,10 +87,68 @@ CREATE FOLDERS:
 - production/existing-assets/api-docs/
 - production/existing-assets/code/
 
+2. CREATE SESSION STATE (production/session-state/active.md):
+
+# Active Session State
+
+## Current Phase: PLANNING
+## Current Step: new-project
+## Project: {projectName}
+## Started: {date}
+
+## Progress
+- [x] Step 1: Gather Information
+- [ ] Step 2: Create Project Structure
+- [ ] Step 3: Research & Discovery
+- [ ] Step 4: Stack Selection
+- [ ] Step 5: Business Documents
+- [ ] Step 6: Technical Documents
+- [ ] Step 7: Knowledge Base
+- [ ] Step 8: Monitoring
+- [ ] Step 9: Sprint Planning
+
+## Existing Assets
+- BRD: {provided/not provided}
+- PRD: {provided/not provided}
+- Landing Page: {provided/not provided}
+- Research: {provided/not provided}
+- Design: {provided/not provided}
+- API Docs: {provided/not provided}
+- Code: {provided/not provided}
+
+3. CREATE PROJECT CONTEXT (production/project-context.json):
+{
+  "projectName": "{projectName}",
+  "description": "{description}",
+  "goal": "{goal}",
+  "existingAssets": {
+    "brd": {"provided": false, "path": null},
+    "prd": {"provided": false, "path": null},
+    "landingPage": {"provided": false, "path": null},
+    "research": {"provided": false, "path": null},
+    "design": {"provided": false, "path": null},
+    "apiDocs": {"provided": false, "path": null},
+    "code": {"provided": false, "path": null}
+  },
+  "stack": null,
+  "frontend": null,
+  "phase": "planning"
+}
+
+4. CREATE PROGRESS TRACKER (production/shortcuts/new-project.json):
+{
+  "shortcut": "new-project",
+  "projectName": "{projectName}",
+  "currentStep": 2,
+  "totalSteps": 23,
+  "status": "in-progress",
+  "completedSteps": ["gather-info", "create-structure"]
+}
+
 IF USER PROVIDED EXISTING ASSETS:
 - Copy/move files to appropriate folders
 - Load content into context
-- Mark as provided in session state
+- Update project-context.json
 ```
 
 ### Step 3: Run Flow with Existing Assets Check
@@ -111,12 +169,17 @@ IF existing research provided:
   → SKIP research phase
   → Use existing research
 
+UPDATE session-state/active.md: "Phase 0 complete"
+
 PHASE 0.5: STACK SELECTION (MANDATORY)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 → Run /choose-stack (ALWAYS - based on research)
 → Run /choose-frontend (ALWAYS)
 → Run /choose-messaging (IF needed)
+
+UPDATE session-state/active.md: "Phase 0.5 complete, stack selected"
+UPDATE project-context.json: "stack": "{selected-stack}"
 
 PHASE 1: BUSINESS DOCUMENTS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -137,6 +200,8 @@ IF existing PRD provided:
 
 → Run /create-urs (ALWAYS)
 
+UPDATE session-state/active.md: "Phase 1 complete"
+
 PHASE 2: TECHNICAL DOCUMENTS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -155,16 +220,22 @@ IF existing API docs provided:
 
 → Run /database-design (ALWAYS)
 
+UPDATE session-state/active.md: "Phase 2 complete"
+
 PHASE 3: KNOWLEDGE BASE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 → Run /knowledge-base (ALWAYS - loads stack-specific docs)
+
+UPDATE session-state/active.md: "Phase 3 complete"
 
 PHASE 4: MONITORING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 → Run /create-monitoring-plan (ALWAYS)
 → Run /create-revenue-analysis (ALWAYS)
+
+UPDATE session-state/active.md: "Phase 4 complete"
 
 PHASE 5: SPRINT PLANNING
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -173,10 +244,14 @@ PHASE 5: SPRINT PLANNING
 → Run /user-stories (ALWAYS)
 → Run /sprint-plan (ALWAYS)
 
+UPDATE session-state/active.md: "Phase 5 complete"
+
 FINAL
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 → Run /doc-validator (ALWAYS)
+→ UPDATE session-state/active.md: "PLANNING COMPLETE"
+→ UPDATE project-context.json: "phase": "planning-complete"
 ```
 
 ### Step 4: Show Progress
@@ -186,7 +261,8 @@ AFTER EACH STEP:
 1. Show which step completed
 2. Show which steps skipped (if existing assets)
 3. Ask for approval at checkpoints
-4. Save progress
+4. Update session-state/active.md
+5. Update shortcuts/new-project.json
 ```
 
 ### Step 5: Handle Existing Assets
@@ -231,3 +307,5 @@ USE IN:
 - Checkpoints at critical steps
 - Progress saved if stopped
 - Final validation report
+- Session state updated
+- Project context created
