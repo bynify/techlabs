@@ -38,16 +38,35 @@ STEP 0d: /user-research
   → User journeys
   → SAVE CHECKPOINT: "User research complete"
 
-PHASE 1: BUSINESS DOCUMENTS
+PHASE 0.5: STACK SELECTION (BEFORE BUSINESS DOCS)
+
+STEP 0e: /choose-stack (MANDATORY)
+  → Select backend, database, messaging
+  → Based on research findings
+  → SAVE CHECKPOINT: "Stack selected"
+
+STEP 0f: /choose-frontend (MANDATORY)
+  → Select frontend framework
+  → Based on project requirements
+  → SAVE CHECKPOINT: "Frontend selected"
+
+STEP 0g: /choose-messaging (IF NEEDED)
+  → Select messaging system
+  → If async processing needed
+  → SAVE CHECKPOINT: "Messaging selected"
+
+PHASE 1: BUSINESS DOCUMENTS (WITH STACK CONTEXT)
 
 STEP 1a: /create-brd (MANDATORY)
   → Business Requirements Document
+  → Now has stack context
   → Stakeholder alignment
   → Budget approval
   → SAVE CHECKPOINT: "BRD created and approved"
 
 STEP 1b: /create-prd
   → Product Requirements Document
+  → Now has stack context
   → Feature definitions
   → SAVE CHECKPOINT: "PRD created"
 
@@ -76,32 +95,24 @@ STEP 2c: /create-srs (MANDATORY)
   → Security & performance requirements
   → SAVE CHECKPOINT: "SRS created and approved"
 
-STEP 2d: /choose-stack
-  → Select backend, database, messaging
-  → SAVE CHECKPOINT: "Stack selected"
-
-STEP 2e: /choose-frontend
-  → Select frontend framework
-  → SAVE CHECKPOINT: "Frontend selected"
-
-STEP 2f: /create-adr (MANDATORY)
+STEP 2d: /create-adr (MANDATORY)
   → Architecture Decision Records
   → Document all technical decisions
   → SAVE CHECKPOINT: "ADR created"
 
-STEP 2g: /create-architecture
+STEP 2e: /create-architecture
   → System design, components
   → SAVE CHECKPOINT: "Architecture created"
 
-STEP 2h: /api-design
+STEP 2f: /api-design
   → API endpoints, schemas
   → SAVE CHECKPOINT: "API design created"
 
-STEP 2i: /database-design
+STEP 2g: /database-design
   → Schema, indexes, constraints
   → SAVE CHECKPOINT: "Database design created"
 
-PHASE 3: RESEARCH & VALIDATION (KNOWLEDGE BASE)
+PHASE 3: KNOWLEDGE BASE (WITH STACK)
 
 STEP 3a: /knowledge-base (MANDATORY)
   → Search ALL documentation for project stack
