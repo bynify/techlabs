@@ -1,148 +1,324 @@
 # market-research
 
-Research market size, competition, and opportunities to validate business ideas.
+Conduct market research to understand market size, trends, and opportunities.
 
 ## When to Use
-- New product validation
-- Expansion into new markets
-- Competitive intelligence
-- Investor pitch preparation
+- New project kickoff
+- Market analysis needed
+- Investment decision
+- Strategy planning
+
+## Agents to Dispatch
+- business-analyst: Market analysis
+- product-manager: Market fit
+- financial-analyst: Market size
+
+## Enforcement
+
+```
+⚠️ MANDATORY: Market research required for new projects
+
+MARKET RESEARCH ENFORCEMENT:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MUST INCLUDE:
+1. Market Size (TAM/SAM/SOM)
+2. Market Trends
+3. Growth Projections
+4. Customer Segments
+5. Buying Behavior
+6. Distribution Channels
+7. Pricing Models
+8. Regulatory Environment
+
+TOOL CALLS:
+- Search industry reports
+- Search market data
+- Search competitor analysis
+- Search customer data
+```
 
 ## Execution
 
-### Step 1: Define Research Scope
+### Step 1: Define Market Scope
 ```
 ASK USER:
-1. What industry/market?
-2. What geography?
-3. Target customer segment?
-4. Budget for research?
-5. Timeline?
+
+1. MARKET DEFINITION
+   - What market are we entering?
+   - What's the product category?
+   - What's the target geography?
+   - What's the target industry?
+
+2. CUSTOMER SEGMENTS
+   - B2B or B2C?
+   - What company size?
+   - What industry?
+   - What budget?
+
+3. COMPETITIVE LANDSCAPE
+   - Who are the competitors?
+   - What's the market share?
+   - What's the pricing?
+   - What's the differentiation?
 ```
 
-### Step 2: Market Size Analysis
+### Step 2: Conduct Research
 ```
-CALCULATE:
+TOOL CALLS:
 
-TAM (Total Addressable Market):
-- All potential customers worldwide
-- Formula: Total customers × Average revenue per customer
+1. MARKET SIZE
+   - Search: "{market} market size 2024"
+   - Search: "{market} TAM SAM SOM"
+   - Search: "{market} market forecast"
 
-SAM (Serviceable Addressable Market):
-- Customers you can realistically reach
-- Formula: TAM × Market percentage you can serve
+2. MARKET TRENDS
+   - Search: "{market} trends 2024"
+   - Search: "{market} growth drivers"
+   - Search: "{market} challenges"
 
-SOM (Serviceable Obtainable Market):
-- Customers you can capture in 1-3 years
-- Formula: SAM × Realistic market share
+3. COMPETITORS
+   - Search: "{market} competitors"
+   - Search: "{market} market share"
+   - Search: "{competitor} revenue"
 
-EXAMPLE:
-TAM: $10B (global CRM market)
-SAM: $1B (small business CRM in US)
-SOM: $10M (1% of SAM in year 1)
-```
+4. CUSTOMERS
+   - Search: "{market} customer segments"
+   - Search: "{market} buying behavior"
+   - Search: "{market} pain points"
 
-### Step 3: Competitive Landscape
-```
-MAP COMPETITORS:
-
-Direct Competitors:
-| Name | Funding | Users | Pricing | Strength | Weakness |
-|------|---------|-------|---------|----------|----------|
-| Comp A | $50M | 100K | $29/mo | Brand | Dated UI |
-| Comp B | $10M | 20K | $19/mo | Features | Poor a11y |
-
-Indirect Competitors:
-| Name | Approach | Overlap |
-|------|----------|---------|
-| Comp C | Spreadsheets | Manual tracking |
-| Comp D | Custom build | Internal tools |
-
-Market Gaps:
-- No solution for [specific need]
-- All competitors lack [feature]
-- Pricing too high for [segment]
+5. PRICING
+   - Search: "{market} pricing models"
+   - Search: "{market} pricing strategy"
+   - Search: "{competitor} pricing"
 ```
 
-### Step 4: Customer Research
+### Step 3: Analyze Data
+```javascript
+async function analyzeMarketData(researchData) {
+  const analysis = {
+    marketSize: {
+      tam: calculateTAM(researchData),
+      sam: calculateSAM(researchData),
+      som: calculateSOM(researchData)
+    },
+    trends: identifyTrends(researchData),
+    growth: calculateGrowth(researchData),
+    segments: identifySegments(researchData),
+    competitors: analyzeCompetitors(researchData),
+    opportunities: identifyOpportunities(researchData),
+    threats: identifyThreats(researchData)
+  };
+  
+  return analysis;
+}
+
+function calculateTAM(data) {
+  // Total Addressable Market
+  return {
+    value: data.totalMarketSize,
+    source: data.source,
+    year: data.year
+  };
+}
+
+function calculateSAM(data) {
+  // Serviceable Addressable Market
+  return {
+    value: data.serviceableMarketSize,
+    source: data.source,
+    year: data.year
+  };
+}
+
+function calculateSOM(data) {
+  // Serviceable Obtainable Market
+  return {
+    value: data.obtainableMarketSize,
+    source: data.source,
+    year: data.year
+  };
+}
 ```
-METHODS:
 
-1. Online Surveys
-   - Target: 100+ responses
-   - Tools: Typeform, Google Forms
-   - Questions: Pain points, willingness to pay
-
-2. Interviews
-   - Target: 10-15 interviews
-   - Length: 30 minutes
-   - Questions: Current workflow, frustrations, budget
-
-3. Community Mining
-   - Reddit, HN, Twitter, forums
-   - Search: "frustrated with", "looking for", "alternative to"
-   - Extract: Common complaints, feature requests
-```
-
-### Step 5: Opportunity Analysis
-```
-IDENTIFY:
-
-Underserved Segments:
-- Who is not being served well?
-- What specific needs are unmet?
-
-Pricing Gaps:
-- Is there a price point no one is offering?
-- Can you offer more value at same price?
-
-Feature Gaps:
-- What features are commonly requested but missing?
-- What would delight users?
-
-Geographic Gaps:
-- Which markets are underserved?
-- Localization opportunities?
-```
-
-### Step 6: Generate Report
+### Step 4: Create Market Research Document
 ```markdown
 # Market Research Report
 
 ## Executive Summary
-- Market: [Industry] worth $[X]B
-- Growth: [Y]% CAGR
-- Opportunity: [Specific gap identified]
-- Recommendation: [Go/No-go with reasoning]
+{brief summary of market opportunity}
 
 ## Market Size
-- TAM: $[X]B
-- SAM: $[X]M
-- SOM: $[X]M (Year 1)
 
-## Competitive Analysis
-[Table from Step 3]
+### TAM (Total Addressable Market)
+- Value: ${amount}
+- Source: {source}
+- Year: {year}
 
-## Customer Insights
-[Key findings from interviews/surveys]
+### SAM (Serviceable Addressable Market)
+- Value: ${amount}
+- Source: {source}
+- Year: {year}
 
-## Opportunity Map
-[Underserved segments and gaps]
+### SOM (Serviceable Obtainable Market)
+- Value: ${amount}
+- Source: {source}
+- Year: {year}
 
-## Risks
-- Market risk: [description]
-- Competition risk: [description]
-- Execution risk: [description]
+## Market Trends
 
-## Next Steps
-- [ ] Validate with 10 more interviews
-- [ ] Build prototype for [feature]
-- [ ] Test pricing with landing page
+### Trend 1: {name}
+- Description: {description}
+- Impact: {High/Medium/Low}
+- Timeline: {timeline}
+
+### Trend 2: {name}
+- Description: {description}
+- Impact: {High/Medium/Low}
+- Timeline: {timeline}
+
+## Growth Projections
+
+### Historical Growth
+| Year | Market Size | Growth Rate |
+|------|-------------|-------------|
+| 2022 | ${amount} | {rate}% |
+| 2023 | ${amount} | {rate}% |
+| 2024 | ${amount} | {rate}% |
+
+### Forecast
+| Year | Projected Size | Growth Rate |
+|------|----------------|-------------|
+| 2025 | ${amount} | {rate}% |
+| 2026 | ${amount} | {rate}% |
+| 2027 | ${amount} | {rate}% |
+
+## Customer Segments
+
+### Segment 1: {name}
+- Size: {number}
+- Characteristics: {description}
+- Needs: {needs}
+- Willingness to Pay: ${amount}
+
+### Segment 2: {name}
+- Size: {number}
+- Characteristics: {description}
+- Needs: {needs}
+- Willingness to Pay: ${amount}
+
+## Competitive Landscape
+
+### Competitor 1: {name}
+- Market Share: {percentage}
+- Strengths: {strengths}
+- Weaknesses: {weaknesses}
+- Pricing: ${amount}
+
+### Competitor 2: {name}
+- Market Share: {percentage}
+- Strengths: {strengths}
+- Weaknesses: {weaknesses}
+- Pricing: ${amount}
+
+## Opportunities
+
+### Opportunity 1: {name}
+- Description: {description}
+- Impact: {High/Medium/Low}
+- Probability: {High/Medium/Low}
+- Timeline: {timeline}
+
+### Opportunity 2: {name}
+- Description: {description}
+- Impact: {High/Medium/Low}
+- Probability: {High/Medium/Low}
+- Timeline: {timeline}
+
+## Threats
+
+### Threat 1: {name}
+- Description: {description}
+- Impact: {High/Medium/Low}
+- Probability: {High/Medium/Low}
+- Mitigation: {mitigation}
+
+### Threat 2: {name}
+- Description: {description}
+- Impact: {High/Medium/Low}
+- Probability: {High/Medium/Low}
+- Mitigation: {mitigation}
+
+## Pricing Models
+
+### Model 1: {name}
+- Description: {description}
+- Pros: {pros}
+- Cons: {cons}
+- Recommendation: {yes/no}
+
+### Model 2: {name}
+- Description: {description}
+- Pros: {pros}
+- Cons: {cons}
+- Recommendation: {yes/no}
+
+## Recommendations
+
+### Recommendation 1: {name}
+- Action: {action}
+- Rationale: {rationale}
+- Timeline: {timeline}
+
+### Recommendation 2: {name}
+- Action: {action}
+- Rationale: {rationale}
+- Timeline: {timeline}
+```
+
+### Step 5: Multi-Agent Review
+```
+REVIEW WITH:
+
+BUSINESS-ANALYST:
+- "Market size is accurate"
+- "Trends are identified"
+- "Segments are defined"
+
+PRODUCT-MANAGER:
+- "Market fit is clear"
+- "Opportunities are valid"
+- "Threats are mitigated"
+
+FINANCIAL-ANALYST:
+- "Projections are realistic"
+- "Pricing is optimal"
+- "ROI is achievable"
+
+ALL MUST AGREE
+```
+
+### Step 6: Save & Validate
+```
+SAVE TO:
+- docs/market-research.md
+
+VALIDATE:
+- Market size defined?
+- Trends identified?
+- Competitors analyzed?
+- Opportunities clear?
+- Threats mitigated?
+
+IF VALID:
+- Mark as APPROVED
+- Proceed to project planning
 ```
 
 ## Output
-- Market sizing (TAM/SAM/SOM)
-- Competitive landscape
-- Customer insights
-- Opportunity map
-- Research report
+- Market research completed
+- Market size calculated
+- Trends identified
+- Competitors analyzed
+- Opportunities validated
+- Ready for business planning

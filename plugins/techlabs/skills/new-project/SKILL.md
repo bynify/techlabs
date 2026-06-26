@@ -9,65 +9,168 @@ Complete project setup from scratch in one command.
 
 ## What This Does
 
-Chains 10 planning skills into one flow:
+Chains 20+ planning skills into one comprehensive flow:
 
 ```
 FLOW:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-STEP 1: /brainstorm
+PHASE 0: RESEARCH & DISCOVERY
+
+STEP 0a: /brainstorm
   → Ask 5 questions about problem
   → Generate ideas
-  → SAVE CHECKPOINT: "Brainstorm complete, ideas generated"
+  → SAVE CHECKPOINT: "Brainstorm complete"
 
-STEP 2: /create-prd
-  → Create requirements document
-  → SAVE CHECKPOINT: "PRD created at docs/PRD.md"
+STEP 0b: /market-research
+  → Market size (TAM/SAM/SOM)
+  → Market trends
+  → Competitor analysis
+  → SAVE CHECKPOINT: "Market research complete"
 
-STEP 3: /project-planning
-  → Plan team, infra, security, budget
+STEP 0c: /competitor-research
+  → Competitor profiles
+  → Competitive analysis
+  → SAVE CHECKPOINT: "Competitor research complete"
+
+STEP 0d: /user-research
+  → User personas
+  → User journeys
+  → SAVE CHECKPOINT: "User research complete"
+
+PHASE 1: BUSINESS DOCUMENTS
+
+STEP 1a: /create-brd (MANDATORY)
+  → Business Requirements Document
+  → Stakeholder alignment
+  → Budget approval
+  → SAVE CHECKPOINT: "BRD created and approved"
+
+STEP 1b: /create-prd
+  → Product Requirements Document
+  → Feature definitions
+  → SAVE CHECKPOINT: "PRD created"
+
+STEP 1c: /create-urs (MANDATORY)
+  → User Requirements Specification
+  → User personas, journeys, use cases
+  → SAVE CHECKPOINT: "URS created and approved"
+
+PHASE 2: TECHNICAL DOCUMENTS
+
+STEP 2a: /project-planning
+  → Team composition
+  → Infrastructure planning
+  → Security requirements
+  → Budget estimation
   → SAVE CHECKPOINT: "Project plan created"
 
-STEP 3b: /create-project-lead (MANDATORY)
+STEP 2b: /create-project-lead (MANDATORY)
   → Create project-specific lead agent
-  → Lead coordinates all work
+  → Build knowledge base
   → SAVE CHECKPOINT: "Project lead created"
 
-STEP 4: /choose-stack
+STEP 2c: /create-srs (MANDATORY)
+  → Software Requirements Specification
+  → Functional & non-functional requirements
+  → Security & performance requirements
+  → SAVE CHECKPOINT: "SRS created and approved"
+
+STEP 2d: /choose-stack
   → Select backend, database, messaging
   → SAVE CHECKPOINT: "Stack selected"
 
-STEP 5: /choose-frontend
+STEP 2e: /choose-frontend
   → Select frontend framework
   → SAVE CHECKPOINT: "Frontend selected"
 
-STEP 6: /create-architecture
+STEP 2f: /create-adr (MANDATORY)
+  → Architecture Decision Records
+  → Document all technical decisions
+  → SAVE CHECKPOINT: "ADR created"
+
+STEP 2g: /create-architecture
   → System design, components
   → SAVE CHECKPOINT: "Architecture created"
 
-STEP 7: /api-design
+STEP 2h: /api-design
   → API endpoints, schemas
   → SAVE CHECKPOINT: "API design created"
 
-STEP 8: /database-design
+STEP 2i: /database-design
   → Schema, indexes, constraints
   → SAVE CHECKPOINT: "Database design created"
 
-STEP 9: /create-epics
+PHASE 3: RESEARCH & VALIDATION
+
+STEP 3a: /stack-research
+  → Search latest docs for stack
+  → Best practices
+  → SAVE CHECKPOINT: "Stack research complete"
+
+STEP 3b: /security-research
+  → Security best practices
+  → Compliance requirements
+  → SAVE CHECKPOINT: "Security research complete"
+
+STEP 3c: /performance-research
+  → Performance guidelines
+  → Scalability patterns
+  → SAVE CHECKPOINT: "Performance research complete"
+
+PHASE 4: SPRINT PLANNING
+
+STEP 4a: /create-epics
   → Break into epics
   → SAVE CHECKPOINT: "Epics created"
 
-STEP 10: /user-stories
+STEP 4b: /user-stories
   → Create user stories
   → SAVE CHECKPOINT: "User stories created"
 
-STEP 11: /sprint-plan
+STEP 4c: /sprint-plan
   → Plan first sprint
   → SAVE CHECKPOINT: "Sprint plan created"
 
 FINAL: /doc-validator
   → Validate all documents
   → SAVE CHECKPOINT: "Documents validated"
+```
+
+## Multi-Agent Discussions
+
+```
+⚠️ MANDATORY: Multi-agent discussions at critical decisions
+
+DISCUSSION POINTS:
+
+1. BRD APPROVAL
+   - Product Manager: Requirements clear?
+   - Business Analyst: Workflows defined?
+   - Financial Analyst: Budget realistic?
+   - Security Lead: Compliance requirements clear?
+
+2. STACK SELECTION
+   - Technical Director: Technically sound?
+   - Security Lead: Security implications?
+   - Performance Lead: Performance implications?
+
+3. ARCHITECTURE DECISION
+   - Technical Director: Architecture feasible?
+   - Security Lead: Security requirements met?
+   - Performance Lead: Scalability requirements met?
+
+4. API DESIGN
+   - Technical Director: API design sound?
+   - Security Lead: Security requirements met?
+   - Performance Lead: Performance requirements met?
+
+5. DATABASE DESIGN
+   - Technical Director: Schema design sound?
+   - Security Lead: Data protection requirements met?
+   - Performance Lead: Performance requirements met?
+
+ALL AGENTS MUST AGREE BEFORE PROCEEDING
 ```
 
 ## Execution
