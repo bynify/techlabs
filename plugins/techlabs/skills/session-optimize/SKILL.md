@@ -298,7 +298,7 @@ function summarize(content) {
 
 ### Step 5: Implement Checkpoint System
 ```javascript
-// Checkpoint System
+// Checkpoint System (integrates with session-persist)
 
 async function saveCheckpoint(session) {
   const checkpoint = {
@@ -310,6 +310,9 @@ async function saveCheckpoint(session) {
   };
   
   await saveToFile(`production/checkpoints/${session.id}.json`, checkpoint);
+  
+  // Also save to session history
+  await sessionDB.save(session);
 }
 
 async function loadCheckpoint(sessionId) {

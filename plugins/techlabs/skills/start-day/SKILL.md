@@ -133,7 +133,7 @@ Next: /sprint-transition → Start Sprint 2
 ```
 ```
 
-### Step 3: Load Session State
+### Step 3: Load Session State (with session-persist)
 ```markdown
 # Last Session
 
@@ -157,6 +157,36 @@ Next: /sprint-transition → Start Sprint 2
 2. Run /choose-frontend
 3. Continue planning flow
 ```
+
+### Step 3b: Load Session History (session-persist)
+```javascript
+// Load session history for context
+
+async function loadSessionHistory() {
+  // Get project sessions
+  const projectSessions = await sessionDB.getProjectSessions(currentProject);
+  
+  // Get recent sessions
+  const recentSessions = await sessionDB.getRecentSessions(5);
+  
+  // Load relevant context
+  const context = await loadSessionContext(recentSessions[0].id);
+  
+  return {
+    projectSessions,
+    recentSessions,
+    context
+  };
+}
+```
+
+SESSION HISTORY LOADED:
+- Last session: {id}
+- Last phase: {phase}
+- Last task: {task}
+- Progress: {progress}
+- Decisions: {decisions}
+- Constraints: {constraints}
 
 ### Step 4: Ask User Based on Phase
 ```
