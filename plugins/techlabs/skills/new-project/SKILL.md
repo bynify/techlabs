@@ -119,23 +119,62 @@ KNOWLEDGE BASE INCLUDES:
 - Security docs (auth, compliance, best practices)
 - Performance docs (caching, optimization)
 
-PHASE 4: SPRINT PLANNING
+PHASE 4: MONITORING & BUSINESS PLANNING
 
-STEP 4a: /create-epics
+STEP 4a: /create-monitoring-plan (MANDATORY)
+  → Define business metrics
+  → Define UX metrics
+  → Define technical metrics
+  → Design dashboards
+  → Configure alerts
+  → SAVE CHECKPOINT: "Monitoring plan created"
+
+STEP 4b: /create-revenue-analysis (MANDATORY)
+  → Revenue model defined
+  → Conversion targets set
+  → Churn targets set
+  → SAVE CHECKPOINT: "Revenue analysis created"
+
+PHASE 5: SPRINT PLANNING
+
+STEP 5a: /create-epics
   → Break into epics
   → SAVE CHECKPOINT: "Epics created"
 
-STEP 4b: /user-stories
+STEP 5b: /user-stories
   → Create user stories
   → SAVE CHECKPOINT: "User stories created"
 
-STEP 4c: /sprint-plan
+STEP 5c: /sprint-plan
   → Plan first sprint
   → SAVE CHECKPOINT: "Sprint plan created"
 
 FINAL: /doc-validator
   → Validate all documents
   → SAVE CHECKPOINT: "Documents validated"
+
+POST-LAUNCH: CONTINUOUS IMPROVEMENT LOOP
+
+STEP 6a: /business-monitoring (AFTER LAUNCH)
+  → Track metrics
+  → Analyze data
+  → Identify issues
+  → Identify opportunities
+  → SAVE CHECKPOINT: "Monitoring complete"
+
+STEP 6b: /business-improvement (AFTER MONITORING)
+  → Create improvement proposals
+  → Prioritize improvements
+  → Assign to planning
+  → SAVE CHECKPOINT: "Improvements proposed"
+
+STEP 6c: /business-planning-update (AFTER IMPROVEMENTS)
+  → Update business planning
+  → Update documents
+  → Create new sprint items
+  → SAVE CHECKPOINT: "Planning updated"
+
+→ REPEAT FROM STEP 6a (CONTINUOUS LOOP)
 ```
 
 ## Multi-Agent Discussions
