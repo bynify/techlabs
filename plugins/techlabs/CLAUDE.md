@@ -44,13 +44,29 @@ Every task: **Question → Options → Decision → Draft → Approval**
 - Multi-file changes need explicit approval
 - No commits without user instruction
 
-## Skills (199 total)
+## Skills (205 total)
 
 ### Existing Project Adoption (NEW)
 - `/adopt-existing` — Scan existing project, generate adoption plan
 - `/remap-paths` — Override path conventions to match your structure
 - `/restructure-plan` — Generate phased restructure blueprint
 - `/integrity-audit` — Audit code against conventions, generate compliance report
+
+### Sprint Orchestrator (NEW)
+- `/sprint-orchestrator` — Master workflow engine, connects all sprint skills
+- `/dispatch-story` — Route stories to specialist agents
+- `/review-gate` — Code review checkpoint
+- `/sprint-state` — Track story lifecycle state machine
+
+**Sprint Flow:**
+```
+brainstorm → create-prd → user-stories → sprint-plan
+    ↓
+per story:
+  story-readiness → dispatch-story → dev-story → review-gate → gate-check → qa-plan → story-done
+    ↓
+milestone-review → post-mortem → sprint-status
+```
 
 ### Standard Phases
 Phase 0: Discovery — `/brainstorm`, `/market-research`, `/competitive-analysis`
