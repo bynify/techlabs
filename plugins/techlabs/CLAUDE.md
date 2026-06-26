@@ -6,10 +6,12 @@ Technology studio framework for Claude Code. 98 agents, 207 skills, 23 hooks, 17
 
 ### Planning
 - `/start` — Guided onboarding
+- `/start-day` — Resume work from previous session
 - `/brainstorm` — Explore ideas
 - `/create-prd` — Create product requirements
 - `/project-planning` — Team, infra, security, budget, timeline
 - `/sprint-plan` — Sprint planning with capacity
+- `/sprint-transition` — Complete sprint and start next
 
 ### Execution
 - `/sprint-orchestrator` — Execute sprint end-to-end
@@ -96,7 +98,12 @@ review-gate → gate-check → qa-plan → story-done
 REVIEW PHASE:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-milestone-review → post-mortem → sprint-status
+milestone-review → post-mortem → sprint-status → sprint-transition
+
+SESSION CONTINUITY:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+start-day → (auto-load session state) → continue work
 ```
 
 ## Dispatch Matrix
