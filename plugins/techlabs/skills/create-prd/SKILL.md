@@ -8,6 +8,11 @@ Create a Product Requirements Document (PRD).
 - Stakeholder alignment
 - Team onboarding
 
+
+## Agents to Dispatch
+- product-director: Requirements validation
+- lead-engineer: Technical feasibility
+
 ## Execution
 
 ### Step 1: Gather Information

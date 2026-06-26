@@ -7,6 +7,11 @@ Design database schema with proper normalization, indexes, and constraints.
 - Schema optimization
 - Data modeling
 
+
+## Agents to Dispatch
+- postgres-specialist: Schema design
+- data-engineer: Data modeling
+
 ## Execution
 
 ### Step 1: Identify Entities

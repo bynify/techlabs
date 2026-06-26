@@ -8,6 +8,11 @@ Create system architecture documentation.
 - Technical planning
 - Team onboarding
 
+
+## Agents to Dispatch
+- lead-engineer: Architecture design
+- technical-director: Review
+
 ## Execution
 
 ### Step 1: Gather Requirements

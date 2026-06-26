@@ -8,6 +8,11 @@ API testing with automated test suites.
 - Regression testing
 - Pre-deployment checks
 
+
+## Agents to Dispatch
+- api-engineer: API testing
+- quality-lead: Test strategy
+
 ## Execution
 
 ### Step 1: Define Test Cases

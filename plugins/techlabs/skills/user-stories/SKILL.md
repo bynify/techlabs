@@ -8,6 +8,12 @@ Create user stories with acceptance criteria following INVEST principles.
 - Backlog grooming
 - PRD breakdown
 
+
+## Agents to Dispatch
+- product-manager: Story breakdown
+- lead-engineer: Technical stories
+- quality-lead: Acceptance criteria
+
 ## Execution
 
 ### Step 1: Gather Requirements

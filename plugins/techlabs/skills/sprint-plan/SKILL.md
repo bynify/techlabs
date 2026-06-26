@@ -8,15 +8,38 @@ Sprint planning with story estimation, backlog prioritization, and orchestrator 
 - Capacity planning
 - Team alignment
 
+
+## Agents to Dispatch
+- product-manager: Sprint planning
+- lead-engineer: Capacity planning
+
 ## Execution
 
-### Step 1: Load Context
+### Step 1: Validate Prerequisites (MANDATORY)
+```
+⚠️ ANOMALY PREVENTION: Validate docs before sprint plan
+
+1. RUN /sprint-prerequisites
+   - Check file existence
+   - Check content quality (score >= 70)
+   
+2. IF validation fails:
+   - SHOW validation report
+   - BLOCK sprint planning
+   - ASK user to fix docs first
+   
+3. IF validation passes:
+   - CONTINUE to sprint planning
+```
+
+### Step 2: Load Context
 ```
 READ:
 - production/stories/ (all stories)
 - production/sprint/state.json (if exists)
 - docs/PRD.md (requirements)
 - docs/architecture.md (if exists)
+- production/validation-results.json (validation output)
 ```
 
 ### Step 2: Capacity Planning

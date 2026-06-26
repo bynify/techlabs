@@ -8,6 +8,10 @@ Implement a user story end-to-end.
 - Task breakdown
 - Estimation
 
+
+## Agents to Dispatch
+- (uses dispatch-story for agent selection)
+
 ## Execution
 
 ### Step 1: Load Story

@@ -50,6 +50,11 @@ Master workflow engine that connects all sprint skills end-to-end.
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+
+## Agents to Dispatch
+- lead-engineer: Sprint execution
+- quality-lead: Quality gates
+
 ## Execution
 
 ### MANDATORY GATES (Must Complete)

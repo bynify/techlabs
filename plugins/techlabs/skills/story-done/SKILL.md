@@ -8,6 +8,11 @@ Verify story meets Definition of Done (DoD) with comprehensive checklist.
 - Quality gate
 - Release readiness
 
+
+## Agents to Dispatch
+- lead-engineer: Code quality
+- quality-lead: Final verification
+
 ## Execution
 
 ### Step 1: Code Completeness

@@ -59,24 +59,34 @@ Cost Estimates              │ docs/cost.md                 │ RECOMMENDED
 
 ## Execution
 
-### Step 1: Check All Prerequisites
+### Step 1: Check All Prerequisites (CONTENT VALIDATION)
 ```javascript
-// Production code
 async function validatePrerequisites() {
+  // ⚠️ USE DOC-VALIDATOR FOR QUALITY CHECK
+  
+  const validation = await runSkill('doc-validator');
+  
   const results = {
-    planning: await checkPlanningPhase(),
-    architecture: await checkArchitecturePhase(),
-    sprint: await checkSprintPhase(),
-    infrastructure: await checkInfrastructurePhase()
+    // Level 1: File existence
+    filesExist: await checkFilesExist(),
+    
+    // Level 2: Content quality (from doc-validator)
+    contentQuality: validation.results,
+    
+    // Level 3: Structure validation
+    structureValid: await validateStructure()
   };
   
-  const allPassed = Object.values(results).every(r => r.passed);
+  // Check if content quality meets threshold
+  const contentReady = Object.values(validation.results)
+    .every(r => r.score >= 70);
   
-  if (!allPassed) {
+  if (!contentReady) {
     return {
       ready: false,
       results: results,
-      missing: getMissingItems(results)
+      validation: validation,
+      failedDocs: validation.failedDocs
     };
   }
   
