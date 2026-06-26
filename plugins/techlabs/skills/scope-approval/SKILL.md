@@ -118,6 +118,15 @@ IF Performance:
 
 ### Step 4: Lead Discusses with Each Agent
 ```
+⚠️ LEAD ALREADY KNOWS PROJECT CONTEXT (BUILT-IN KNOWLEDGE)
+
+LEAD DOES NOT NEED TO READ DOCS:
+- Project goals: Already known
+- Tech stack: Already known
+- Architecture: Already known
+- API design: Already known
+- Database schema: Already known
+
 FOR EACH AFFECTED AGENT:
 
 LEAD ASKS:

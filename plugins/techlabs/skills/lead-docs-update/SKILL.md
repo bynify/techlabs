@@ -53,12 +53,21 @@ AGENT-SPECIFIC UPDATES:
 
 ## Execution
 
-### Step 1: Load Approval Context
+### Step 1: Lead Already Knows Context
 ```
-READ:
-- production/stories/{story-id}.md
-- production/scope-discussions/{scope-id}.json
-- Current docs
+⚠️ LEAD ALREADY KNOWS PROJECT CONTEXT (BUILT-IN KNOWLEDGE)
+
+LEAD DOES NOT NEED TO READ DOCS:
+- Project goals: Already known
+- Tech stack: Already known
+- Architecture: Already known
+- API design: Already known
+- Database schema: Already known
+
+LEAD ONLY READS:
+- Scope discussion record
+- Agent feedback
+- Implementation status
 ```
 
 ### Step 2: Create Documentation Update Report
