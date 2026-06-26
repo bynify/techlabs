@@ -331,6 +331,20 @@ async function executeStory(story) {
 ### Step 4: Run Review Phase
 ```javascript
 async function runReviewPhase() {
+  // ⚠️ ENFORCEMENT: Sprint-Release-Gate BEFORE sprint done
+  console.log("\\n=== SPRINT RELEASE GATES ===");
+  const gatesPassed = await runSkill('sprint-release-gate', {
+    sprintId: currentSprint.id
+  });
+  
+  if (!gatesPassed) {
+    console.log("❌ SPRINT RELEASE GATES FAILED");
+    console.log("Fix issues before completing sprint.");
+    return false;
+  }
+  
+  console.log("✅ SPRINT RELEASE GATES PASSED");
+  
   // 1. Performance baseline
   await runSkill('perf-baseline', { sprintId: currentSprint.id });
   
@@ -355,8 +369,14 @@ async function runReviewPhase() {
     metrics: sprintMetrics,
   });
   
-  // 3. Final status report
+  // 7. Final status report
   await runSkill('sprint-status', {
+    sprintId: currentSprint.id,
+  });
+  
+  return true;
+}
+```
     sprintId: currentSprint.id,
   });
 }

@@ -285,6 +285,47 @@ QUESTIONS:
    - [ ] Unusual spike detection
 ```
 
+### Step 6b: Deployment Strategy (MANDATORY)
+```
+⚠️ ASK ABOUT DEPLOYMENT WORKFLOW
+
+QUESTIONS:
+
+1. Environment setup?
+   - [ ] Dev + Production
+   - [ ] Dev + Staging + Production
+   - [ ] Dev + Staging + Pre-prod + Production
+
+2. Deployment frequency?
+   - [ ] Every sprint (bi-weekly)
+   - [ ] Weekly
+   - [ ] Continuous (on merge)
+   - [ ] On-demand
+
+3. Deployment approach?
+   - [ ] Blue-Green (zero downtime)
+   - [ ] Rolling (gradual)
+   - [ ] Canary (percentage-based)
+   - [ ] Big Bang (all at once)
+
+4. Staging strategy?
+   - [ ] Every sprint → staging
+   - [ ] Weekly → staging
+   - [ ] On merge → staging
+
+5. Production deployment?
+   - [ ] Manual approval required
+   - [ ] Automated after QA
+   - [ ] Scheduled releases
+
+6. Rollback strategy?
+   - [ ] Automatic on error
+   - [ ] Manual trigger
+   - [ ] Keep previous version 24h
+
+RUN: /deployment-strategy
+```
+
 ### Step 7: Timeline Planning
 ```
 QUESTIONS:
