@@ -96,9 +96,27 @@ CHECK:
 - [ ] Linting: 2 warnings remaining
 - [x] Type checking passes
 
-### Documentation: ✅ PASS
-- [x] README updated
-- [x] API docs updated
+### Documentation: ❌ MANDATORY CHECK
+```
+⚠️ ENFORCEMENT: Documentation MUST be complete
+
+CHECK:
+- [ ] README.md updated (new features, commands)
+- [ ] API docs updated (if endpoints changed)
+- [ ] Changelog updated (entry added)
+- [ ] Architecture updated (if design changed)
+- [ ] Comments on complex logic
+
+IF ANY MISSING → BLOCK story completion
+→ Cannot proceed to Deployment until docs complete
+```
+
+IF documentation NOT complete:
+  → STOP
+  → Show missing docs
+  → Require developer to add docs
+  → Re-check documentation
+  → ONLY THEN proceed to Deployment
 
 ### Deployment: ✅ PASS
 - [x] Builds successfully

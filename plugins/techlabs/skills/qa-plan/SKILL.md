@@ -13,6 +13,20 @@ Create comprehensive QA plan with test strategy and quality gates.
 
 ## Execution
 
+### Step 0: Documentation Verification
+```
+⚠️ ENFORCEMENT: Verify docs before testing
+
+CHECK:
+- [ ] README.md exists and updated
+- [ ] API docs exist (if API changed)
+- [ ] Changelog exists and updated
+- [ ] Architecture docs exist
+- [ ] Test docs exist
+
+IF MISSING → BLOCK QA until docs added
+```
+
 ### Step 1: Test Strategy
 ```markdown
 ## Test Strategy

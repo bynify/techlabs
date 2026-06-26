@@ -16,14 +16,23 @@ Pre-deployment quality gate checks.
 
 ### Step 1: Run Checks
 ```
-CHECKLIST:
+⚠️ ENFORCEMENT: All checks mandatory for story completion
+
+CODE CHECKS:
 - [ ] All tests passing
 - [ ] No lint errors
 - [ ] No type errors
 - [ ] Coverage > 80%
 - [ ] No critical vulnerabilities
 - [ ] Build succeeds
-- [ ] Documentation updated
+
+DOCUMENTATION CHECKS (MANDATORY):
+- [ ] README.md updated (new features)
+- [ ] API docs updated (if endpoints changed)
+- [ ] Changelog updated (always)
+- [ ] Architecture updated (if design changed)
+
+IF ANY CHECK FAILS → BLOCK story completion
 ```
 
 ### Step 2: Run Commands

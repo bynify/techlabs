@@ -250,15 +250,31 @@ async function executeStory(story) {
   const agent = await runSkill('dispatch-story', { story });
   await updateStoryState(story.id, 'IN_PROGRESS', { assignedTo: agent });
   
-  // CHECKPOINT 3: Implementation
-  const implementation = await runSkill('dev-story', { story, agent });
+  // CHECKPOINT 3: Tech Plan (MANDATORY)
+  // ⚠️ ENFORCEMENT: Engineer must create tech plan before coding
+  const techPlan = await runSkill('tech-plan', { story, agent });
+  if (!techPlan) {
+    await updateStoryState(story.id, 'BLOCKED', { reason: 'No tech plan' });
+    return;
+  }
   
-  // CHECKPOINT 4: Code Review Gate
+  // CHECKPOINT 4: Implementation
+  const implementation = await runSkill('dev-story', { story, agent, techPlan });
+  
+  // CHECKPOINT 5: Code Review Gate
   const reviewPassed = await runSkill('review-gate', {
     story,
     code: implementation.files,
     type: 'code-review',
   });
+  
+  // CHECKPOINT 6: Review Documentation (MANDATORY)
+  // ⚠️ ENFORCEMENT: Reviewer must create review docs
+  const reviewDoc = await runSkill('review-doc', { story, review: reviewPassed });
+  if (!reviewDoc) {
+    await updateStoryState(story.id, 'BLOCKED', { reason: 'No review docs' });
+    return;
+  }
   
   if (!reviewPassed) {
     await updateStoryState(story.id, 'REVISION_NEEDED');
@@ -277,12 +293,31 @@ async function executeStory(story) {
     await runSkill('dev-story', { story, feedback: gatePassed.failures });
   }
   
-  // CHECKPOINT 6: Manual QA (if needed)
+  // CHECKPOINT 7: Automated QA Gate
+  const gatePassed = await runSkill('gate-check', {
+    story,
+    checks: ['tests', 'lint', 'types', 'coverage', 'security'],
+  });
+  
+  if (!gatePassed) {
+    await updateStoryState(story.id, 'QA_FAILED');
+    await runSkill('dev-story', { story, feedback: gatePassed.failures });
+  }
+  
+  // CHECKPOINT 8: Manual QA (if needed)
   if (story.requiresManualQA) {
     await runSkill('qa-plan', { story });
   }
   
-  // CHECKPOINT 7: Final Verification
+  // CHECKPOINT 9: QA Report (MANDATORY)
+  // ⚠️ ENFORCEMENT: QA must create QA report
+  const qaReport = await runSkill('qa-report', { story });
+  if (!qaReport) {
+    await updateStoryState(story.id, 'BLOCKED', { reason: 'No QA report' });
+    return;
+  }
+  
+  // CHECKPOINT 10: Final Verification
   const isDone = await runSkill('story-done', { story });
   
   if (isDone) {

@@ -1,13 +1,12 @@
 # dev-story
 
-Implement a user story end-to-end.
+Implement a user story end-to-end with mandatory documentation.
 
 ## When to Use
 - Development stories
 - Sprint planning
 - Task breakdown
 - Estimation
-
 
 ## Agents to Dispatch
 - (uses dispatch-story for agent selection)
@@ -22,12 +21,18 @@ READ:
 - docs/architecture.md (architecture)
 ```
 
-### Step 2: Plan Implementation
+### Step 2: Plan Implementation (WITH DOCS)
 ```
+⚠️ ENFORCEMENT: Documentation required for ALL changes
+
 DETERMINE:
 1. Which files to create/modify
 2. Which tests to write
 3. Which documentation to update
+   - README.md (if new feature)
+   - API docs (if endpoints changed)
+   - Changelog (always)
+   - Architecture (if design changed)
 4. Dependencies and order
 ```
 
@@ -40,7 +45,21 @@ FOR EACH FILE:
 4. Run validation
 ```
 
-### Step 4: Test
+### Step 4: Update Documentation (MANDATORY)
+```
+⚠️ ENFORCEMENT: Docs MUST be updated before story complete
+
+CHECKLIST:
+- [ ] README.md updated (new features, commands)
+- [ ] API docs updated (if endpoints changed)
+- [ ] Changelog updated (entry added)
+- [ ] Architecture updated (if design changed)
+- [ ] Comments added to complex logic
+
+IF docs not updated → BLOCK story completion
+```
+
+### Step 5: Test
 ```
 RUN:
 - Unit tests
@@ -49,7 +68,7 @@ RUN:
 - Type checking
 ```
 
-### Step 5: Update Story
+### Step 6: Update Story
 ```
 UPDATE:
 - Mark story as "Done"
@@ -60,5 +79,5 @@ UPDATE:
 ## Output
 - Implemented code
 - Tests passing
-- Documentation updated
+- Documentation updated (MANDATORY)
 - Story marked as done
