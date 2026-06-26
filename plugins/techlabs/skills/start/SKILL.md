@@ -32,13 +32,13 @@ QUESTIONS:
 ### Step 3: Recommend Workflow
 ```
 IF stage == "idea":
-  RECOMMEND: /brainstorm → /choose-domain → /create-prd
+  RECOMMEND: /brainstorm → /choose-domain → /create-prd → /project-planning
   
 IF stage == "design":
   RECOMMEND: /design-system → /create-architecture → /api-design
   
 IF stage == "implementation":
-  RECOMMEND: /dev-story → /create-migration → /create-component
+  RECOMMEND: /sprint-plan → /sprint-orchestrator
   
 IF stage == "production":
   RECOMMEND: /qa-plan → /release-checklist → /launch-checklist

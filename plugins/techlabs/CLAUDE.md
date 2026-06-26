@@ -52,6 +52,20 @@ Every task: **Question → Options → Decision → Draft → Approval**
 - `/restructure-plan` — Generate phased restructure blueprint
 - `/integrity-audit` — Audit code against conventions, generate compliance report
 
+### Project Planning (NEW)
+- `/project-planning` — Team composition, infra, security, monitoring, budget
+
+**Planning Flow:**
+```
+start → brainstorm → create-prd → project-planning
+  ↓
+choose-stack → choose-frontend → choose-messaging
+  ↓
+create-architecture → api-design
+  ↓
+sprint-plan → sprint-orchestrator
+```
+
 ### Sprint Orchestrator (NEW)
 - `/sprint-orchestrator` — Master workflow engine, connects all sprint skills
 - `/dispatch-story` — Route stories to specialist agents
@@ -60,8 +74,6 @@ Every task: **Question → Options → Decision → Draft → Approval**
 
 **Sprint Flow:**
 ```
-brainstorm → create-prd → user-stories → sprint-plan
-    ↓
 per story:
   story-readiness → dispatch-story → dev-story → review-gate → gate-check → qa-plan → story-done
     ↓
