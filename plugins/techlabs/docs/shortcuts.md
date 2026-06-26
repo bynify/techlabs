@@ -187,6 +187,14 @@ Quick reference for all shortcut commands.
 | `/create-vector-search` | Create vector search | create-vector-search |
 | `/create-recommendation` | Create recommendation engine | create-recommendation |
 
+## Session Management
+
+| Shortcut | Description | Skills Used |
+|----------|-------------|-------------|
+| `/session-optimize` | Optimize session for day-to-day usage | session-optimize |
+| `/start-day` | Resume work from previous session | start-day |
+| `/session-recover` | Recover from session issues | session-recover |
+
 ## How to Use
 
 1. Type the shortcut command in your chat

@@ -24,6 +24,7 @@ Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18
 ## Quick Commands
 
 ### Shortcuts (Auto-chains)
+- `/session-optimize` — Optimize session for day-to-day usage
 - `/new-project` — Complete project setup (11 steps)
 - `/quick-sprint` — Plan and execute sprint
 - `/full-cycle` — Complete sprint cycle
