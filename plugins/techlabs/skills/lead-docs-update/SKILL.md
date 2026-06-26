@@ -57,35 +57,37 @@ AGENT-SPECIFIC UPDATES:
 ```
 READ:
 - production/stories/{story-id}.md
-- Scope approval record
-- Agent feedback
+- production/scope-discussions/{scope-id}.json
 - Current docs
 ```
 
-### Step 2: Identify Required Updates
+### Step 2: Create Documentation Update Report
+```markdown
+# Documentation Update Report
+
+## Story: {story-id}
+## Scope Change: {scope-id}
+## Lead: {lead-name}
+## Date: {date}
+
+## Changes Made
+| Document | Changes | Agent Source |
+|----------|---------|--------------|
+| api-design.md | Added phone field | security-lead |
+| database-design.md | Added migration | quality-lead |
+| security-docs.md | Added encryption | security-lead |
+| quality-docs.md | Added test requirements | quality-lead |
+| changelog.md | Added entry | product-manager |
+
+## Agent Feedback Incorporated
+| Agent | Feedback | Incorporated |
+|-------|----------|--------------|
+| security-lead | AES-256 encryption | ✅ |
+| quality-lead | Validation regex | ✅ |
+| product-manager | User guide update | ✅ |
 ```
-FOR EACH CHANGE:
 
-IF API changed:
-  → Update api-design docs
-  → Update endpoint list
-  → Update request/response examples
-  → Update OpenAPI spec
-
-IF Database changed:
-  → Update database-design docs
-  → Update ER diagram
-  → Update migration SQL
-  → Update data dictionary
-
-IF Architecture changed:
-  → Update architecture docs
-  → Update system diagrams
-  → Update component relationships
-  → Write ADR (Architecture Decision Record)
-```
-
-### Step 3: Lead Updates API Design Docs
+### Step 3: Update API Design Docs
 ```markdown
 # API Design Update
 
@@ -116,7 +118,7 @@ IF Architecture changed:
   "id": "uuid",
   "name": "string",
   "email": "string",
-  "phone": "string",
+  "phone": "string",  // NEW - decrypted for display
   "createdAt": "datetime"
 }
 ```
@@ -126,13 +128,18 @@ IF Architecture changed:
 - Phone validation: regex pattern
 - Access control: same as email
 
+## Testing Notes (from quality-lead)
+- Phone validation regex required
+- Unit tests for validation (100% coverage)
+- Integration tests for API
+
 ## Migration Notes
 - No breaking changes
 - New field is optional
 - Existing data unaffected
 ```
 
-### Step 4: Lead Updates Database Design Docs
+### Step 4: Update Database Design Docs
 ```markdown
 # Database Design Update
 
@@ -160,7 +167,7 @@ ALTER TABLE users ADD COLUMN phone VARCHAR(255);
 {updated diagram}
 ```
 
-### Step 5: Lead Updates Security Docs (if applicable)
+### Step 5: Update Security Docs
 ```markdown
 # Security Update
 
@@ -185,7 +192,7 @@ ALTER TABLE users ADD COLUMN phone VARCHAR(255);
 - Must provide deletion capability
 ```
 
-### Step 6: Lead Updates Quality Docs (if applicable)
+### Step 6: Update Quality Docs
 ```markdown
 # Quality Update
 
@@ -208,7 +215,7 @@ ALTER TABLE users ADD COLUMN phone VARCHAR(255);
 - [ ] Phone masked in logs
 ```
 
-### Step 7: Lead Updates Changelog
+### Step 7: Update Changelog
 ```markdown
 # Changelog
 
@@ -232,23 +239,71 @@ ALTER TABLE users ADD COLUMN phone VARCHAR(255);
 - Updated quality-docs.md
 ```
 
-### Step 8: Save Updated Docs
+### Step 8: Update README (if needed)
 ```
-SAVE:
-- docs/api-design.md (updated)
-- docs/database-design.md (updated)
-- docs/security-docs.md (if changed)
-- docs/quality-docs.md (if changed)
-- CHANGELOG.md (updated)
-
-UPDATE:
-- story.docsUpdated = true
-- story.updatedBy = lead.name
-- story.updatedAt = new Date()
-- story.agentApprovals = agentDecisions
+IF new commands/APIs added:
+  → Update README commands section
+  → Update API documentation
+  → Update examples
 ```
 
-### Step 9: Notify All Stakeholders
+### Step 9: Save Documentation Record
+```json
+// Save to production/docs-updates/{scope-id}.json
+{
+  "scopeId": "SCOPE-001",
+  "storyId": "AUTH-001",
+  "lead": "lead-engineer",
+  "timestamp": "2024-01-15T11:00:00Z",
+  "updates": [
+    {
+      "file": "docs/api-design.md",
+      "changes": "Added phone field to users API",
+      "agentSource": "security-lead"
+    },
+    {
+      "file": "docs/database-design.md",
+      "changes": "Added phone column migration",
+      "agentSource": "quality-lead"
+    },
+    {
+      "file": "docs/security-docs.md",
+      "changes": "Added encryption requirements",
+      "agentSource": "security-lead"
+    },
+    {
+      "file": "docs/quality-docs.md",
+      "changes": "Added test requirements",
+      "agentSource": "quality-lead"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "changes": "Added phone field entry",
+      "agentSource": "product-manager"
+    }
+  ]
+}
+```
+
+### Step 10: Update Session State
+```json
+// Update .claude/sprint-state.json
+{
+  "stories": {
+    "AUTH-001": {
+      "scopeChanges": {
+        "SCOPE-001": {
+          "docsUpdated": true,
+          "docsUpdateTimestamp": "2024-01-15T11:00:00Z",
+          "docsUpdateLead": "lead-engineer"
+        }
+      }
+    }
+  }
+}
+```
+
+### Step 11: Notify All Stakeholders
 ```
 NOTIFY:
 - Developer: All docs updated, proceed with implementation
@@ -263,5 +318,6 @@ NOTIFY:
 - Security docs updated (if applicable)
 - Quality docs updated (if applicable)
 - Changelog updated
+- Documentation record saved
+- Session state updated
 - All stakeholders notified
-- Documentation complete

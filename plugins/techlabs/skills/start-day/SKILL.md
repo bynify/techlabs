@@ -42,6 +42,8 @@ CHECK FILES:
 3. production/sprint/state.json → Sprint status
 4. production/epics/ → Epics created
 5. production/stories/ → Stories created
+6. production/scope-discussions/ → Pending scope approvals
+7. production/docs-updates/ → Pending docs updates
 
 DETERMINE PHASE:
 IF no project-context.json → PHASE 0 (Not started)
@@ -49,6 +51,11 @@ IF project-context.json AND no sprint → PHASE 1 (Planning)
 IF sprint.state == PLANNING → PHASE 2 (Sprint Planning)
 IF sprint.state == ACTIVE → PHASE 3 (Sprint Execution)
 IF sprint.state == CLOSED → PHASE 4 (Sprint Complete)
+
+CHECK PENDING WORK:
+IF scope-discussions/ has APPROVED but docs not updated → PENDING DOCS
+IF stories have IN_PROGRESS status → IN PROGRESS
+IF stories have BLOCKED status → BLOCKED
 ```
 
 ### Step 2: Show Status Based on Phase
@@ -103,7 +110,15 @@ Sprint: 2024-S1 (Day 4/10)
 Progress: 13/34 points (38%)
 In Progress: AUTH-001 (60%)
 
-Next: Continue story execution
+Scope Changes:
+- SCOPE-001: Add phone field (APPROVED)
+  - Lead: lead-engineer
+  - Agents consulted: security-lead, quality-lead, product-manager, devops-lead
+  - Status: ✅ Approved (11 conditions)
+  - Docs updated: ✅ Yes
+  - Implementation: 🔄 In progress (3/11 conditions met)
+
+Next: Continue story execution with scope conditions
 ```
 
 ### If Phase 4 (Sprint Complete)
@@ -165,7 +180,12 @@ PHASE 3 (SPRINT EXECUTION):
    - Yes → Resume current story
    - No → Choose different story
 
-2. Any changes since yesterday?
+2. Scope changes pending?
+   - Check approved scope changes
+   - Review conditions
+   - Continue implementation
+
+3. Any changes since yesterday?
    - New requirements?
    - Blockers?
    - Priority changes?
@@ -224,10 +244,47 @@ async function startDay() {
       const inProgress = Object.entries(sprintState.stories)
         .filter(([_, s]) => s.state === 'IN_PROGRESS');
       
+      // Check for pending scope changes
+      const scopeDir = 'production/scope-discussions/';
+      const scopeFiles = await readdir(scopeDir);
+      const pendingScope = [];
+      
+      for (const file of scopeFiles) {
+        const scope = await loadJSON(`${scopeDir}/${file}`);
+        if (scope.status === 'APPROVED' && !scope.docsUpdated) {
+          pendingScope.push(scope);
+        }
+      }
+      
+      if (pendingScope.length > 0) {
+        console.log('\n📋 PENDING SCOPE CHANGES:');
+        for (const scope of pendingScope) {
+          console.log(`- ${scope.id}: ${scope.description}`);
+          console.log(`  Lead: ${scope.coordinatedBy}`);
+          console.log(`  Conditions: ${scope.conditions.length}`);
+        }
+        
+        const handleScope = await askUser({
+          question: 'Handle pending scope changes first?',
+          options: ['Yes, update docs', 'No, continue story'],
+        });
+        
+        if (handleScope === 'Yes, update docs') {
+          for (const scope of pendingScope) {
+            await runSkill('lead-docs-update', { scope });
+          }
+        }
+      }
+      
       if (inProgress.length > 0) {
-        console.log('In progress:');
+        console.log('\n🔄 IN PROGRESS:');
         for (const [id, story] of inProgress) {
           console.log(`- ${id}: ${story.title} (${story.progress}%)`);
+          
+          // Show scope conditions if any
+          if (story.scopeChanges && story.scopeChanges.length > 0) {
+            console.log(`  Scope conditions: ${story.scopeConditionsMet}/${story.scopeConditionsTotal} met`);
+          }
         }
         
         const continueWork = await askUser({
