@@ -8,6 +8,10 @@ Dev must think critically before implementing any task.
 - When task is ambiguous
 - When task is incomplete
 - When task is conflicting
+- When agent wants to propose improvement
+- When agent wants to challenge assumption
+- When agent wants to suggest alternative
+- When agent wants to raise concern
 
 ## Agents to Dispatch
 - lead-agent: Clarification
@@ -16,39 +20,51 @@ Dev must think critically before implementing any task.
 ## Enforcement
 
 ```
-⚠️ MANDATORY: Dev must think critically before implementing
+⚠️ MANDATORY: Agents must think critically AND proactively
 
 CRITICAL THINKING FLOW:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-1. READ TASK CAREFULLY
-   - What is the goal?
-   - What are the requirements?
-   - What are the acceptance criteria?
-   - What are the constraints?
+1. REACTIVE (RECEIVING TASK)
+   - Read task carefully
+   - Identify issues
+   - Ask questions
+   - Wait for clarification
+   - Implement
 
-2. IDENTIFY ISSUES
-   - Ambiguous requirements?
-   - Incomplete requirements?
-   - Conflicting requirements?
-   - Missing information?
-   - Edge cases not defined?
+2. PROACTIVE (PROPOSING/CHALLENGING)
+   - Analyze current approach
+   - Identify improvements
+   - Propose alternatives
+   - Challenge assumptions
+   - Raise concerns
 
-3. ASK QUESTIONS
-   - If ambiguous → Ask lead
-   - If incomplete → Ask lead
-   - If conflicting → Ask lead
-   - If missing info → Ask lead
+AGENT PERSPECTIVES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-4. WAIT FOR CLARIFICATION
-   - Lead answers questions
-   - Lead provides clarity
-   - Lead updates task
+DEV:
+- Implementation complexity
+- Maintainability
+- Code quality
+- Technical debt
 
-5. IMPLEMENT
-   - Now implement with clarity
-   - Follow lead's answers
-   - No guessing allowed
+QA:
+- Test coverage
+- Edge cases
+- Quality risks
+- Regression potential
+
+SECURITY:
+- Vulnerabilities
+- Compliance risks
+- Data exposure
+- Attack vectors
+
+PERFORMANCE:
+- Scalability
+- Speed
+- Resource usage
+- Bottlenecks
 ```
 
 ## Execution
@@ -363,9 +379,92 @@ NO GUESSING:
 - If new issue → Ask again
 ```
 
+### Step 8: PROACTIVE THINKING (DURING IMPLEMENTATION)
+```
+⚠️ MANDATORY: Agent must think proactively during work
+
+AGENT MUST:
+
+1. IDENTIFY IMPROVEMENTS
+   - Is there a better approach?
+   - Can we simplify?
+   - Can we optimize?
+   - Can we reduce complexity?
+
+2. CHALLENGE ASSUMPTIONS
+   - Is this the right approach?
+   - Are we solving the right problem?
+   - Are we over-engineering?
+   - Are we under-engineering?
+
+3. RAISE CONCERNS
+   - Will this scale?
+   - Is this secure?
+   - Will this break existing code?
+   - Are we creating technical debt?
+
+4. SUGGEST ALTERNATIVES
+   - Better algorithm?
+   - Better architecture?
+   - Better design pattern?
+   - Better tool?
+```
+
+### Step 9: Proactive Proposal
+```
+AGENT CAN PROPOSE:
+
+DEV:
+- "I think we should use X instead of Y because Z"
+- "This approach will create tech debt, I suggest..."
+- "We can simplify this by doing..."
+- "This will be hard to maintain, better to..."
+
+QA:
+- "I suggest adding these test cases..."
+- "This test approach won't cover edge cases"
+- "We should test for X, Y, Z scenarios"
+- "The acceptance criteria is missing..."
+
+SECURITY:
+- "This approach has security risk: ..."
+- "We should encrypt X because..."
+- "This violates compliance: ..."
+- "Attack vector: ..."
+
+PERFORMANCE:
+- "This will not scale because..."
+- "Memory usage will be high: ..."
+- "Response time will exceed: ..."
+- "We should cache X because..."
+```
+
+### Step 10: Lead Responds to Proposal
+```
+LEAD DECIDES:
+
+IF PROPOSAL GOOD:
+- Accept proposal
+- Update task
+- Implement proposal
+
+IF PROPOSAL BAD:
+- Reject proposal
+- Explain why
+- Continue current approach
+
+IF NEEDS DISCUSSION:
+- Discuss with other agents
+- Make decision
+- Update task
+```
+
 ## Output
 - Issues identified
 - Questions formulated
 - Clarifications received
 - Task updated
+- Proposals made
+- Concerns raised
+- Alternatives suggested
 - Implementation ready

@@ -270,11 +270,13 @@ async function executeStory(story) {
   }
   
   // CHECKPOINT 1b: Critical Thinking (MANDATORY)
-  // Dev must think critically before receiving task
-  const clarification = await runSkill('critical-thinking', { story });
-  if (clarification.questions.length > 0) {
-    console.log(`\n⚠️ Dev has ${clarification.questions.length} questions before implementing`);
-    const answers = await askLeadForClarification(clarification.questions);
+  // Dev must think critically and proactively
+  const criticalThinking = await runSkill('critical-thinking', { story });
+  
+  // Handle reactive questions
+  if (criticalThinking.questions.length > 0) {
+    console.log(`\n⚠️ Dev has ${criticalThinking.questions.length} questions before implementing`);
+    const answers = await askLeadForClarification(criticalThinking.questions);
     
     if (!answers.allResolved) {
       await updateStoryState(story.id, 'BLOCKED', { reason: 'Questions not answered' });
@@ -283,6 +285,29 @@ async function executeStory(story) {
     
     // Save clarifications
     await saveClarifications(story.id, answers);
+  }
+  
+  // Handle proactive proposals
+  if (criticalThinking.proposals.length > 0) {
+    console.log(`\n💡 Dev has ${criticalThinking.proposals.length} proposals`);
+    const decisions = await leadDecidesOnProposals(criticalThinking.proposals);
+    
+    // Save proposals and decisions
+    await saveProposals(story.id, decisions);
+    
+    // Update task if proposal accepted
+    if (decisions.accepted.length > 0) {
+      await updateTaskWithAcceptedProposals(story.id, decisions.accepted);
+    }
+  }
+  
+  // Handle concerns
+  if (criticalThinking.concerns.length > 0) {
+    console.log(`\n⚠️ Dev has ${criticalThinking.concerns.length} concerns`);
+    const resolutions = await leadResolvesConcerns(criticalThinking.concerns);
+    
+    // Save concerns and resolutions
+    await saveConcerns(story.id, resolutions);
   }
   
   // CHECKPOINT 2: Dispatch to Specialist

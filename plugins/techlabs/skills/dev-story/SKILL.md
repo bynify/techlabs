@@ -43,7 +43,7 @@ IF out-of-scope → scope-approval → lead-docs-update
 
 ### Step 0: CRITICAL THINKING (FIRST)
 ```
-⚠️ MANDATORY: Dev must think critically before implementing
+⚠️ MANDATORY: Dev must think critically AND proactively
 
 RUN: /critical-thinking
 
@@ -55,6 +55,9 @@ RESULT:
 - Questions formulated
 - Lead clarified
 - Task updated with clarity
+- Proposals made
+- Concerns raised
+- Alternatives suggested
 
 RULES:
 - NO GUESSING ALLOWED
@@ -62,6 +65,8 @@ RULES:
 - If ambiguous → Ask lead
 - If incomplete → Ask lead
 - If conflicting → Ask lead
+- If better approach → Propose to lead
+- If concern → Raise to lead
 - Wait for answers before implementing
 ```
 
