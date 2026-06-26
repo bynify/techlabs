@@ -645,14 +645,55 @@ ALL MUST AGREE
 SAVE TO:
 - production/knowledge-base/
 
-UPDATE AGENTS:
-- All agents can access knowledge base
-- Agents load relevant docs
-- No need to search again
+UPDATE AGENTS (ALL AGENTS MUST KNOW):
+┌─────────────────────────────────────────────────────────────┐
+│ KNOWLEDGE BASE ACCESS FOR ALL AGENTS                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│ LOCATION: production/knowledge-base/                         │
+│                                                              │
+│ AGENTS THAT MUST ACCESS:                                     │
+│ - go-specialist → backend docs                              │
+│ - python-specialist → backend docs                          │
+│ - nextjs-specialist → frontend docs                         │
+│ - react-specialist → frontend docs                          │
+│ - postgres-specialist → database docs                       │
+│ - redis-specialist → database docs                          │
+│ - docker-specialist → infrastructure docs                   │
+│ - k8s-specialist → infrastructure docs                      │
+│ - cloudflare-specialist → infrastructure docs               │
+│ - security-lead → security docs                             │
+│ - performance-lead → performance docs                       │
+│ - auth-engineer → security docs                             │
+│ - data-engineer → database docs                             │
+│ - qa-engineer → testing docs                                │
+│ - ALL OTHER AGENTS → relevant docs                          │
+│                                                              │
+│ HOW AGENTS ACCESS:                                           │
+│ - Before implementation: Read relevant docs                  │
+│ - During implementation: Reference as needed                 │
+│ - When stuck: Check knowledge base first                    │
+│ - Before proposing: Check best practices                    │
+│                                                              │
+│ KNOWLEDGE BASE STRUCTURE:                                    │
+│ - backend/{language}.md → Backend language docs              │
+│ - backend/{framework}.md → Backend framework docs           │
+│ - frontend/{framework}.md → Frontend framework docs         │
+│ - database/{database}.md → Database docs                    │
+│ - infrastructure/{platform}.md → Infrastructure docs        │
+│ - security/*.md → Security documentation                    │
+│ - performance/*.md → Performance documentation              │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
 
 UPDATE PROJECT CONTEXT:
 - project-context.knowledgeBase = true
 - project-context.knowledgeBasePath = "production/knowledge-base/"
+
+UPDATE ALL AGENTS:
+- Add knowledge base reference to each agent
+- Agent loads relevant docs on startup
+- Agent can query knowledge base during work
 ```
 
 ## Output

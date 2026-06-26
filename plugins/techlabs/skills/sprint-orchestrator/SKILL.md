@@ -314,6 +314,15 @@ async function executeStory(story) {
   const agent = await runSkill('dispatch-story', { story });
   await updateStoryState(story.id, 'IN_PROGRESS', { assignedTo: agent });
   
+  // Load Knowledge Base for Agent
+  const knowledgeBase = await loadKnowledgeBase();
+  if (knowledgeBase) {
+    // Agent loads relevant docs based on story type
+    const relevantDocs = getRelevantDocs(story.type, knowledgeBase);
+    agent.knowledgeBase = relevantDocs;
+    console.log(`\n📚 Agent loaded ${relevantDocs.length} relevant docs from knowledge base`);
+  }
+  
   // CHECKPOINT 3: Tech Plan (MANDATORY)
   // ⚠️ ENFORCEMENT: Engineer must create tech plan before coding
   const techPlan = await runSkill('tech-plan', { story, agent });

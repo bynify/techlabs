@@ -179,15 +179,50 @@ async function loadAgentContext(agentName, story) {
   // Load relevant skills
   const skills = await loadRelevantSkills(agentName, story);
   
+  // Load Knowledge Base (if available)
+  const knowledgeBase = await loadKnowledgeBase();
+  const relevantDocs = knowledgeBase ? getRelevantDocs(story.type, knowledgeBase) : [];
+  
   // Load story context
   const context = {
     story: story,
     prd: await readFile('docs/PRD.md'),
     architecture: await readFile('docs/architecture.md'),
     stack: await readFile('docs/stack-reference/'),
+    knowledgeBase: relevantDocs  // Agent gets relevant docs
   };
   
   return { agent, skills, context };
+}
+
+function getRelevantDocs(storyType, knowledgeBase) {
+  const docs = [];
+  
+  // Backend stories get backend docs
+  if (['backend-api', 'database', 'redis', 'messaging'].includes(storyType)) {
+    docs.push(...knowledgeBase.backend);
+    docs.push(...knowledgeBase.database);
+  }
+  
+  // Frontend stories get frontend docs
+  if (['frontend', 'nextjs', 'react', 'vue', 'svelte'].includes(storyType)) {
+    docs.push(...knowledgeBase.frontend);
+  }
+  
+  // Security stories get security docs
+  if (['auth', 'security'].includes(storyType)) {
+    docs.push(...knowledgeBase.security);
+  }
+  
+  // Performance stories get performance docs
+  if (['performance'].includes(storyType)) {
+    docs.push(...knowledgeBase.performance);
+  }
+  
+  // All stories get infrastructure docs
+  docs.push(...knowledgeBase.infrastructure);
+  
+  return docs;
 }
 ```
 
