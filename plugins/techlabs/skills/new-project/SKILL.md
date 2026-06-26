@@ -20,6 +20,7 @@ PHASE 0: RESEARCH & DISCOVERY
 STEP 0a: /brainstorm
   → Ask 5 questions about problem
   → Generate ideas
+  → SKIP if existing research provided
   → SAVE CHECKPOINT: "Brainstorm complete"
 
 STEP 0b: /market-research
@@ -245,12 +246,50 @@ ASK USER:
 2. Project description?
 3. Main goal?
 
+ASK USER (EXISTING ASSETS):
+4. Do you have existing BRD? (yes/no)
+   - If yes: "Provide BRD file path or paste content"
+5. Do you have existing PRD? (yes/no)
+   - If yes: "Provide PRD file path or paste content"
+6. Do you have existing landing page? (yes/no)
+   - If yes: "Provide landing page file path or URL"
+7. Do you have existing research? (yes/no)
+   - If yes: "Provide research files"
+8. Do you have existing design? (yes/no)
+   - If yes: "Provide design files (Figma, images, etc.)"
+9. Do you have existing API docs? (yes/no)
+   - If yes: "Provide API docs file path or URL"
+10. Do you have existing code? (yes/no)
+    - If yes: "Provide code repository path"
+
+EXISTING ASSETS FOLDER:
+```
+production/existing-assets/
+├── brd/           ← Existing BRD files
+├── prd/           ← Existing PRD files
+├── landing-page/  ← Existing landing pages
+├── research/      ← Existing research
+├── design/        ← Existing design files
+├── api-docs/      ← Existing API docs
+├── code/          ← Existing code
+└── README.md      ← Index of existing assets
+```
+
 SAVE to session state:
 {
   "shortcut": "new-project",
   "projectName": "[user-input]",
   "currentStep": 1,
-  "totalSteps": 23
+  "totalSteps": 23,
+  "existingAssets": {
+    "brd": {"provided": false, "path": null},
+    "prd": {"provided": false, "path": null},
+    "landingPage": {"provided": false, "path": null},
+    "research": {"provided": false, "path": null},
+    "design": {"provided": false, "path": null},
+    "apiDocs": {"provided": false, "path": null},
+    "code": {"provided": false, "path": null}
+  }
 }
 ```
 
@@ -259,10 +298,10 @@ SAVE to session state:
 async function runNewProject(projectInfo) {
   const steps = [
     // PHASE 0: RESEARCH
-    { skill: 'brainstorm', args: { topic: projectInfo.goal } },
-    { skill: 'market-research', args: {} },
-    { skill: 'competitor-research', args: {} },
-    { skill: 'user-research', args: {} },
+    { skill: 'brainstorm', args: { topic: projectInfo.goal }, skipIf: 'existingResearch' },
+    { skill: 'market-research', args: {}, skipIf: 'existingResearch' },
+    { skill: 'competitor-research', args: {}, skipIf: 'existingResearch' },
+    { skill: 'user-research', args: {}, skipIf: 'existingResearch' },
     
     // PHASE 0.5: STACK SELECTION (BEFORE BUSINESS DOCS)
     { skill: 'choose-stack', args: {} },
@@ -270,8 +309,8 @@ async function runNewProject(projectInfo) {
     { skill: 'choose-messaging', args: {}, optional: true },
     
     // PHASE 1: BUSINESS DOCUMENTS (WITH STACK CONTEXT)
-    { skill: 'create-brd', args: {} },
-    { skill: 'create-prd', args: {} },
+    { skill: 'create-brd', args: {}, skipIf: 'existingBRD' },
+    { skill: 'create-prd', args: {}, skipIf: 'existingPRD' },
     { skill: 'create-urs', args: {} },
     
     // PHASE 2: TECHNICAL DOCUMENTS
@@ -308,6 +347,13 @@ async function runNewProject(projectInfo) {
       if (needed === 'No') continue;
     }
     
+    // Skip if existing asset provided
+    if (step.skipIf && projectInfo.existingAssets[step.skipIf]) {
+      console.log(`\n=== Step ${i + 1}/${steps.length}: /${step.skill} (SKIPPED - using existing) ===`);
+      await loadExistingAsset(step.skipIf);
+      continue;
+    }
+    
     console.log(`\n=== Step ${i + 1}/${steps.length}: /${step.skill} ===`);
     
     // Run skill
@@ -331,6 +377,13 @@ async function runNewProject(projectInfo) {
   await runSkill('doc-validator');
   
   return { status: 'complete', allDocs: 'validated' };
+}
+
+async function loadExistingAsset(assetType) {
+  const assetPath = `production/existing-assets/${assetType}/`;
+  console.log(`Loading existing ${assetType} from ${assetPath}`);
+  // Load and integrate existing asset into context
+  return await readFile(assetPath);
 }
 
 function isCriticalStep(stepIndex) {
