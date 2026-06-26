@@ -3,13 +3,30 @@
 Create Next.js component/page with proper typing, state management, and accessibility.
 
 ## When to Use
+- Building UI features
+- Adding new pages
+- Creating reusable components
 
 ## Agents to Dispatch
 - nextjs-specialist: Next.js implementation
 - ui-engineer: Page design
-- Building UI features
-- Adding new pages
-- Creating reusable components
+
+## Knowledge Base Reference
+```
+⚠️ BEFORE IMPLEMENTATION: Load knowledge base
+
+LOAD FROM:
+- production/knowledge-base/frontend/nextjs.md
+- production/knowledge-base/frontend/components.md
+- production/knowledge-base/frontend/state-management.md
+
+USE FOR:
+- Next.js patterns (App Router, Server Components)
+- Component patterns (reusability, composition)
+- State management patterns
+- Best practices
+- Error handling patterns
+```
 
 ## Execution
 

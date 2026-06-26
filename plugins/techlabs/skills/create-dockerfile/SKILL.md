@@ -8,6 +8,22 @@ Create optimized Dockerfiles with multi-stage builds and security best practices
 - Production deployment
 - Development environments
 
+## Knowledge Base Reference
+```
+⚠️ BEFORE IMPLEMENTATION: Load knowledge base
+
+LOAD FROM:
+- production/knowledge-base/infrastructure/docker.md
+- production/knowledge-base/infrastructure/deployment.md
+
+USE FOR:
+- Docker best practices
+- Multi-stage builds
+- Security patterns
+- Health checks
+- Optimization patterns
+```
+
 ## Execution
 
 ### Step 1: Detect Language/Framework

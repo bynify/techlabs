@@ -8,6 +8,22 @@ Cloudflare Worker scaffolding with proper structure, bindings, and types.
 - Setting up webhooks
 - Implementing middleware
 
+## Knowledge Base Reference
+```
+⚠️ BEFORE IMPLEMENTATION: Load knowledge base
+
+LOAD FROM:
+- production/knowledge-base/infrastructure/cloudflare.md
+- production/knowledge-base/backend/typescript.md
+
+USE FOR:
+- Cloudflare Workers patterns
+- Bindings (KV, D1, R2, Durable Objects)
+- TypeScript patterns
+- Best practices
+- Error handling patterns
+```
+
 ## Execution
 
 ### Step 1: Gather Requirements

@@ -13,6 +13,14 @@ Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18
 5. **UPDATE STATE** - After EVERY action, update session state
 6. **ERROR HANDLING** - If something fails, STOP, report, ask for guidance
 7. **CHUNK WRITES** - Write/edit in small chunks (max 20 lines for edit, 50 for write)
+8. **KNOWLEDGE BASE** - All agents MUST load knowledge base before implementation
+
+**SKILLS vs KNOWLEDGE BASE:**
+- Skills = HOW to do it (workflow, steps, quality gates)
+- Knowledge Base = WHAT to do it with (documentation, patterns, best practices)
+- Skills define process, Knowledge Base provides reference
+- Agents load Knowledge Base automatically when dispatched
+- Skills don't need to explicitly reference Knowledge Base
 
 **NEVER:**
 - Skip reading the skill file
@@ -20,6 +28,7 @@ Technology studio framework for Claude Code. 98 agents, 211 skills, 23 hooks, 18
 - Write without user approval
 - Proceed with errors
 - Assume without asking
+- Implement without loading knowledge base
 
 ## Quick Commands
 
